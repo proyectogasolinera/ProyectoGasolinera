@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import modelos.Usuario;
+import modelo.Usuario;
 
 public class BD_Usuario extends BD_Conector {
 	
@@ -15,14 +15,14 @@ public class BD_Usuario extends BD_Conector {
 		super();
 	}
 	
-	public  int añadir_usuario( Usuario usu){	
+	public  int aé¦»dir_usuario(Usuario usu){	
 		String cadenaSQL="INSERT INTO usuario VALUES('" + usu.getDni() + "','" +
-		usu.getContraseña()+"','"+ usu.getNombre() +"',"+ usu.getCorreo()+",'"+
+		usu.getContraseÃ±a()+"','"+ usu.getNombre() +"',"+ usu.getCorreo()+",'"+
 				usu.getFechaNacimiento()+"','"+usu.getLocalidad()+"','"+usu.getTelefono()+"','"+
 				usu.getDireccion()+"','"+usu.getCodPostal()+"')";
 		
 		try{
-			//Si las filas retorna 1 el usuario ha sido añadido, si devuelve 0, el usuario no se añadio, si devuelve -1 no se añade por algun error de BD 
+			//Si las filas retorna 1 el usuario ha sido aé¦»dido, si devuelve 0, el usuario no se aé¦»dio, si devuelve -1 no se aé¦»de por algun error de BD 
 			this.abrir();
 			s=c.createStatement();
 			int filas=s.executeUpdate(cadenaSQL);
