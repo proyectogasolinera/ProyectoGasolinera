@@ -1,7 +1,11 @@
 package modelo;
 
 import java.time.LocalDate;
-
+/**
+ * 
+ * @author Weize
+ *
+ */
 public class Visita { 
 	private String DniUsuario; 
 	private LocalDate fechaVisita;  

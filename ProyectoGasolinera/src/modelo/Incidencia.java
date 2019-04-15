@@ -1,7 +1,11 @@
 package modelo;
 
 import java.time.LocalDate;
- 
+ /**
+  * 
+  * @author Weize
+  *
+  */
 public class Incidencia {
 	private String cod_incid;
 	private String DniUsuario;

@@ -4,6 +4,11 @@ package modelo;
 
 import java.time.LocalDate;
    
+/**
+ * 
+ * @author Weize
+ *
+ */
 public class Usuario {
 	private String dni;
 	private String nombre;

@@ -1,3 +1,5 @@
+package modelo;
+
 
 public class Gasolinera {
 	private int id_Gasolinera;

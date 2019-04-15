@@ -1,7 +1,11 @@
 package modelo;
 
 import java.time.LocalDate;
- 
+ /**
+  * 
+  * @author Weize
+  *
+  */
 public class Cuenta {  
 	private String numTarjeta;
 	private String DniTitular; 
