@@ -15,7 +15,7 @@ public class BD_Usuario extends BD_Conector {
 		super();
 	}
 	
-	public  int a馻dir_usuario(Usuario usu){	
+	public  int add_usuario(Usuario usu){	
 		String cadenaSQL="INSERT INTO usuario VALUES('" + usu.getDni() + "','" +
 		usu.getPassword()+"','"+ usu.getNombre() +"',"+ usu.getCorreo()+",'"+
 				usu.getFechaNacimiento()+"','"+usu.getLocalidad()+"','"+usu.getTelefono()+"','"+
