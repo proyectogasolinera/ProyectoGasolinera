@@ -1,24 +1,30 @@
 package modelo;
 
+import java.time.LocalDate;
 
 public class Carburante {
 
 	private String idGasolinera;
 	private String nombreCarburante;
 	private float precio;
+	private LocalDate fecha_mod;
 	
-	public Carburante(String idGasolinera, String nombreCarburante, float precio) {
+	public Carburante(String idGasolinera, String nombreCarburante, float precio,LocalDate fecha_mod) {
 		super();
 		this.idGasolinera = idGasolinera;
 		this.nombreCarburante = nombreCarburante;
 		this.precio = precio;
+		this.fecha_mod= fecha_mod;
 	}
 
-	@Override
-	public String toString() {
-		return "id_Gasolinera=" + idGasolinera+ ", nombreCarburante=" + nombreCarburante + ", precio="
-				+ precio;
+	public LocalDate getFecha_mod() {
+		return fecha_mod;
 	}
+
+	public void setFecha_mod(LocalDate fecha_mod) {
+		this.fecha_mod = fecha_mod;
+	}
+
 
 	public String getIdGasolinera() {
 		return idGasolinera;
@@ -43,6 +49,14 @@ public class Carburante {
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
+
+	@Override
+	public String toString() {
+		return "Carburante [idGasolinera=" + idGasolinera + ", nombreCarburante=" + nombreCarburante + ", precio="
+				+ precio + ", fecha_mod=" + fecha_mod + "]";
+	}
+	
+	
 	
 	
 	

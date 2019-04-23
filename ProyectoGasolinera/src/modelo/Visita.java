@@ -10,7 +10,7 @@ public class Visita {
 	private String DniUsuario; 
 	private LocalDate fechaVisita;  
 	private String id_gasolinera;
-	private double precio;
+	private double precio; //se puede omitir dependiendo si realiza pago en efectivo
 	private String tipoPago;
 	
 	public Visita(String dniUsuario, LocalDate fechaVisita, String id_gasolinera, double precio, String tipoPago) {
