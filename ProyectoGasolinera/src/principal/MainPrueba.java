@@ -20,13 +20,13 @@ public class MainPrueba {
 		
 		System.out.println("Dar de alta usuario");
 		
-		String dni="47290762W";
+		String dni="43569837W";
 		String nombre="Marcos";
 		String password="Hola";
-		String correo="marcosgrao1@gmail.com"; 
+		String correo="marcosgrao@gmail.com"; 
 		String direccion="C/Piruleta 8";
 		String codPostal="28035";
-		String Telefono="608488662";
+		String Telefono="683658832";
 		String localidad="Madrid";
 		String fecha="1996-11-08";
 		LocalDate fechaNacimiento=LocalDate.parse(fecha,fechaFormateada);
