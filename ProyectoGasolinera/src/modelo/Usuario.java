@@ -29,7 +29,7 @@ public class Usuario {
 		this.correo = correo;
 		this.direccion = direccion;
 		this.codPostal = codPostal;
-		Telefono = telefono;
+		this.Telefono = telefono;
 		this.localidad = localidad;
 		this.fechaNacimiento = fechaNacimiento;
 	}

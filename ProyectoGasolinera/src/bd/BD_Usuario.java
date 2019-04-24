@@ -15,11 +15,11 @@ public class BD_Usuario extends BD_Conector {
 		super();
 	}
 	
-	public  int add_usuario(Usuario usu){	
-		String cadenaSQL="INSERT INTO usuario VALUES('" + usu.getDni() + "','" +
-		usu.getPassword()+"','"+ usu.getNombre() +"',"+ usu.getCorreo()+",'"+
-				usu.getFechaNacimiento()+"','"+usu.getLocalidad()+"','"+usu.getTelefono()+"','"+
-				usu.getDireccion()+"','"+usu.getCodPostal()+"')";
+	public int add_usuario(Usuario usu){	
+		String cadenaSQL="INSERT INTO clientes VALUES('" + usu.getNombre() + "','" +
+		usu.getDni()+"','"+ usu.getFechaNacimiento() +"',"+ usu.getCorreo()+",'"+
+				usu.getLocalidad()+"','"+usu.getDireccion()+"','"+usu.getCodPostal()+"','"+
+				usu.getTelefono()+"','"+usu.getPassword()+"')";
 		
 		try{
 			//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
