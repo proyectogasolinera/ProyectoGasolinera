@@ -3,6 +3,8 @@ package bd;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.Vector;
 
 import modelo.Usuario;
 
@@ -34,5 +36,28 @@ public class BD_Usuario extends BD_Conector {
 				return -1;
 			}
 	
+	}
+	
+	public  Vector<Usuario> userList(String dni){
+		String cadenaSQL="SELECT * from clientes WHERE dni_usuario='"+dni+"'";
+		Vector<Usuario> listaUsuarios=new Vector<Usuario>();
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			while ( reg.next()){
+				// La fecha que se extrae de la bbdd es sql.Date, hay que transformarla a LocalDate
+				java.sql.Date f=reg.getDate("fecha_naci");
+				LocalDate fBuena=f.toLocalDate();
+				listaUsuarios.add(new Usuario(reg.getString("nombre"),reg.getString("dni_usuario"),fBuena,reg.getString("mail"),reg.getString("localidad"),reg.getString("direccion"),reg.getString("cod_post"),reg.getString("tlf"),reg.getString("password")));
+				
+			}
+			s.close();
+			this.cerrar();
+			return listaUsuarios;
+		}
+		catch ( SQLException e){		
+			return null;			
+		}
 	}
 }

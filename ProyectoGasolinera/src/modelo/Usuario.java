@@ -10,18 +10,19 @@ import java.time.LocalDate;
  *
  */
 public class Usuario {
-	private String dni;
 	private String nombre;
-	private String password;
-	private String correo; 
+	private String dni;
+	private LocalDate fechaNacimiento;
+	private String correo;
+	private String localidad;
 	private String direccion;
 	private String codPostal;
 	private String Telefono;
-	private String localidad;
-	private LocalDate fechaNacimiento;
+	private String password;	
 	
-	public Usuario(String dni, String nombre, String password, String correo, String direccion, String codPostal,
-			String telefono, String localidad, LocalDate fechaNacimiento) {
+	
+	public Usuario(String nombre, String dni, LocalDate fechaNacimiento, String correo, String localidad, String direccion,
+			String codPostal, String telefono, String password) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
