@@ -10,13 +10,13 @@ public class Incidencia {
 	private String cod_incid;
 	private String DniUsuario;
 	private String id_admin;
-	private int id_gasolinera;
-	private String descripcion; 
 	private LocalDate fechaIncidencia;
-	private LocalDate fechaArreglo;  
+	private LocalDate fechaArreglo;
+	private String descripcion;
+	private int id_gasolinera; 
+	 
 	
-	public Incidencia(String cod_incid, String dniUsuario, String id_admin, int id_gasolinera, String descripcion,
-			LocalDate fechaIncidencia, LocalDate fechaArreglo) {
+	public Incidencia(String cod_incid, String dniUsuario, String id_admin, LocalDate fechaIncidencia, LocalDate fechaArreglo,String descripcion,int id_gasolinera) {
 		super();
 		this.cod_incid = cod_incid;
 		DniUsuario = dniUsuario;

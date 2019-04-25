@@ -6,8 +6,10 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import bd.BD_Conector;
+import bd.BD_Incidencia;
 import bd.BD_Usuario;
 import bd.BD_Visita;
+import modelo.Incidencia;
 import modelo.Usuario;
 import modelo.Visita;
 
@@ -22,6 +24,7 @@ public class MainPrueba {
 		BD_Conector.BD_Ini("aldautomitvebbdd");
 		BD_Usuario bdu=new BD_Usuario();
 		BD_Visita bdv=new BD_Visita();
+		BD_Incidencia bdi=new BD_Incidencia();
 		
 		
 		int opc;
@@ -70,7 +73,7 @@ public class MainPrueba {
 					System.out.println("Introduce dni usuario para buscar");
 					dni_usu=sc.nextLine();
 					Vector <Usuario> listadoUser=bdu.userList(dni_usu);
-					System.out.println("\n\nLISTADO ALUMNOS "+ dni_usu.toUpperCase()+"\n");
+					System.out.println("\n\nLISTADO USUARIO "+ dni_usu.toUpperCase()+"\n");
 					for (int i=0;i<listadoUser.size();i++)									
 						System.out.println(listadoUser.get(i).toString());
 					break;
@@ -88,12 +91,15 @@ public class MainPrueba {
 					System.out.println("Introduce precio");
 					double precio=sc.nextDouble();
 					
+				
+					
+					
 					Visita visit=new Visita(dni,fcha,tipo,id,precio);
 					
 					System.out.println(visit.toString());
 					filas=bdv.add_visita(visit);
 					if(filas==1)
-						System.out.println("Usuario añadido con exito");
+						System.out.println("Visita añadida con exito");
 					else
 						System.out.println("Error - "+filas);
 					
@@ -104,10 +110,46 @@ public class MainPrueba {
 					System.out.println("Introduce dni usuario para buscar");
 					dni_usu=sc.nextLine();
 					Vector<Visita> listadoVisita=bdv.visitList(dni_usu);
-					System.out.println("\n\nLISTADO ALUMNOS "+ dni_usu.toUpperCase()+"\n");
+					System.out.println("\n\nLISTADO VISITAS DE "+ dni_usu.toUpperCase()+"\n");
 					for (int i=0;i<listadoVisita.size();i++)									
 						System.out.println(listadoVisita.get(i).toString());
 					break;
+				case 5:
+					sc.nextLine();
+					System.out.println("Introduce cod inc");
+					String cod=sc.nextLine();
+					System.out.println("Introduce DNI usuario");
+					dni=sc.nextLine();
+					System.out.println("Introduce id_admin");
+					String id_admin=sc.nextLine();
+					System.out.println("Descibe problema");
+					String descripcion=sc.nextLine();
+					System.out.println("Introduce id_gasolinera");
+					id=sc.nextInt();
+					
+					LocalDate fcha1=LocalDate.now();
+					LocalDate fcha2=LocalDate.now();
+					
+					Incidencia inc=new Incidencia(cod,dni,id_admin,fcha1,fcha2,descripcion,id);
+					
+					System.out.println(inc.toString());
+					filas=bdi.add_inc(inc);
+					if(filas==1)
+						System.out.println("INC añadida con exito");
+					else
+						System.out.println("Error - "+filas);
+					
+					break;
+				case 6:
+					sc.nextLine();
+					System.out.println("Introduce dni usuario para buscar");
+					dni_usu=sc.nextLine();
+					Vector<Incidencia> listadoIncidencias=bdi.incList(dni_usu);
+					System.out.println("\n\nLISTADO INCIDENCIAS DE "+ dni_usu.toUpperCase()+"\n");
+					for (int i=0;i<listadoIncidencias.size();i++)									
+						System.out.println(listadoIncidencias.get(i).toString());
+					break;
+					
 					
 			}
 			
