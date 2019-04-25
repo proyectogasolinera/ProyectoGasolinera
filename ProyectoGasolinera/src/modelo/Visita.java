@@ -7,13 +7,15 @@ import java.time.LocalDate;
  *
  */
 public class Visita { 
-	private String DniUsuario; 
-	private LocalDate fechaVisita;  
-	private String id_gasolinera;
-	private double precio; //se puede omitir dependiendo si realiza pago en efectivo
-	private String tipoPago;
 	
-	public Visita(String dniUsuario, LocalDate fechaVisita, String id_gasolinera, double precio, String tipoPago) {
+	private String DniUsuario; 
+	private LocalDate fechaVisita; 
+	private String tipoPago;
+	private int id_gasolinera;
+	private double precio; //se puede omitir dependiendo si realiza pago en efectivo
+	
+	
+	public Visita(String dniUsuario, LocalDate fechaVisita,String tipoPago, int id_gasolinera, double precio ) {
 		super();
 		DniUsuario = dniUsuario;
 		this.fechaVisita = fechaVisita;
@@ -30,7 +32,7 @@ public class Visita {
 		return fechaVisita;
 	}
 
-	public String getId_gasolinera() {
+	public int getId_gasolinera() {
 		return id_gasolinera;
 	}
 
