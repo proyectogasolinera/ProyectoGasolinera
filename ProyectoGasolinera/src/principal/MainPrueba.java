@@ -6,9 +6,11 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import bd.BD_Conector;
+import bd.BD_Cuenta;
 import bd.BD_Incidencia;
 import bd.BD_Usuario;
 import bd.BD_Visita;
+import modelo.Cuenta;
 import modelo.Incidencia;
 import modelo.Usuario;
 import modelo.Visita;
@@ -25,7 +27,7 @@ public class MainPrueba {
 		BD_Usuario bdu=new BD_Usuario();
 		BD_Visita bdv=new BD_Visita();
 		BD_Incidencia bdi=new BD_Incidencia();
-		
+		BD_Cuenta bdc=new BD_Cuenta();
 		
 		int opc;
 		String dni_usu;
@@ -149,6 +151,42 @@ public class MainPrueba {
 					for (int i=0;i<listadoIncidencias.size();i++)									
 						System.out.println(listadoIncidencias.get(i).toString());
 					break;
+					
+				//Metodos Cuentas
+				case 7:
+					sc.nextLine();
+					System.out.println("Num tarjeta");
+					String num_tarj=sc.nextLine();
+					System.out.println("DNI");
+					dni=sc.nextLine();
+					System.out.println("Saldo");
+					Double saldo=sc.nextDouble();
+					System.out.println("Puntos");
+					int puntos=sc.nextInt();
+					sc.nextLine();
+					System.out.println("Tipo cuenta");
+					tipo=sc.nextLine();
+					
+					Cuenta cuenta=new Cuenta(num_tarj,dni,saldo,puntos,tipo);
+					
+					System.out.println(cuenta.toString());
+					filas=bdc.add_cuenta(cuenta);
+					if(filas==1)
+						System.out.println("Cuenta añadida con exito");
+					else
+						System.out.println("Error - "+filas);
+					
+					break;
+					
+				case 8:
+					sc.nextLine();
+					System.out.println("Introduce dni usuario para buscar");
+					dni_usu=sc.nextLine();
+					Vector<Cuenta> lista=bdc.cuentaList(dni_usu);
+					System.out.println("\n\nLISTADO CUENTAS DE "+ dni_usu.toUpperCase()+"\n");
+					for (int i=0;i<lista.size();i++)									
+						System.out.println(lista.get(i).toString());
+					break;					
 					
 					
 			}
