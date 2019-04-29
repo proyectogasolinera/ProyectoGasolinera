@@ -13,6 +13,7 @@ public class Cuenta {
 	private int punto;
 	private String tipoCuenta;
 	private LocalDate fechaAlt;
+	
 	public Cuenta(String numTarjeta, String dniTitular, double saldo, int punto, String tipoCuenta) {
 		super();
 		this.numTarjeta = numTarjeta;
@@ -25,8 +26,14 @@ public class Cuenta {
 	}
 	
 	
-	public Cuenta(String string, String string2, double double1, int int1, String string3, LocalDate fBuena) {
-		// TODO Auto-generated constructor stub
+	public Cuenta(String numTarjeta, String dniTitular, double saldo, int punto, String tipoCuenta,LocalDate fecha) {
+		super();
+		this.numTarjeta = numTarjeta;
+		DniTitular = dniTitular;
+		this.saldo = saldo;
+		this.punto = punto;
+		this.tipoCuenta = tipoCuenta;
+		this.fechaAlt = fecha;
 	}
 
 

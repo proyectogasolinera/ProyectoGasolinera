@@ -55,7 +55,7 @@ public class BD_Cuenta extends BD_Conector {
 				// La fecha que se extrae de la bbdd es sql.Date, hay que transformarla a LocalDate
 				java.sql.Date f=reg.getDate("fecha_alta");
 				LocalDate fBuena=f.toLocalDate();
-				listaCuentas.add(new Cuenta(reg.getString("num_tarj"),reg.getString("dni_usuario"),reg.getDouble("Saldo"),reg.getInt("Puntos"),reg.getString("Tipo_cuenta")));
+				listaCuentas.add(new Cuenta(reg.getString("num_tarj"),reg.getString("dni_usuario"),reg.getDouble("Saldo"),reg.getInt("Puntos"),reg.getString("Tipo_cuenta"),fBuena));
 				
 			}
 			s.close();
