@@ -1,52 +1,56 @@
 package modelo;
 
-
 public class Gasolinera {
-	private int id_Gasolinera;
+	private int id_gasolinera;
+	private String empresa;
 	private String provincia;
 	private String municipio;
 	private String localidad;
-	private String codPostal;
+	private String codpostal;
 	private String direccion;
 	private String margen;
 	private float longitud;
 	private float latitud;
-	private String rotulo;
-	private String tipoVenta;
-	private String horario;
-
-	public Gasolinera(int id_Gasolinera, String provincia, String municipio, String localidad, String codPostal,
-			String direccion, String margen, float longitud, float latitud, String rotulo, String tipoVenta,
-			String horario) {
+	private String Horario;
+	
+	public Gasolinera(int id_gasolinera, String empresa, String provincia, String municipio, String localidad,
+			String codpostal, String direccion, String margen, float longitud, float latitud, String Horario) {
 		super();
-		this.id_Gasolinera = id_Gasolinera;
+		this.id_gasolinera = id_gasolinera;
+		this.empresa = empresa;
 		this.provincia = provincia;
 		this.municipio = municipio;
 		this.localidad = localidad;
-		this.codPostal = codPostal;
+		this.codpostal = codpostal;
 		this.direccion = direccion;
 		this.margen = margen;
 		this.longitud = longitud;
 		this.latitud = latitud;
-		this.rotulo = rotulo;
-		this.tipoVenta = tipoVenta;
-		this.horario = horario;
+		this.Horario = Horario;
 	}
 
 	@Override
 	public String toString() {
-		return "id_Gasolinera=" + id_Gasolinera + ", provincia=" + provincia + ", municipio=" + municipio
-				+ ", localidad=" + localidad + ", codPostal=" + codPostal + ", direccion=" + direccion + ", margen="
-				+ margen + ", longitud=" + longitud + ", latitud=" + latitud + ", rotulo=" + rotulo + ", tipoVenta="
-				+ tipoVenta + ", horario=" + horario;
+		return "Gasolinera: id_gasolinera=" + id_gasolinera + ", empresa=" + empresa + ", provincia=" + provincia
+				+ ", municipio=" + municipio + ", localidad=" + localidad + ", codpostal=" + codpostal + ", direccion="
+				+ direccion + ", margen=" + margen + ", longitud=" + longitud + ", latitud=" + latitud + ", Horario="
+				+ Horario;
 	}
 
-	public int getId_Gasolinera() {
-		return id_Gasolinera;
+	public int getId_gasolinera() {
+		return id_gasolinera;
 	}
 
-	public void setId_Gasolinera(int id_Gasolinera) {
-		this.id_Gasolinera = id_Gasolinera;
+	public void setId_gasolinera(int id_gasolinera) {
+		this.id_gasolinera = id_gasolinera;
+	}
+
+	public String getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
 	}
 
 	public String getProvincia() {
@@ -73,12 +77,12 @@ public class Gasolinera {
 		this.localidad = localidad;
 	}
 
-	public String getCodPostal() {
-		return codPostal;
+	public String getCodpostal() {
+		return codpostal;
 	}
 
-	public void setCodPostal(String codPostal) {
-		this.codPostal = codPostal;
+	public void setCodpostal(String codpostal) {
+		this.codpostal = codpostal;
 	}
 
 	public String getDireccion() {
@@ -113,28 +117,12 @@ public class Gasolinera {
 		this.latitud = latitud;
 	}
 
-	public String getRotulo() {
-		return rotulo;
-	}
-
-	public void setRotulo(String rotulo) {
-		this.rotulo = rotulo;
-	}
-
-	public String getTipoVenta() {
-		return tipoVenta;
-	}
-
-	public void setTipoVenta(String tipoVenta) {
-		this.tipoVenta = tipoVenta;
-	}
-
 	public String getHorario() {
-		return horario;
+		return Horario;
 	}
 
 	public void setHorario(String horario) {
-		this.horario = horario;
+		Horario = horario;
 	}
 
 	

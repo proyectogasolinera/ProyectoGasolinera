@@ -3,44 +3,61 @@ package modelo;
 import java.time.LocalDate;
 
 public class Administrador {
-
-	private String nombre;
+	
+	private String id_admin;
+	private String Nombre_admin;
+	private String Password;
 	private String dni;
-	private String password;
-	private String codPostal;
-	private String direccion;
 	private String correo;
 	private String telefono;
+	private String direccion;
+	private String codPostal;
 	private LocalDate fechaAlt;
-	private String id_Administrador;
-
-	public Administrador(String nombre, String dni, String password, String codPostal, String direccion, String correo,
-			String telefono, LocalDate fechaAlt, String id_Administrador) {
+	
+	public Administrador(String id_admin, String Nombre_admin, String Password, String dni, String correo,
+			String telefono,String direccion,String codPostal,LocalDate fechaAlt) {
 		super();
-		this.nombre = nombre;
+		this.id_admin = id_admin;
+		this.Nombre_admin = Nombre_admin;
+		this.Password = Password;
 		this.dni = dni;
-		this.password = password;
-		this.codPostal = codPostal;
-		this.direccion = direccion;
 		this.correo = correo;
 		this.telefono = telefono;
+		this.direccion = direccion;
+		this.codPostal = codPostal;
 		this.fechaAlt = fechaAlt;
-		this.id_Administrador = id_Administrador;
+		
 	}
 
 	@Override
 	public String toString() {
-		return "nombre=" + nombre + ", dni=" + dni + ", password=" + password + ", codPostal=" + codPostal
-				+ ", direccion=" + direccion + ", correo=" + correo + ", telefono=" + telefono + ", fechaAlt="
-				+ fechaAlt + ", id_Administrador=" + id_Administrador;
+		return "Administrador: id_admin=" + id_admin + ", Nombre_admin=" + Nombre_admin + ", Password=" + Password
+				+ ", dni=" + dni + ", correo=" + correo + ", telefono=" + telefono + ", direccion=" + direccion
+				+ ", codPostal=" + codPostal + ", fechaAlt=" + fechaAlt ;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getId_admin() {
+		return id_admin;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setId_admin(String id_admin) {
+		this.id_admin = id_admin;
+	}
+
+	public String getNombre_admin() {
+		return Nombre_admin;
+	}
+
+	public void setNombre_admin(String nombre_admin) {
+		Nombre_admin = nombre_admin;
+	}
+
+	public String getPassword() {
+		return Password;
+	}
+
+	public void setPassword(String password) {
+		Password = password;
 	}
 
 	public String getDni() {
@@ -49,30 +66,6 @@ public class Administrador {
 
 	public void setDni(String dni) {
 		this.dni = dni;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getCodPostal() {
-		return codPostal;
-	}
-
-	public void setCodPostal(String codPostal) {
-		this.codPostal = codPostal;
-	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
 	}
 
 	public String getCorreo() {
@@ -91,6 +84,22 @@ public class Administrador {
 		this.telefono = telefono;
 	}
 
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getCodPostal() {
+		return codPostal;
+	}
+
+	public void setCodPostal(String codPostal) {
+		this.codPostal = codPostal;
+	}
+
 	public LocalDate getFechaAlt() {
 		return fechaAlt;
 	}
@@ -99,12 +108,8 @@ public class Administrador {
 		this.fechaAlt = fechaAlt;
 	}
 
-	public String getId_Administrador() {
-		return id_Administrador;
-	}
+	
+	
 
-	public void setId_Administrador(String id_Administrador) {
-		this.id_Administrador = id_Administrador;
-	}
-
+	
 }

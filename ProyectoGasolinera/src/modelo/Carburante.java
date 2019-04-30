@@ -1,65 +1,54 @@
 package modelo;
 
-import java.time.LocalDate;
+import java.time.*;
 
 public class Carburante {
 
-	private String idGasolinera;
-	private String nombreCarburante;
+	private String tipo_carbu;
 	private float precio;
+	private String id_gasolinera;
 	private LocalDate fecha_mod;
 	
-	public Carburante(String idGasolinera, String nombreCarburante, float precio,LocalDate fecha_mod) {
+	public Carburante(String tipo_carbu, float precio, String id_gasolinera, LocalDate fecha_mod) {
 		super();
-		this.idGasolinera = idGasolinera;
-		this.nombreCarburante = nombreCarburante;
+		this.tipo_carbu = tipo_carbu;
 		this.precio = precio;
-		this.fecha_mod= fecha_mod;
-	}
-
-	public LocalDate getFecha_mod() {
-		return fecha_mod;
-	}
-
-	public void setFecha_mod(LocalDate fecha_mod) {
+		this.id_gasolinera = id_gasolinera;
 		this.fecha_mod = fecha_mod;
 	}
-
-
-	public String getIdGasolinera() {
-		return idGasolinera;
+	
+	
+	@Override
+	public String toString() {
+		return "carburante: tipo_carbu=" + tipo_carbu + ", precio=" + precio + ", id_gasolinera=" + id_gasolinera
+				+ ", fecha_mod=" + fecha_mod;
 	}
 
-	public void setIdGasolinera(String idGasolinera) {
-		this.idGasolinera = idGasolinera;
-	}
 
-	public String getNombreCarburante() {
-		return nombreCarburante;
+	public String getTipo_carbu() {
+		return tipo_carbu;
 	}
-
-	public void setNombreCarburante(String nombreCarburante) {
-		this.nombreCarburante = nombreCarburante;
+	public void setTipo_carbu(String tipo_carbu) {
+		this.tipo_carbu = tipo_carbu;
 	}
-
 	public float getPrecio() {
 		return precio;
 	}
-
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
-
-	@Override
-	public String toString() {
-		return "Carburante [idGasolinera=" + idGasolinera + ", nombreCarburante=" + nombreCarburante + ", precio="
-				+ precio + ", fecha_mod=" + fecha_mod + "]";
+	public String getId_gasolinera() {
+		return id_gasolinera;
+	}
+	public void setId_gasolinera(String id_gasolinera) {
+		this.id_gasolinera = id_gasolinera;
+	}
+	public LocalDate getFecha_mod() {
+		return fecha_mod;
+	}
+	public void setFecha_mod(LocalDate fecha_mod) {
+		this.fecha_mod = fecha_mod;
 	}
 	
 	
-	
-	
-	
-	
-	
-}
+}	
