@@ -20,8 +20,10 @@ public class Main {
 		BD_Conector.BD_Ini("aldautomotivebbdd");
 		//DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("yyyy-LL-dd");
 		BD_Administrador bdA= new BD_Administrador();
+		BD_Gasolinera bdG=new BD_Gasolinera();
+		BD_Carburante bdC=new BD_Carburante();
 		int op;
-		
+		//datos admin
 		String id_admin;
 		String nombre_admin;
 		String password;
@@ -30,11 +32,24 @@ public class Main {
 		String telefono;
 		String direccion;
 		String codPostal;
+		//datos Gasolinera
+		int id_Gas;
+		//datos Carburantes
+		String tipo;
 
 		
 		
 		do{
-			System.out.println("Seleccione opcion deseada:\n 1: mostrar Administrador.\n 2: Insertar nuevo Administrador");
+			System.out.println("*******************************");
+			System.out.println("-------Opciones Administrardor--------");
+			System.out.println("Seleccione opcion deseada:\n 1: mostrar Administrador.\n 2: Insertar nuevo Administrador\n 3.Borrar administrador\n 4.Modificar datos Administrador");
+			System.out.println("************************");
+			System.out.println("-------Opciones Gasolinera---------");
+			System.out.println("\n 5:Seleccione Gasolinera\n 6: Insertar nueva Gasolinera\n 7: Borrar Gasolinera\n 8:Modificar datos Gasolinera");
+			System.out.println("************************");
+			System.out.println("-------Opciones Carburantes---------");
+			System.out.println("9. Buscar Carburante");
+			System.out.println("");
 			op=sc.nextInt();
 			switch (op) {
 			case 1:
@@ -79,6 +94,28 @@ public class Main {
 					break;
 				 
 			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				sc.nextLine();
+				System.out.println("identificador Gasolinera: ");
+				id_Gas=sc.nextInt();
+				Vector<Gasolinera> listaGas=bdG.selectGasolinera(id_Gas);
+				for(int i=0; i<listaGas.size();i++){
+					System.out.println(listaGas.get(i).toString());
+				}
+				break;
+			case 9:
+				sc.nextLine();
+				System.out.println("Tipo de carburante a buscar:");
+				tipo=sc.nextLine();
+				System.out.println("Identificador de la Gasolinera:");
+				id_Gas=sc.nextInt();
+				Vector<Carburante> listaCarbu= bdC.selectCarburante(tipo,id_Gas);
+				for(int i=0; i<listaCarbu.size();i++){
+					System.out.println(listaCarbu.get(i).toString());
+				}
 				break;
 			
 				

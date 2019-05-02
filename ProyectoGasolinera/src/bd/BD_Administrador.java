@@ -16,6 +16,10 @@ public class BD_Administrador extends BD_Conector{
 	private static ResultSet reg;
 	
 	
+	
+	
+	
+//insert
 	public int add_admin(Administrador admin){	
 		String cadenaSQL="INSERT INTO administrador VALUES('" + admin.getId_admin() + "','" +
 		admin.getNombre_admin()+"','"+ admin.getPassword() +"','"+ admin.getDni()+"','"+
@@ -61,4 +65,6 @@ public  Vector<Administrador> selectAdmin(String dni){
 		return null;			
 	}
 }
+//update
+//delete
 }

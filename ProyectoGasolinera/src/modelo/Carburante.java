@@ -6,10 +6,10 @@ public class Carburante {
 
 	private String tipo_carbu;
 	private float precio;
-	private String id_gasolinera;
+	private int id_gasolinera;
 	private LocalDate fecha_mod;
 	
-	public Carburante(String tipo_carbu, float precio, String id_gasolinera, LocalDate fecha_mod) {
+	public Carburante(String tipo_carbu, float precio, int id_gasolinera, LocalDate fecha_mod) {
 		super();
 		this.tipo_carbu = tipo_carbu;
 		this.precio = precio;
@@ -37,10 +37,10 @@ public class Carburante {
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
-	public String getId_gasolinera() {
+	public int getId_gasolinera() {
 		return id_gasolinera;
 	}
-	public void setId_gasolinera(String id_gasolinera) {
+	public void setId_gasolinera(int id_gasolinera) {
 		this.id_gasolinera = id_gasolinera;
 	}
 	public LocalDate getFecha_mod() {

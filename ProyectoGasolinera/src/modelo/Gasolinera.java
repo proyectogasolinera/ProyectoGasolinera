@@ -6,15 +6,15 @@ public class Gasolinera {
 	private String provincia;
 	private String municipio;
 	private String localidad;
-	private String codpostal;
+	private int codpostal;
 	private String direccion;
-	private String margen;
+	private char margen;
 	private float longitud;
 	private float latitud;
 	private String Horario;
-	
+	//int, String, String, String, String, int, String, char, float, float, String, String
 	public Gasolinera(int id_gasolinera, String empresa, String provincia, String municipio, String localidad,
-			String codpostal, String direccion, String margen, float longitud, float latitud, String Horario) {
+			int codpostal, String direccion, char margen, float longitud, float latitud, String Horario) {
 		super();
 		this.id_gasolinera = id_gasolinera;
 		this.empresa = empresa;
@@ -77,11 +77,11 @@ public class Gasolinera {
 		this.localidad = localidad;
 	}
 
-	public String getCodpostal() {
+	public int getCodpostal() {
 		return codpostal;
 	}
 
-	public void setCodpostal(String codpostal) {
+	public void setCodpostal(int codpostal) {
 		this.codpostal = codpostal;
 	}
 
@@ -93,11 +93,11 @@ public class Gasolinera {
 		this.direccion = direccion;
 	}
 
-	public String getMargen() {
+	public char getMargen() {
 		return margen;
 	}
 
-	public void setMargen(String margen) {
+	public void setMargen(char margen) {
 		this.margen = margen;
 	}
 
