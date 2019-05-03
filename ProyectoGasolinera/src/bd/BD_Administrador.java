@@ -8,7 +8,6 @@ package bd;
 import java.sql.*;
 import java.util.*;
 import modelo.Administrador;
-
 import java.time.LocalDate;
 
 public class BD_Administrador extends BD_Conector{
@@ -55,7 +54,10 @@ public  Vector<Administrador> selectAdmin(String dni){
 		while ( reg.next()){
 			java.sql.Date f=reg.getDate("Fecha_alta");
 			LocalDate f_alta=f.toLocalDate();
-			listadoAdmin.add(new Administrador(reg.getString("id_admin"),reg.getString("Nombre_admin"),reg.getString("Password"),reg.getString("dni"),reg.getString("Correo_admin"),reg.getString("Tlfono_admin"),reg.getString("Direccion_admin"),reg.getString("cod_post"),f_alta));
+			listadoAdmin.add(new Administrador(reg.getString("id_admin")
+					,reg.getString("Nombre_admin"),reg.getString("Password")
+					,reg.getString("dni"),reg.getString("Correo_admin")
+					,reg.getString("Tlfono_admin"),reg.getString("Direccion_admin"),reg.getString("cod_post"),f_alta));
 		}
 		s.close();
 		this.cerrar();

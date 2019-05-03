@@ -6,6 +6,8 @@ package bd;
  */
 import java.sql.*;
 import java.util.*;
+
+
 import modelo.Carburante;
 
 
@@ -17,7 +19,7 @@ public class BD_Carburante extends BD_Conector{
 
 	//select 
 	public  Vector<Carburante> selectCarburante( String tipo,int id){
-		String cadenaSQL="SELECT * from carburantes WHERE id_gasolinera='"+id+"' and tipo_carbu='"+tipo+"'";
+		String cadenaSQL="SELECT * from carburante WHERE id_gasolinera='"+id+"' and tipo_carbu='"+tipo+"'";
 		Vector<Carburante> listadoCarbu=new Vector<Carburante>();
 		
 		try{
@@ -38,5 +40,25 @@ public class BD_Carburante extends BD_Conector{
 		catch ( SQLException e){		
 			return null;			
 		}
+	}
+	// insert
+	public int add_carburante(Carburante carbu){	
+		String cadenaSQL="INSERT INTO carburante VALUES('" + carbu.getTipo_carbu()+ "','" +
+		carbu.getPrecio()+"','"+ carbu.getId_gasolinera() +"','"+ carbu.getFecha_mod()+"')";
+		
+		try{
+			this.abrir();
+			s=c.createStatement();
+			int filas=s.executeUpdate(cadenaSQL);
+		
+			s.close();
+			this.cerrar();
+			return filas;
+			
+			}
+			catch ( SQLException e){			
+				return -1;
+			}
+	
 	}
 }

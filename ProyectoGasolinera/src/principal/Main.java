@@ -23,6 +23,7 @@ public class Main {
 		BD_Gasolinera bdG=new BD_Gasolinera();
 		BD_Carburante bdC=new BD_Carburante();
 		int op;
+		int filas;
 		//datos admin
 		String id_admin;
 		String nombre_admin;
@@ -35,7 +36,11 @@ public class Main {
 		//datos Gasolinera
 		int id_Gas;
 		//datos Carburantes
-		String tipo;
+	
+		 String tipo;
+		 float precio;
+		 int id_gasolinera;
+		LocalDate fecha_mod;
 
 		
 		
@@ -48,7 +53,8 @@ public class Main {
 			System.out.println("\n 5:Seleccione Gasolinera\n 6: Insertar nueva Gasolinera\n 7: Borrar Gasolinera\n 8:Modificar datos Gasolinera");
 			System.out.println("************************");
 			System.out.println("-------Opciones Carburantes---------");
-			System.out.println("9. Buscar Carburante");
+			System.out.println("9.Buscar Carburante");
+			System.out.println("10.Insertar nuevo carburante");
 			System.out.println("");
 			op=sc.nextInt();
 			switch (op) {
@@ -83,7 +89,7 @@ public class Main {
 				 LocalDate fechaAlt=LocalDate.now();
 				 
 				 Administrador admin=new Administrador(id_admin,nombre_admin,password,dni_adm,correo,telefono,direccion,codPostal,fechaAlt);
-				 int filas=bdA.add_admin(admin);
+				 filas=bdA.add_admin(admin);
 				 if(filas==1){
 						System.out.println("Administrador nuevo introduccido");
 				 		System.out.println(admin.toString());
@@ -117,7 +123,25 @@ public class Main {
 					System.out.println(listaCarbu.get(i).toString());
 				}
 				break;
-			
+			case 10:
+				System.out.println("Tipo de carburante: ");
+				sc.nextLine();
+				tipo=sc.nextLine();
+				System.out.println("Precio del "+tipo);
+				precio=sc.nextFloat();
+				System.out.println("Identificador Gasolinera");
+				id_gasolinera=sc.nextInt();
+				fecha_mod=LocalDate.now();
+				Carburante carbu=new Carburante(tipo,precio,id_gasolinera,fecha_mod);
+				filas=bdC.add_carburante(carbu);
+				 if(filas==-1){
+					 System.out.println("Se ha producido un error interno");
+				 }
+				 else{
+					 System.out.println("Carburante "+tipo+" introduccido ");
+				 }
+				break;
+				
 				
 				
 
