@@ -30,7 +30,7 @@ public class BD_Usuario extends BD_Conector {
 				usu.getTelefono()+"','"+usu.getPassword()+"')";
 		
 		try{
-			//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
+			//Si las ilas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
 			this.abrir();
 			s=c.createStatement();
 			int filas=s.executeUpdate(cadenaSQL);
