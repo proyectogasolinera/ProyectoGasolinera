@@ -45,6 +45,22 @@ public class BD_Visita extends BD_Conector {
 	
 	}
 	
+	public int borrarVisita(String dni){
+        String cadenaSQL="DELETE FROM visitas WHERE dni_usuario=('" +dni+"')";
+
+        try{
+        this.abrir();
+        s=c.createStatement();
+        int filas=s.executeUpdate(cadenaSQL);
+        s.close();
+        this.cerrar();
+        return filas;
+        }
+        catch ( SQLException e){
+            return -1;
+        }
+    }
+	
 	public  Vector<Visita> visitList(String dni){
 		String cadenaSQL="SELECT * from visitas WHERE dni_usuario='"+dni+"'";
 		Vector<Visita> listaVisitas=new Vector<Visita>();

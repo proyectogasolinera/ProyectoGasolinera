@@ -44,6 +44,41 @@ public class BD_Usuario extends BD_Conector {
 	
 	}
 	
+	public int updateUser(String dni,String campo,String cambio) {
+
+	    String cadena = "UPDATE clientes SET "+campo+" = '"+cambio+"' WHERE dni_usuario = '" + dni + "'";
+
+	    try{
+	        this.abrir();
+	        s=c.createStatement();
+	        int filas=s.executeUpdate(cadena);
+	        s.close();
+	        this.cerrar();
+	        return filas;
+	    }
+	    catch ( SQLException e){
+	        return -1;
+	    }
+
+	}
+	
+	public int borrarUser(String dni){
+        String cadenaSQL="DELETE FROM clientes WHERE dni_usuario=('" +dni+"')";
+
+        try{
+        this.abrir();
+        s=c.createStatement();
+        int filas=s.executeUpdate(cadenaSQL);
+        s.close();
+        this.cerrar();
+        return filas;
+        }
+        catch ( SQLException e){
+            return -1;
+        }
+    }
+	
+	
 	public  Vector<Usuario> userList(String dni){
 		String cadenaSQL="SELECT * from clientes WHERE dni_usuario='"+dni+"'";
 		Vector<Usuario> listaUsuarios=new Vector<Usuario>();

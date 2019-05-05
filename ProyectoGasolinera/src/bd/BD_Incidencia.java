@@ -45,6 +45,40 @@ public class BD_Incidencia extends BD_Conector {
 	
 	}
 	
+	public int updateInc(String inc,LocalDate fecha) {
+
+	    String cadena = "UPDATE incidencias SET Fecha_arreglo= '"+fecha+"' WHERE cod_incidencia = '" + inc + "'";
+
+	    try{
+	        this.abrir();
+	        s=c.createStatement();
+	        int filas=s.executeUpdate(cadena);
+	        s.close();
+	        this.cerrar();
+	        return filas;
+	    }
+	    catch ( SQLException e){
+	        return -1;
+	    }
+
+	}
+	
+	public int borrarIncidencia(String dni){
+        String cadenaSQL="DELETE FROM incidencias WHERE dni_usuario=('" +dni+"')";
+
+        try{
+        this.abrir();
+        s=c.createStatement();
+        int filas=s.executeUpdate(cadenaSQL);
+        s.close();
+        this.cerrar();
+        return filas;
+        }
+        catch ( SQLException e){
+            return -1;
+        }
+    }
+	
 	public  Vector<Incidencia> incList(String dni){
 		String cadenaSQL="SELECT * from incidencias WHERE dni_usuario='"+dni+"'";
 		Vector<Incidencia> listaIncidencias=new Vector<Incidencia>();

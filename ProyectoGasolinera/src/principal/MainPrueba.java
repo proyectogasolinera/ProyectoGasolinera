@@ -23,7 +23,7 @@ public class MainPrueba {
 		Scanner sc=new Scanner(System.in);
 		DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("yyyy-LL-dd"); 
 		
-		BD_Conector.BD_Ini("aldautomitvebbdd");
+		BD_Conector.BD_Ini("aldautomotivebbdd");
 		BD_Usuario bdu=new BD_Usuario();
 		BD_Visita bdv=new BD_Visita();
 		BD_Incidencia bdi=new BD_Incidencia();
@@ -35,6 +35,18 @@ public class MainPrueba {
 		do {
 			System.out.println("1.Dar de alta usuario");
 			System.out.println("2.Buscar usuario");
+			System.out.println("3.Dar de alta visita");
+			System.out.println("4.Buscar visita");
+			System.out.println("5.Añadir incidencia");
+			System.out.println("6.Buscar incidencias");
+			System.out.println("7.Añadir cuenta");
+			System.out.println("8.Buscar cuenta");
+			System.out.println("9.Eliminar usuario");
+			System.out.println("10.Eliminar visita");
+			System.out.println("11.Eliminar incidencia");
+			System.out.println("12.Eliminar cuentas");
+			System.out.println("13.Actualiar usuario");
+			
 			opc=sc.nextInt();
 			
 			switch(opc) {
@@ -186,12 +198,103 @@ public class MainPrueba {
 					System.out.println("\n\nLISTADO CUENTAS DE "+ dni_usu.toUpperCase()+"\n");
 					for (int i=0;i<lista.size();i++)									
 						System.out.println(lista.get(i).toString());
-					break;					
+					break;	
+					
+				case 9:
+					sc.nextLine();
+					System.out.println("DNI");
+					dni=sc.nextLine();
+					
+					filas=bdu.borrarUser(dni);
+					if(filas==1)
+						System.out.println("Usuario eliminado con exito");
+					else
+						System.out.println("Error - "+filas);
+					
+					break;
+				
+				case 10:
+					
+					sc.nextLine();
+					System.out.println("DNI");
+					dni=sc.nextLine();
+					
+					filas=bdv.borrarVisita(dni);
+					if(filas==1)
+						System.out.println("Visita eliminada con exito");
+					else
+						System.out.println("Error - "+filas);
+					
+					break;
+					
+				case 11:
+					
+					sc.nextLine();
+					System.out.println("DNI");
+					dni=sc.nextLine();
+					
+					filas=bdi.borrarIncidencia(dni);
+					if(filas==1)
+						System.out.println("Incidencia eliminada con exito");
+					else
+						System.out.println("Error - "+filas);
+					
+					break;
+					
+				case 12:
+					
+					sc.nextLine();
+					System.out.println("DNI");
+					dni=sc.nextLine();
+					
+					filas=bdc.borrarCuenta(dni);
+					if(filas==1)
+						System.out.println("Cuenta eliminada con exito");
+					else
+						System.out.println("Error - "+filas);
+					
+					break;
+					
+				case 13:
+					sc.nextLine();
+					System.out.println("Introduce dni del user a modificar");
+					dni=sc.nextLine();
+					System.out.println("Que campo desea modificar ?");
+					String campo=sc.nextLine();
+					System.out.println("Introduce nuevo registro");
+					String cambio=sc.nextLine();
+					
+					filas=bdu.updateUser(dni, campo, cambio);
+					if(filas==1)
+						System.out.println("Cambio realizado");
+					else
+						System.out.println("Error - "+filas);
+					
+					break;
+					
+				case 14:
+					sc.nextLine();
+					System.out.println("Introduce INC a modificar");
+					String inci=sc.nextLine();
+					System.out.println("Introduce nuevo registro");
+					fecha=sc.nextLine();
+					LocalDate fechita=LocalDate.parse(fecha,fechaFormateada);
+					
+					filas=bdi.updateInc(inci, fechita);
+					if(filas==1)
+						System.out.println("Cambio realizado");
+					else
+						System.out.println("Error - "+filas);
+					
+					break;	
+				
+					
+					
 					
 					
 			}
 			
-		}while(opc!=10);
+		}while(opc!=20);
 
 		
 		
