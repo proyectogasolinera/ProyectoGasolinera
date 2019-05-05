@@ -39,4 +39,43 @@ public  Vector<Gasolinera> selectGasolinera(int id){
 		return null;			
 	}
 }
+//Insert
+public int add_Gasolinera(Gasolinera gas){	
+	String cadenaSQL="INSERT INTO gasolineras VALUES('" + gas.getId_gasolinera() + "','" +
+	gas.getEmpresa()+"','"+ gas.getProvincia() +"','"+ gas.getMunicipio()+"','"+
+			gas.getLocalidad()+"','"+gas.getCodpostal()+"','"+gas.getDireccion()+"','"+
+			gas.getMargen()+"','"+gas.getLongitud()+"','"+ gas.getLatitud()+"','"+ gas.getHorario()+"')";
+	
+	try{
+		//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
+		this.abrir();
+		s=c.createStatement();
+		int filas=s.executeUpdate(cadenaSQL);
+	
+		s.close();
+		this.cerrar();
+		return filas;
+		
+		}
+		catch ( SQLException e){			
+			return -1;
+		}
+
+}
+//Delete
+public int borrarGas(int id){	
+	String cadenaSQL="DELETE FROM gasolineras WHERE id_gasolinera=('" +id+"')"; 	
+	
+	try{
+	this.abrir();
+	s=c.createStatement();
+	int filas=s.executeUpdate(cadenaSQL);
+	s.close();
+	this.cerrar();
+	return filas;
+	}
+	catch ( SQLException e){			
+		return -1;
+	}
+}
 }

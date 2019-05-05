@@ -68,5 +68,38 @@ public  Vector<Administrador> selectAdmin(String dni){
 	}
 }
 //update
+public int updateAdmin(String direccion,String id) {
+
+    String cadena = "UPDATE administrador  SET Direccion_admin = '"+direccion+"' WHERE id_admin = '" + id + "'";
+
+    try{
+        this.abrir();
+        s=c.createStatement();
+        int filas=s.executeUpdate(cadena);
+        s.close();
+        this.cerrar();
+        return filas;
+    }
+    catch ( SQLException e){
+        return -1;
+    }
+
+}
 //delete
+public int borrarAdmin(String id){	
+	String cadenaSQL="DELETE FROM administrador WHERE id_admin=('" +id+"')"; 	
+	
+	try{
+	this.abrir();
+	s=c.createStatement();
+	int filas=s.executeUpdate(cadenaSQL);
+	s.close();
+	this.cerrar();
+	return filas;
+	}
+	catch ( SQLException e){			
+		return -1;
+	}
+}
+
 }

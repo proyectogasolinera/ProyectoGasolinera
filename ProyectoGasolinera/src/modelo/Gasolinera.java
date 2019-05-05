@@ -11,7 +11,7 @@ public class Gasolinera {
 	private char margen;
 	private float longitud;
 	private float latitud;
-	private String Horario;
+	private String horario;
 	//int, String, String, String, String, int, String, char, float, float, String, String
 	public Gasolinera(int id_gasolinera, String empresa, String provincia, String municipio, String localidad,
 			int codpostal, String direccion, char margen, float longitud, float latitud, String Horario) {
@@ -26,7 +26,7 @@ public class Gasolinera {
 		this.margen = margen;
 		this.longitud = longitud;
 		this.latitud = latitud;
-		this.Horario = Horario;
+		this.horario = Horario;
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class Gasolinera {
 		return "Gasolinera: id_gasolinera=" + id_gasolinera + ", empresa=" + empresa + ", provincia=" + provincia
 				+ ", municipio=" + municipio + ", localidad=" + localidad + ", codpostal=" + codpostal + ", direccion="
 				+ direccion + ", margen=" + margen + ", longitud=" + longitud + ", latitud=" + latitud + ", Horario="
-				+ Horario;
+				+ horario;
 	}
 
 	public int getId_gasolinera() {
@@ -118,11 +118,11 @@ public class Gasolinera {
 	}
 
 	public String getHorario() {
-		return Horario;
+		return horario;
 	}
 
 	public void setHorario(String horario) {
-		Horario = horario;
+		horario = horario;
 	}
 
 	

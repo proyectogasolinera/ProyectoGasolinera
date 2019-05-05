@@ -36,6 +36,17 @@ public class Main {
 		String codPostal;
 		//datos Gasolinera
 		int id_Gas;
+		
+		String empresa;
+		String provincia;
+		String municipio;
+		String localidad;
+		int codpostal;
+		
+		char margen;
+		float longitud;
+		float latitud;
+		String horario;
 		//datos Carburantes
 	
 		 String tipo;
@@ -46,8 +57,7 @@ public class Main {
 		 int cod_mod;
 		String tipo_mod;
 		 LocalDate fecha_mod;
-		 //String id_admin;
-		 //int id_gasolinera;
+		
 		
 
 		
@@ -66,6 +76,7 @@ public class Main {
 			System.out.println("11. Modificar precio carburaante");
 			System.out.println("12.Borrar carburante Gasolinera");
 			System.out.println("-------Opciones Modificacion---------");
+			System.out.println("13. Ver modificaciones");
 			op=sc.nextInt();
 			switch (op) {
 			case 1:
@@ -110,8 +121,29 @@ public class Main {
 					break;
 				 
 			case 3:
+				sc.nextLine();
+				System.out.println("Introducce identificador del administrador a borrar");
+				id_admin=sc.nextLine();
+				filas=bdA.borrarAdmin(id_admin);
+				if(filas==1){
+					System.out.println("Administrador Borrado Correctamente");
+				}
+				else
+					System.out.println("Error - "+filas);
 				break;
 			case 4:
+				sc.nextLine();
+				System.out.println("identificador del administrador:");
+				id_admin=sc.nextLine();
+				System.out.println("Nueva direccion:");
+				direccion=sc.nextLine();
+				filas=bdA.updateAdmin(direccion, id_admin);
+				if(filas==1){
+					System.out.println("Datos cambiados correctamente");
+				}
+				else
+					System.out.println("Error - "+filas);
+				
 				break;
 			case 5:
 				sc.nextLine();
@@ -121,6 +153,49 @@ public class Main {
 				for(int i=0; i<listaGas.size();i++){
 					System.out.println(listaGas.get(i).toString());
 				}
+				break;
+			case 6:
+				sc.nextLine();
+				System.out.println("identificador");
+				
+				id_gasolinera=sc.nextInt();
+				System.out.println("Marca: ");
+				empresa=sc.nextLine();
+				System.out.println("provincia:");
+				provincia=sc.nextLine();
+				System.out.println("Municipio:");
+				 municipio=sc.nextLine();
+				 System.out.println("Localidad:");
+				 localidad=sc.nextLine();
+				 System.out.println("Codigo postal:");
+				 codpostal=sc.nextInt();
+				 sc.nextLine();
+				 System.out.println("Direccion:");
+				 direccion=sc.nextLine();
+				System.out.println("Margen");
+				margen=sc.nextLine().charAt(0);
+				System.out.println("longitud");
+				longitud=sc.nextFloat();
+				System.out.println("latitud");
+				latitud=sc.nextFloat();
+				sc.nextLine();
+				System.out.println("Horario");
+				horario=sc.nextLine();
+				Gasolinera Gas=new Gasolinera(id_gasolinera,empresa,provincia,municipio,
+						localidad,codpostal,direccion,margen,longitud,latitud,horario);
+				
+				break;
+			
+			case 7:
+				System.out.println("Identificador de Gasolinera a Borrar");
+				id_Gas=sc.nextInt();
+				filas=bdG.borrarGas(id_Gas);
+				if(filas==1){
+					System.out.println("Gasolinera Borrado Correctamente");
+				}
+				else
+					System.out.println("Error - "+filas);
+				
 				break;
 			case 9:
 				sc.nextLine();
@@ -150,9 +225,23 @@ public class Main {
 				 else{
 					 System.out.println("Carburante "+tipo+" introduccido ");
 					 //Introduccion automatica en la tabla modificaciones 
-					int filas2= bdM.add_modificacion(cod_mod,tipo_mod,fecha_mod,id_admin,id_gasolinera);
+				//	int filas2= bdM.add_modificacion(cod_mod,tipo_mod,fecha_mod,id_admin,id_gasolinera);
 					 
 				 }
+				break;
+			case 12:
+				sc.nextLine();
+			
+				System.out.println(" id Gasolinera quieres borrar el carburante:");
+				id_Gas=sc.nextInt();
+				filas=bdC.borrarCarbu(id_Gas);
+				if(filas!=-1){
+					System.out.println("Error - "+filas);
+				}
+				else
+					System.out.println("Borrado Correctamente");
+					
+				
 				break;
 				
 				

@@ -62,4 +62,20 @@ public class BD_Carburante extends BD_Conector{
 	
 	
 	}
+	//delete
+	public int borrarCarbu(int id){	
+		String cadenaSQL="DELETE FROM carburante WHERE id_gasolinera=('" +id+"')"; 	
+		
+		try{
+		this.abrir();
+		s=c.createStatement();
+		int filas=s.executeUpdate(cadenaSQL);
+		s.close();
+		this.cerrar();
+		return filas;
+		}
+		catch ( SQLException e){			
+			return -1;
+		}
+	}
 }
