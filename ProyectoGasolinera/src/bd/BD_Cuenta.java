@@ -44,6 +44,23 @@ public class BD_Cuenta extends BD_Conector {
 	
 	}
 	
+	
+	public int borrarCuenta(String dni){
+        String cadenaSQL="DELETE FROM cuentas WHERE dni_usuario=('" +dni+"')";
+
+        try{
+        this.abrir();
+        s=c.createStatement();
+        int filas=s.executeUpdate(cadenaSQL);
+        s.close();
+        this.cerrar();
+        return filas;
+        }
+        catch ( SQLException e){
+            return -1;
+        }
+    }
+	
 	public  Vector<Cuenta> cuentaList(String dni){
 		String cadenaSQL="SELECT * from cuentas WHERE dni_usuario='"+dni+"'";
 		Vector<Cuenta> listaCuentas=new Vector<Cuenta>();
