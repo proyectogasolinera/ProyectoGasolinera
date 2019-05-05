@@ -59,6 +59,7 @@ public class BD_Usuario extends BD_Conector {
 				
 			}
 			s.close();
+		
 			this.cerrar();
 			return listaUsuarios;
 		}

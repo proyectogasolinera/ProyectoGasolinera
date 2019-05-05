@@ -23,7 +23,7 @@ public class MainPrueba {
 		Scanner sc=new Scanner(System.in);
 		DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("yyyy-LL-dd"); 
 		
-		BD_Conector.BD_Ini("aldautomitvebbdd");
+		BD_Conector.BD_Ini("aldautomotivebbdd");
 		BD_Usuario bdu=new BD_Usuario();
 		BD_Visita bdv=new BD_Visita();
 		BD_Incidencia bdi=new BD_Incidencia();
