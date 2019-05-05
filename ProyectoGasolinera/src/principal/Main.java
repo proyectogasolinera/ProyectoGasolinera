@@ -249,7 +249,7 @@ public class Main {
 
 			
 			}
-		}while(op!=11);
+		}while(op!=77);
 	}
 
 }
