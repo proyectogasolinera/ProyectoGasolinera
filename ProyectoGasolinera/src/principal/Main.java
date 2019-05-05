@@ -22,6 +22,7 @@ public class Main {
 		BD_Administrador bdA= new BD_Administrador();
 		BD_Gasolinera bdG=new BD_Gasolinera();
 		BD_Carburante bdC=new BD_Carburante();
+		BD_Modificacion bdM=new BD_Modificacion();
 		int op;
 		int filas;
 		//datos admin
@@ -40,7 +41,14 @@ public class Main {
 		 String tipo;
 		 float precio;
 		 int id_gasolinera;
-		LocalDate fecha_mod;
+		LocalDate fecha_modP;
+		//datos Modificacion
+		 int cod_mod;
+		String tipo_mod;
+		 LocalDate fecha_mod;
+		 //String id_admin;
+		 //int id_gasolinera;
+		
 
 		
 		
@@ -55,7 +63,9 @@ public class Main {
 			System.out.println("-------Opciones Carburantes---------");
 			System.out.println("9.Buscar Carburante");
 			System.out.println("10.Insertar nuevo carburante");
-			System.out.println("");
+			System.out.println("11. Modificar precio carburaante");
+			System.out.println("12.Borrar carburante Gasolinera");
+			System.out.println("-------Opciones Modificacion---------");
 			op=sc.nextInt();
 			switch (op) {
 			case 1:
@@ -131,14 +141,17 @@ public class Main {
 				precio=sc.nextFloat();
 				System.out.println("Identificador Gasolinera");
 				id_gasolinera=sc.nextInt();
-				fecha_mod=LocalDate.now();
-				Carburante carbu=new Carburante(tipo,precio,id_gasolinera,fecha_mod);
+				fecha_modP=LocalDate.now();
+				Carburante carbu=new Carburante(tipo,precio,id_gasolinera,fecha_modP);
 				filas=bdC.add_carburante(carbu);
 				 if(filas==-1){
 					 System.out.println("Se ha producido un error interno");
 				 }
 				 else{
 					 System.out.println("Carburante "+tipo+" introduccido ");
+					 //Introduccion automatica en la tabla modificaciones 
+					int filas2= bdM.add_modificacion(cod_mod,tipo_mod,fecha_mod,id_admin,id_gasolinera);
+					 
 				 }
 				break;
 				

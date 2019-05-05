@@ -50,7 +50,7 @@ public class BD_Carburante extends BD_Conector{
 			this.abrir();
 			s=c.createStatement();
 			int filas=s.executeUpdate(cadenaSQL);
-		
+	
 			s.close();
 			this.cerrar();
 			return filas;
@@ -59,6 +59,7 @@ public class BD_Carburante extends BD_Conector{
 			catch ( SQLException e){			
 				return -1;
 			}
+	
 	
 	}
 }

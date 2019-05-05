@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 public class Modificacion {
 	
-	private String cod_mod;
+	private int cod_mod;
 	private String tipo;
 	private LocalDate fecha;
 	private String id_admin;
 	private int id_gasolinera;
 	
 	
-	public Modificacion(String cod_mod, String tipo, LocalDate fecha, String id_admin, int id_gasolinera) {
+	public Modificacion(int cod_mod, String tipo, LocalDate fecha, String id_admin, int id_gasolinera) {
 		super();
 		this.cod_mod = cod_mod;
 		this.tipo = tipo;
@@ -27,10 +27,10 @@ public class Modificacion {
 				+ ", id_gasolinera=" + id_gasolinera;
 	}
 
-	public String getCodMod() {
+	public int getCodMod() {
 		return cod_mod;
 	}
-	public void setCodMod(String cod_mod) {
+	public void setCodMod(int cod_mod) {
 		this.cod_mod = cod_mod;
 	}
 	public String getTipo() {
