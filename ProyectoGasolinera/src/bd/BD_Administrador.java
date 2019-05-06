@@ -88,7 +88,7 @@ public int updateAdmin(String direccion,String id) {
 }
 */
 
-//metodo update para cambiar tipos de datos String
+//metodo update para cambiar tipos de datos Strings
 public int updateAdminS(String id,String campo,String cambio) {
 
     String cadena = "UPDATE administrador SET "+campo+" = '"+cambio+"' WHERE id_admin = '" + id + "'";

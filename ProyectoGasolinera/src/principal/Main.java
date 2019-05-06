@@ -231,7 +231,7 @@ public class Main {
 				 }
 				 else{
 					 System.out.println("Carburante "+tipo+" introduccido ");
-					 //Introduccion automatica en la tabla modificaciones 
+					 //Introduccion automatica en la tabla de modificaciones 
 				//	int filas2= bdM.add_modificacion(cod_mod,tipo_mod,fecha_mod,id_admin,id_gasolinera);
 					 
 				 }

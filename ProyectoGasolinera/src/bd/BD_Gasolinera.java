@@ -39,7 +39,7 @@ public  Vector<Gasolinera> selectGasolinera(int id){
 		return null;			
 	}
 }
-//Insert
+//Inserts
 public int add_Gasolinera(Gasolinera gas){	
 	String cadenaSQL="INSERT INTO gasolineras VALUES('"+gas.getEmpresa()+"','"+ gas.getProvincia() +"','"+ gas.getMunicipio()+"','"+
 			gas.getLocalidad()+"','"+gas.getCodpostal()+"','"+gas.getDireccion()+"','"+

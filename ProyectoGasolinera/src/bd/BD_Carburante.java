@@ -17,7 +17,7 @@ public class BD_Carburante extends BD_Conector{
 	private static Statement s;	
 	private static ResultSet reg;
 
-	//select 
+	//selects
 	public  Vector<Carburante> selectCarburante( String tipo,int id){
 		String cadenaSQL="SELECT * from carburante WHERE id_gasolinera='"+id+"' and tipo_carbu='"+tipo+"'";
 		Vector<Carburante> listadoCarbu=new Vector<Carburante>();
