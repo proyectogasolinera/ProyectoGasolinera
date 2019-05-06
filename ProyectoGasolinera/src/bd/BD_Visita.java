@@ -15,6 +15,7 @@ import modelo.Visita;
  *
  */
 
+//BD_Visita
 public class BD_Visita extends BD_Conector {
 	
 	private static Statement s;	

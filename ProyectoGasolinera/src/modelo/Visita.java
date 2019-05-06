@@ -6,6 +6,8 @@ import java.time.LocalDate;
  * @author Weize
  *
  */
+
+//Visita
 public class Visita { 
 	
 	private String DniUsuario; 

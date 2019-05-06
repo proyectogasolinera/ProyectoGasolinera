@@ -78,6 +78,7 @@ public class BD_Incidencia extends BD_Conector {
         }
     }
 	
+	//Metodo para ver todas las incs de un usuario
 	public  Vector<Incidencia> incUserList(String dni){
 		String cadenaSQL="SELECT * from incidencias WHERE dni_usuario='"+dni+"'";
 		Vector<Incidencia> listaIncidencias=new Vector<Incidencia>();
