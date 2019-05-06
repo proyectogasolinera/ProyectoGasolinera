@@ -95,9 +95,6 @@ public class MainPrueba {
 					sc.nextLine();
 					System.out.println("Introduce dni");
 					dni=sc.nextLine();
-					System.out.println("Introduce fecha de visita");
-					fecha=sc.nextLine();
-					LocalDate fcha=LocalDate.parse(fecha,fechaFormateada);
 					System.out.println("Introduce tipo de pago");
 					String tipo=sc.nextLine();
 					System.out.println("Introduce id_gasolinera");
@@ -108,7 +105,7 @@ public class MainPrueba {
 				
 					
 					
-					Visita visit=new Visita(dni,fcha,tipo,id,precio);
+					Visita visit=new Visita(dni,tipo,id,precio);
 					
 					System.out.println(visit.toString());
 					filas=bdv.add_visita(visit);
@@ -158,7 +155,7 @@ public class MainPrueba {
 					sc.nextLine();
 					System.out.println("Introduce dni usuario para buscar");
 					dni_usu=sc.nextLine();
-					Vector<Incidencia> listadoIncidencias=bdi.incList(dni_usu);
+					Vector<Incidencia> listadoIncidencias=bdi.incUserList(dni_usu);
 					System.out.println("\n\nLISTADO INCIDENCIAS DE "+ dni_usu.toUpperCase()+"\n");
 					for (int i=0;i<listadoIncidencias.size();i++)									
 						System.out.println(listadoIncidencias.get(i).toString());
@@ -218,8 +215,15 @@ public class MainPrueba {
 					sc.nextLine();
 					System.out.println("DNI");
 					dni=sc.nextLine();
+					System.out.println("Gasolinera");
+					int codigo=sc.nextInt();
+					sc.nextLine();
+					System.out.println("Fecha");
+					fecha=sc.nextLine();
+					LocalDate fechaVisita=LocalDate.parse(fecha,fechaFormateada);
 					
-					filas=bdv.borrarVisita(dni);
+					
+					filas=bdv.borrarVisita(dni,codigo,fechaVisita);
 					if(filas==1)
 						System.out.println("Visita eliminada con exito");
 					else
@@ -287,6 +291,55 @@ public class MainPrueba {
 						System.out.println("Error - "+filas);
 					
 					break;	
+					
+				case 15:
+					sc.nextLine();
+					System.out.println("cod admin");
+					cod=sc.nextLine();
+					Vector<Incidencia> lista1=bdi.incAdminList(cod);
+					System.out.println("\n\nLISTADO INCIDENCIAS");
+					for (int i=0;i<lista1.size();i++)									
+						System.out.println(lista1.get(i).toString());
+					break;
+					
+				case 16:
+					sc.nextLine();
+					System.out.println("cod admin");
+					cod=sc.nextLine();
+					System.out.println("Esta resuelta?");
+					System.out.println("1.Si");
+					System.out.println("2.No");
+					int decision=sc.nextInt();
+					String entrada;
+					if(decision==1)
+						entrada="not null";
+					else
+						entrada="null";
+						
+					Vector<Incidencia> lista2=bdi.incAdminListResolve(cod,entrada);
+					System.out.println("\n\nLISTADO INCIDENCIAS");
+					for (int i=0;i<lista2.size();i++)									
+						System.out.println(lista2.get(i).toString());
+					break;
+					
+				case 17:
+					sc.nextLine();
+					System.out.println("dni");
+					dni=sc.nextLine();
+					System.out.println("Esta resuelta?");
+					System.out.println("1.Si");
+					System.out.println("2.No");
+					decision=sc.nextInt();
+					if(decision==1)
+						entrada="not null";
+					else
+						entrada="null";
+						
+					Vector<Incidencia> lista3=bdi.incUserListResolve(dni, entrada);
+					System.out.println("\n\nLISTADO INCIDENCIAS");
+					for (int i=0;i<lista3.size();i++)									
+						System.out.println(lista3.get(i).toString());
+					break;
 				
 					
 					

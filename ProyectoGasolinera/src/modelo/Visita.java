@@ -15,10 +15,19 @@ public class Visita {
 	private double precio; //se puede omitir dependiendo si realiza pago en efectivo
 	
 	
-	public Visita(String dniUsuario, LocalDate fechaVisita,String tipoPago, int id_gasolinera, double precio ) {
+	public Visita(String dniUsuario, String tipoPago, int id_gasolinera, double precio ) {
 		super();
 		DniUsuario = dniUsuario;
-		this.fechaVisita = fechaVisita;
+		this.fechaVisita = LocalDate.now();
+		this.id_gasolinera = id_gasolinera;
+		this.precio = precio;
+		this.tipoPago = tipoPago;
+	}
+
+	public Visita(String dniUsuario, LocalDate fecha,String tipoPago, int id_gasolinera, double precio ) {
+		super();
+		DniUsuario = dniUsuario;
+		this.fechaVisita = fecha;
 		this.id_gasolinera = id_gasolinera;
 		this.precio = precio;
 		this.tipoPago = tipoPago;

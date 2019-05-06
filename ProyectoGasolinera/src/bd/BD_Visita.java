@@ -26,8 +26,7 @@ public class BD_Visita extends BD_Conector {
 	
 	
 	public int add_visita(Visita visit){	
-		String cadenaSQL="INSERT INTO visitas VALUES('" + visit.getDniUsuario() + "','" +
-		visit.getFechaVisita()+"','"+ visit.getTipoPago() +"','"+ visit.getId_gasolinera()+"','"+
+		String cadenaSQL="INSERT INTO visitas VALUES('" + visit.getDniUsuario() +"','"+visit.getFechaVisita()+"','"+ visit.getTipoPago() +"','"+ visit.getId_gasolinera()+"','"+
 				visit.getPrecio()+"')";
 		
 		try{
@@ -45,8 +44,8 @@ public class BD_Visita extends BD_Conector {
 	
 	}
 	
-	public int borrarVisita(String dni){
-        String cadenaSQL="DELETE FROM visitas WHERE dni_usuario=('" +dni+"')";
+	public int borrarVisita(String dni,int cod,LocalDate fecha){
+        String cadenaSQL="DELETE FROM visitas WHERE dni_usuario=('" +dni+"')and id_gasolinera=('"+cod+"') and fecha_visita=('"+fecha+"')";
 
         try{
         this.abrir();
