@@ -26,6 +26,17 @@ public class Incidencia {
 		this.fechaIncidencia = fechaIncidencia;
 		this.fechaArreglo = fechaArreglo;
 	}
+	
+	//Costructor para sacar fecha de arreglo a null
+	public Incidencia(String cod_incid, String dniUsuario, String id_admin, LocalDate fechaIncidencia,String descripcion,int id_gasolinera) {
+		super();
+		this.cod_incid = cod_incid;
+		DniUsuario = dniUsuario;
+		this.id_admin = id_admin;
+		this.id_gasolinera = id_gasolinera;
+		this.descripcion = descripcion;
+		this.fechaIncidencia = fechaIncidencia;
+	}
 
 	public String getCod_incid() {
 		return cod_incid;

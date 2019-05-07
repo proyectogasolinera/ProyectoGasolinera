@@ -23,6 +23,7 @@ public class BD_Usuario extends BD_Conector {
 		super();
 	}
 	
+	//Metodo para añadir usuarios
 	public int add_usuario(Usuario usu){	
 		String cadenaSQL="INSERT INTO clientes VALUES('" + usu.getNombre() + "','" +
 		usu.getDni()+"','"+ usu.getFechaNacimiento() +"','"+ usu.getCorreo()+"','"+
@@ -44,6 +45,7 @@ public class BD_Usuario extends BD_Conector {
 	
 	}
 	
+	//Update de campo a elegir por el usuario, el usuario solo puede cambiar, Mail,Direccion,Cod_postal,password y localidad
 	public int updateUser(String dni,String campo,String cambio) {
 
 	    String cadena = "UPDATE clientes SET "+campo+" = '"+cambio+"' WHERE dni_usuario = '" + dni + "'";
@@ -62,6 +64,7 @@ public class BD_Usuario extends BD_Conector {
 
 	}
 	
+	//Metodo para eliminar usuarios.
 	public int borrarUser(String dni){
         String cadenaSQL="DELETE FROM clientes WHERE dni_usuario=('" +dni+"')";
 
@@ -78,9 +81,9 @@ public class BD_Usuario extends BD_Conector {
         }
     }
 	
-	
+	//Select de todos los campos de cliente menos password
 	public  Vector<Usuario> userList(String dni){
-		String cadenaSQL="SELECT * from clientes WHERE dni_usuario='"+dni+"'";
+		String cadenaSQL="SELECT nombre,dni_usuario,fecha_naci,mail,localidad,direccion,cod_post,tlf,password from clientes WHERE dni_usuario='"+dni+"'";
 		Vector<Usuario> listaUsuarios=new Vector<Usuario>();
 		try{
 			this.abrir();
@@ -90,7 +93,7 @@ public class BD_Usuario extends BD_Conector {
 				// La fecha que se extrae de la bbdd es sql.Date, hay que transformarla a LocalDate
 				java.sql.Date f=reg.getDate("fecha_naci");
 				LocalDate fBuena=f.toLocalDate();
-				listaUsuarios.add(new Usuario(reg.getString("nombre"),reg.getString("dni_usuario"),fBuena,reg.getString("mail"),reg.getString("localidad"),reg.getString("direccion"),reg.getString("cod_post"),reg.getString("tlf"),reg.getString("password")));
+				listaUsuarios.add(new Usuario(reg.getString("nombre"),reg.getString("dni_usuario"),fBuena,reg.getString("mail"),reg.getString("localidad"),reg.getString("direccion"),reg.getString("cod_post"),reg.getString("tlf")));
 				
 			}
 			s.close();

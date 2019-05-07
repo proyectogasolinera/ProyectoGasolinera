@@ -104,8 +104,9 @@ public class BD_Incidencia extends BD_Conector {
 		}
 	}
 	
-	public  Vector<Incidencia> incUserListResolve(String dni,String entrada){
-		String cadenaSQL="SELECT * from incidencias WHERE dni_usuario='"+dni+"'and fecha_arreglo is "+entrada+"";
+	//Buscar Incidencias por usuario o administrador, resueltas o no resueltas
+	public  Vector<Incidencia> incUserListResolve(String id,String campo,String entrada){
+		String cadenaSQL="SELECT * from incidencias WHERE "+campo+"='"+id+"' and Fecha_arreglo is "+entrada+"";
 		Vector<Incidencia> listaIncidencias=new Vector<Incidencia>();
 		try{
 			this.abrir();
@@ -115,9 +116,14 @@ public class BD_Incidencia extends BD_Conector {
 				// La fecha que se extrae de la bbdd es sql.Date, hay que transformarla a LocalDate
 				java.sql.Date f=reg.getDate("fecha_incidencia");
 				LocalDate fFalla=f.toLocalDate();
+				
 				java.sql.Date f1=reg.getDate("fecha_arreglo");
-				LocalDate fArreglo=f1.toLocalDate();
-				listaIncidencias.add(new Incidencia(reg.getString("cod_incidencia"),reg.getString("dni_usuario"),reg.getString("id_admin"),fFalla,fArreglo,reg.getString("Descripcion"),reg.getInt("id_gasolinera")));
+				if(f1!=null) {
+					LocalDate fArreglo=f1.toLocalDate();
+					listaIncidencias.add(new Incidencia(reg.getString("cod_incidencia"),reg.getString("dni_usuario"),reg.getString("id_admin"),fFalla,fArreglo,reg.getString("Descripcion"),reg.getInt("id_gasolinera")));
+				}
+				else
+					listaIncidencias.add(new Incidencia(reg.getString("cod_incidencia"),reg.getString("dni_usuario"),reg.getString("id_admin"),fFalla,reg.getString("Descripcion"),reg.getInt("id_gasolinera")));
 				
 			}
 			s.close();
@@ -155,29 +161,5 @@ public class BD_Incidencia extends BD_Conector {
 		}
 	}
 	
-	//Metodo para buscar incidencias resueltas o no asignadas a un administrador
-	public  Vector<Incidencia> incAdminListResolve(String cod,String entrada){
-		String cadenaSQL="SELECT * from incidencias WHERE id_admin='"+cod+"'and fecha_arreglo is "+entrada+"";
-		Vector<Incidencia> listaIncidencias=new Vector<Incidencia>();
-		try{
-			this.abrir();
-			s=c.createStatement();
-			reg=s.executeQuery(cadenaSQL);
-			while ( reg.next()){
-				// La fecha que se extrae de la bbdd es sql.Date, hay que transformarla a LocalDate
-				java.sql.Date f=reg.getDate("fecha_incidencia");
-				LocalDate fFalla=f.toLocalDate();
-				java.sql.Date f1=reg.getDate("fecha_arreglo");
-				LocalDate fArreglo=f1.toLocalDate();
-				listaIncidencias.add(new Incidencia(reg.getString("cod_incidencia"),reg.getString("dni_usuario"),reg.getString("id_admin"),fFalla,fArreglo,reg.getString("Descripcion"),reg.getInt("id_gasolinera")));
-				
-			}
-			s.close();
-			this.cerrar();
-			return listaIncidencias;
-		}
-		catch ( SQLException e){		
-			return null;			
-		}
-	}
+	
 }
