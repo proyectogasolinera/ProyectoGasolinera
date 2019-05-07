@@ -30,7 +30,7 @@ public class BD_Administrador extends BD_Conector{
 			this.cerrar();
 			return Dni;
 		} catch (SQLException e) {
-			return null; 
+			return null;  
 		}
 	}
 	
