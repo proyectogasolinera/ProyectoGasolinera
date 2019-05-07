@@ -22,7 +22,26 @@ public class BD_Usuario extends BD_Conector {
 	public BD_Usuario(){
 		super();
 	}
+//verifica
+	public String VerificaUsuario(String dni, String clave) {
+		String cadenaSQL = "SELECT nombre from clientes WHERE dni_usuario='" + dni + "'AND password='" + clave + "'";
+		String nombre = null;
+		try {
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			if (reg.next()) {
+				nombre = reg.getString("nombre");
+			}
+			s.close();
+			this.cerrar();
+			return nombre;
+		} catch (SQLException e) {
+			return null;
+		}
+	}
 	
+//add
 	public int add_usuario(Usuario usu){	
 		String cadenaSQL="INSERT INTO clientes VALUES('" + usu.getNombre() + "','" +
 		usu.getDni()+"','"+ usu.getFechaNacimiento() +"','"+ usu.getCorreo()+"','"+

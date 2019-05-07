@@ -15,8 +15,24 @@ public class BD_Administrador extends BD_Conector{
 	private static ResultSet reg;
 	
 	
-	
-	
+//Verifica
+	public String VerificaClave(String id, String clave) {
+		String cadenaSQL = "SELECT Nombre_admin from administrador WHERE id_admin='" + id + "'AND Password='" + clave + "'";
+		String Dni = null;
+		try {
+			this.abrir();
+			s = c.createStatement();
+			reg = s.executeQuery(cadenaSQL);
+			if (reg.next()) {
+				Dni = reg.getString("Nombre_admin");
+			}
+			s.close();
+			this.cerrar();
+			return Dni;
+		} catch (SQLException e) {
+			return null;
+		}
+	}
 	
 //insert
 	public int add_admin(Administrador admin){	
