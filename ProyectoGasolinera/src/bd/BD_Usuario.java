@@ -20,7 +20,7 @@ public class BD_Usuario extends BD_Conector {
 	private static ResultSet reg;
 	 
 	public BD_Usuario(){
-		super();
+		super(); 
 	}
 //verifica
 	public String VerificaUsuario(String dni, String clave) {

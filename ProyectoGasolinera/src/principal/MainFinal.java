@@ -6,7 +6,7 @@ import bd.BD_Administrador;
 import bd.BD_Conector;
 import bd.BD_Usuario;
 /**
- * 
+ *  
  * @author Weize
  *
  */
