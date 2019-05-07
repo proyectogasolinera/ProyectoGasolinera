@@ -73,7 +73,7 @@ public class Main {
 			System.out.println("-------Opciones Carburantes---------");
 			System.out.println("9.Buscar Carburante");
 			System.out.println("10.Insertar nuevo carburante");
-			System.out.println("11. Modificar precio carburaante");
+			System.out.println("11. Modificar precio carburante");
 			System.out.println("12.Borrar carburante Gasolinera");
 			System.out.println("-------Opciones Modificacion---------");
 			System.out.println("13. Ver modificaciones");
@@ -135,9 +135,12 @@ public class Main {
 				sc.nextLine();
 				System.out.println("identificador del administrador:");
 				id_admin=sc.nextLine();
-				System.out.println("Nueva direccion:");
-				direccion=sc.nextLine();
-				filas=bdA.updateAdmin(direccion, id_admin);
+				System.out.println("campo que desea cambiar:");
+				String campo=sc.nextLine();
+				System.out.println("Nuevo valor de "+campo);
+				String nuevoValor;
+				nuevoValor=sc.nextLine();
+				filas=bdA.updateAdminS(id_admin,campo,nuevoValor);
 				if(filas==1){
 					System.out.println("Datos cambiados correctamente");
 				}
@@ -156,9 +159,6 @@ public class Main {
 				break;
 			case 6:
 				sc.nextLine();
-				System.out.println("identificador");
-				
-				id_gasolinera=sc.nextInt();
 				System.out.println("Marca: ");
 				empresa=sc.nextLine();
 				System.out.println("provincia:");
@@ -181,9 +181,16 @@ public class Main {
 				sc.nextLine();
 				System.out.println("Horario");
 				horario=sc.nextLine();
-				Gasolinera Gas=new Gasolinera(id_gasolinera,empresa,provincia,municipio,
+				Gasolinera gas=new Gasolinera(0,empresa,provincia,municipio,
 						localidad,codpostal,direccion,margen,longitud,latitud,horario);
-				
+				filas=bdG.add_Gasolinera(gas);
+				 if(filas==1){
+						System.out.println("Gasolinera nueva introduccida");
+				 		System.out.println(gas.toString());
+				 }
+					else
+						System.out.println("Error - "+filas);
+					
 				break;
 			
 			case 7:
@@ -224,10 +231,30 @@ public class Main {
 				 }
 				 else{
 					 System.out.println("Carburante "+tipo+" introduccido ");
-					 //Introduccion automatica en la tabla modificaciones 
+					 //Introduccion automatica en la tabla de modificaciones 
 				//	int filas2= bdM.add_modificacion(cod_mod,tipo_mod,fecha_mod,id_admin,id_gasolinera);
 					 
 				 }
+				break;
+			case 11:
+				sc.nextLine();
+				System.out.println("Carburante que quieres modificar:");
+				tipo=sc.nextLine();
+				System.out.println("identificador de gasolinera en la que quieres modificar");
+				id_gasolinera=sc.nextInt();
+				System.out.println("nuevo precio");
+				precio=sc.nextFloat();
+				fecha_mod=LocalDate.now();
+				filas=bdC.updatePrecio(tipo, id_gasolinera, precio, fecha_mod);
+				if(filas==1){
+					System.out.println("Datos cambiados correctamente");
+				}
+				else
+					System.out.println("Error - "+filas);
+				
+				
+				
+				
 				break;
 			case 12:
 				sc.nextLine();

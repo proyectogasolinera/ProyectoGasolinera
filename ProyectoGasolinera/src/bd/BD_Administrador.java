@@ -84,6 +84,7 @@ public  Vector<Administrador> selectAdmin(String dni){
 	}
 }
 //update
+/*
 public int updateAdmin(String direccion,String id) {
 
     String cadena = "UPDATE administrador  SET Direccion_admin = '"+direccion+"' WHERE id_admin = '" + id + "'";
@@ -101,6 +102,27 @@ public int updateAdmin(String direccion,String id) {
     }
 
 }
+*/
+
+//metodo update para cambiar tipos de datos Strings
+public int updateAdminS(String id,String campo,String cambio) {
+
+    String cadena = "UPDATE administrador SET "+campo+" = '"+cambio+"' WHERE id_admin = '" + id + "'";
+
+    try{
+        this.abrir();
+        s=c.createStatement();
+        int filas=s.executeUpdate(cadena);
+        s.close();
+        this.cerrar();
+        return filas;
+    }
+    catch ( SQLException e){
+        return -1;
+    }
+
+}
+
 //delete
 public int borrarAdmin(String id){	
 	String cadenaSQL="DELETE FROM administrador WHERE id_admin=('" +id+"')"; 	

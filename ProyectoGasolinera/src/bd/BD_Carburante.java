@@ -17,7 +17,7 @@ public class BD_Carburante extends BD_Conector{
 	private static Statement s;	
 	private static ResultSet reg;
 
-	//select 
+	//selects
 	public  Vector<Carburante> selectCarburante( String tipo,int id){
 		String cadenaSQL="SELECT * from carburante WHERE id_gasolinera='"+id+"' and tipo_carbu='"+tipo+"'";
 		Vector<Carburante> listadoCarbu=new Vector<Carburante>();
@@ -77,5 +77,24 @@ public class BD_Carburante extends BD_Conector{
 		catch ( SQLException e){			
 			return -1;
 		}
+	}
+	
+	//update precio
+	public int updatePrecio( String tipo,int id,float precio,LocalDate fecha_mod) {
+
+	    String cadena = "UPDATE carburante SET precio = '"+precio+"' , fecha_mod= '"+fecha_mod+"' WHERE id_gasolinera='"+id+"' and tipo_carbu='"+tipo+"'";
+
+	    try{
+	        this.abrir();
+	        s=c.createStatement();
+	        int filas=s.executeUpdate(cadena);
+	        s.close();
+	        this.cerrar();
+	        return filas;
+	    }
+	    catch ( SQLException e){
+	        return -1;
+	    }
+
 	}
 }

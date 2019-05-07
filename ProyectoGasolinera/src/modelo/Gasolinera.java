@@ -12,7 +12,7 @@ public class Gasolinera {
 	private float longitud;
 	private float latitud;
 	private String horario;
-	//int, String, String, String, String, int, String, char, float, float, String, String
+	
 	public Gasolinera(int id_gasolinera, String empresa, String provincia, String municipio, String localidad,
 			int codpostal, String direccion, char margen, float longitud, float latitud, String Horario) {
 		super();
