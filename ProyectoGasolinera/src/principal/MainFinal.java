@@ -43,7 +43,7 @@ public class MainFinal {
 			
 			System.out.println("Bienvenido querido administrador "+nombreAdmin+" :");
 			
-			do {
+			do { 
 				System.out.println("---Elige un campo---");
 				System.out.println("1.Gestionar Administrardor\n2.Gestionar Cliente\n3.Mostrar Visitas\n4.Gestionar Incidencias");
 				System.out.println("5.Gestionar Cuentas\n6.Gestionar dato Gasolinera\n7.Gestionar Carburante\n8.Mostrar Modificacion");

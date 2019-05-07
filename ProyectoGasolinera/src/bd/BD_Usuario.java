@@ -18,7 +18,7 @@ public class BD_Usuario extends BD_Conector {
 	
 	private static Statement s;	
 	private static ResultSet reg;
-	
+	 
 	public BD_Usuario(){
 		super();
 	}

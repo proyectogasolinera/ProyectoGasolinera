@@ -15,7 +15,7 @@ public class BD_Administrador extends BD_Conector{
 	private static ResultSet reg;
 	
 	
-//Verifica
+//Verifica 
 	public String VerificaClave(String id, String clave) {
 		String cadenaSQL = "SELECT Nombre_admin from administrador WHERE id_admin='" + id + "'AND Password='" + clave + "'";
 		String Dni = null;
