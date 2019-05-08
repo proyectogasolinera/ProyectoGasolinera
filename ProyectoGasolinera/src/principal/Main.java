@@ -23,8 +23,12 @@ public class Main {
 		BD_Gasolinera bdG=new BD_Gasolinera();
 		BD_Carburante bdC=new BD_Carburante();
 		BD_Modificacion bdM=new BD_Modificacion();
+		Vector<Gasolinera> listaGas;
 		int op;
 		int filas;
+		String campo="";
+		int datoN=0;
+		String datoS="";
 		//datos admin
 		String id_admin;
 		String nombre_admin;
@@ -33,7 +37,7 @@ public class Main {
 		String correo;
 		String telefono;
 		String direccion;
-		String codPostal;
+		String codPostalAdmin;
 		//datos Gasolinera
 		int id_Gas;
 		
@@ -41,7 +45,7 @@ public class Main {
 		String provincia;
 		String municipio;
 		String localidad;
-		int codpostal;
+		int codPostalGas;
 		
 		char margen;
 		float longitud;
@@ -106,10 +110,10 @@ public class Main {
 				 System.out.println("dirrecion:");
 				 direccion=sc.nextLine();
 				 System.out.println("Codigo postal:");
-				 codPostal=sc.nextLine();	 
+				 codPostalAdmin=sc.nextLine();	 
 				 LocalDate fechaAlt=LocalDate.now();
 				 
-				 Administrador admin=new Administrador(id_admin,nombre_admin,password,dni_adm,correo,telefono,direccion,codPostal,fechaAlt);
+				 Administrador admin=new Administrador(id_admin,nombre_admin,password,dni_adm,correo,telefono,direccion,codPostalAdmin,fechaAlt);
 				 filas=bdA.add_admin(admin);
 				 if(filas==1){
 						System.out.println("Administrador nuevo introduccido");
@@ -136,7 +140,7 @@ public class Main {
 				System.out.println("identificador del administrador:");
 				id_admin=sc.nextLine();
 				System.out.println("campo que desea cambiar:");
-				String campo=sc.nextLine();
+				campo=sc.nextLine();
 				System.out.println("Nuevo valor de "+campo);
 				String nuevoValor;
 				nuevoValor=sc.nextLine();
@@ -149,13 +153,65 @@ public class Main {
 				
 				break;
 			case 5:
-				sc.nextLine();
-				System.out.println("identificador Gasolinera: ");
-				id_Gas=sc.nextInt();
-				Vector<Gasolinera> listaGas=bdG.selectGasolinera(id_Gas);
-				for(int i=0; i<listaGas.size();i++){
-					System.out.println(listaGas.get(i).toString());
-				}
+				int op2;
+				do{
+					System.out.println("CASOS DE FIltrado");
+					System.out.println("1.Para filtrar");
+					op2=sc.nextInt();
+					switch(op2){
+					case 1:
+						
+						System.out.println("Campo de busqueda 1.identificador gasolinera, 2.codigo postal 3.Marca 4.Municipio");
+						int op3=sc.nextInt();
+						if (op3==1){
+							campo="id_gasolinera";
+							System.out.println("identificador Gasolinera: ");
+							datoN=sc.nextInt();
+							listaGas=bdG.selectGasolinera(datoN,campo);
+						}
+						else{
+							if(op3==2){
+								campo="codpostal";
+								System.out.println("Codigo postal: ");
+								datoN=sc.nextInt();
+								listaGas=bdG.selectGasolinera(datoN,campo);
+							}
+								else{
+									if (op3==3){
+										sc.nextLine();
+										campo="empresa";
+										System.out.println("Marca");
+										datoS=sc.nextLine();
+										listaGas=bdG.selectGasolinera(datoS,campo);
+									}
+									else{
+										if (op3==4){
+											sc.nextLine();
+											campo="municipio";
+											System.out.println("Municipio:");
+											datoS=sc.nextLine();
+											listaGas=bdG.selectGasolinera(datoS,campo);
+										}
+										else{
+											break;
+										}
+									}
+							
+						}
+						
+						}
+					
+					
+						for(int i=0; i<listaGas.size();i++){
+							System.out.println(listaGas.get(i).toString());
+						}
+						
+						break;
+					}
+					
+				}while(op2!=100);
+			
+				
 				break;
 			case 6:
 				sc.nextLine();
@@ -168,7 +224,7 @@ public class Main {
 				 System.out.println("Localidad:");
 				 localidad=sc.nextLine();
 				 System.out.println("Codigo postal:");
-				 codpostal=sc.nextInt();
+				 codPostalGas=sc.nextInt();
 				 sc.nextLine();
 				 System.out.println("Direccion:");
 				 direccion=sc.nextLine();
@@ -182,7 +238,7 @@ public class Main {
 				System.out.println("Horario");
 				horario=sc.nextLine();
 				Gasolinera gas=new Gasolinera(0,empresa,provincia,municipio,
-						localidad,codpostal,direccion,margen,longitud,latitud,horario);
+						localidad,codPostalGas,direccion,margen,longitud,latitud,horario);
 				filas=bdG.add_Gasolinera(gas);
 				 if(filas==1){
 						System.out.println("Gasolinera nueva introduccida");
