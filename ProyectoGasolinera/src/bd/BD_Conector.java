@@ -1,6 +1,7 @@
 /*
  * BD_Conector: Se encarga de abrir y cerrar la base de datoss
  */
+
 package bd;
 
 import java.sql.*;

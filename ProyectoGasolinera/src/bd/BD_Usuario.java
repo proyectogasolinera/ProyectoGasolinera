@@ -105,4 +105,21 @@ public class BD_Usuario extends BD_Conector {
 			return null;			
 		}
 	}
+	public boolean isUser(String dni, String pass) {
+		boolean existe=false;
+		String cadenaSQL="SELECT dni_usuario from clientes WHERE dni_usuario='"+dni+"' AND password='"+pass+"'";
+		this.abrir();
+		try {
+		s=c.createStatement();
+		reg=s.executeQuery(cadenaSQL);
+		if (reg.next())
+			existe=true;
+		s.close();		
+		this.cerrar();
+		return existe;
+		}
+		catch ( SQLException e){		
+			return false;			
+		}
+	}
 }
