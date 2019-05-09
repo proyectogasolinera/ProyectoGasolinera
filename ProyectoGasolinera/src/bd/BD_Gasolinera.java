@@ -20,7 +20,7 @@ public class BD_Gasolinera extends BD_Conector{
 
 
 /*
- * select para fliltar unicamente por el codigo postal
+ * select para fliltar unicamente por el codWigo postal
  
 
 public  Vector<Gasolinera> selectGasolinera1 (int cod){

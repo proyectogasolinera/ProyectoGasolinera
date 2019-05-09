@@ -15,7 +15,7 @@ import java.util.*;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stubW
 		Scanner sc= new Scanner(System.in);
 		BD_Conector.BD_Ini("aldautomotivebbdd");
 		//DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("yyyy-LL-dd");

@@ -1,5 +1,5 @@
 package modelo;
-//Problema tipo de datos del modelo no coinciden con el tipo de datos la base de datos 
+//Problema tipo de datos del modelo no coincidQen con el tipo de datos la base de datos 
 public class Gasolinera {
 	private int id_gasolinera;
 	private String empresa;
