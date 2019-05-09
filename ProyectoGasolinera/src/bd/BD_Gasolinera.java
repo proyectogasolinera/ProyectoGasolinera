@@ -55,7 +55,7 @@ public  Vector<Gasolinera> selectGasolinera(int dato , String campo){
 		
 		while ( reg.next()){
 		
-		listadoGasolinera.add(new Gasolinera(reg.getInt(1),reg.getString(2),reg.getString(3),reg.getString(4),reg.getString(5),reg.getInt(6),reg.getString(7),reg.getString(8).charAt(0),reg.getFloat(9),reg.getFloat(10),reg.getString(11)));
+		listadoGasolinera.add(new Gasolinera(reg.getInt(1),reg.getString(2),reg.getString(3),reg.getString(4),reg.getString(5),reg.getString(6),reg.getString(7),reg.getString(8).charAt(0),reg.getFloat(9),reg.getFloat(10),reg.getString(11)));
 		}
 		s.close();
 		this.cerrar();
@@ -77,7 +77,7 @@ public  Vector<Gasolinera> selectGasolinera(String dato1,String dato2 , String c
 		
 		while ( reg.next()){
 		
-		listadoGasolinera.add(new Gasolinera(reg.getInt(1),reg.getString(2),reg.getString(3),reg.getString(4),reg.getString(5),reg.getInt(6),reg.getString(7),reg.getString(8).charAt(0),reg.getFloat(9),reg.getFloat(10),reg.getString(11)));
+		listadoGasolinera.add(new Gasolinera(reg.getInt(1),reg.getString(2),reg.getString(3),reg.getString(4),reg.getString(5),reg.getString(6),reg.getString(7),reg.getString(8).charAt(0),reg.getFloat(9),reg.getFloat(10),reg.getString(11)));
 		}
 		s.close();
 		this.cerrar();
@@ -99,7 +99,7 @@ public  Vector<Gasolinera> selectGasolinera(String dato , String campo){
 		
 		while ( reg.next()){
 		
-		listadoGasolinera.add(new Gasolinera(reg.getInt(1),reg.getString(2),reg.getString(3),reg.getString(4),reg.getString(5),reg.getInt(6),reg.getString(7),reg.getString(8).charAt(0),reg.getFloat(9),reg.getFloat(10),reg.getString(11)));
+		listadoGasolinera.add(new Gasolinera(reg.getInt(1),reg.getString(2),reg.getString(3),reg.getString(4),reg.getString(5),reg.getString(6),reg.getString(7),reg.getString(8).charAt(0),reg.getFloat(9),reg.getFloat(10),reg.getString(11)));
 		}
 		s.close();
 		this.cerrar();
@@ -121,7 +121,7 @@ public  Vector<Gasolinera> selectGasolinera(String dato1,int dato2 , String camp
 		
 		while ( reg.next()){
 		
-		listadoGasolinera.add(new Gasolinera(reg.getInt(1),reg.getString(2),reg.getString(3),reg.getString(4),reg.getString(5),reg.getInt(6),reg.getString(7),reg.getString(8).charAt(0),reg.getFloat(9),reg.getFloat(10),reg.getString(11)));
+		listadoGasolinera.add(new Gasolinera(reg.getInt(1),reg.getString(2),reg.getString(3),reg.getString(4),reg.getString(5),reg.getString(6),reg.getString(7),reg.getString(8).charAt(0),reg.getFloat(9),reg.getFloat(10),reg.getString(11)));
 		}
 		s.close();
 		this.cerrar();

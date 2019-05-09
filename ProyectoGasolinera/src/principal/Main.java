@@ -39,7 +39,7 @@ public class Main {
 		String correo;
 		String telefono;
 		String direccion;
-		String codPostalAdmin;
+		String codpostal;
 		//datos Gasolinera
 		int id_Gas;
 		
@@ -112,10 +112,10 @@ public class Main {
 				 System.out.println("dirrecion:");
 				 direccion=sc.nextLine();
 				 System.out.println("Codigo postal:");
-				 codPostalAdmin=sc.nextLine();	 
+				 codpostal=sc.nextLine();	 
 				 LocalDate fechaAlt=LocalDate.now();
 				 
-				 Administrador admin=new Administrador(id_admin,nombre_admin,password,dni_adm,correo,telefono,direccion,codPostalAdmin,fechaAlt);
+				 Administrador admin=new Administrador(id_admin,nombre_admin,password,dni_adm,correo,telefono,direccion,codpostal,fechaAlt);
 				 filas=bdA.add_admin(admin);
 				 if(filas==1){
 						System.out.println("Administrador nuevo introduccido");
@@ -250,7 +250,7 @@ public class Main {
 				 System.out.println("Localidad:");
 				 localidad=sc.nextLine();
 				 System.out.println("Codigo postal:");
-				 codPostalGas=sc.nextInt();
+				 codpostal=sc.nextLine();
 				 sc.nextLine();
 				 System.out.println("Direccion:");
 				 direccion=sc.nextLine();
@@ -264,7 +264,7 @@ public class Main {
 				System.out.println("Horario");
 				horario=sc.nextLine();
 				Gasolinera gas=new Gasolinera(0,empresa,provincia,municipio,
-						localidad,codPostalGas,direccion,margen,longitud,latitud,horario);
+						localidad,codpostal,direccion,margen,longitud,latitud,horario);
 				filas=bdG.add_Gasolinera(gas);
 				 if(filas==1){
 						System.out.println("Gasolinera nueva introduccida");
