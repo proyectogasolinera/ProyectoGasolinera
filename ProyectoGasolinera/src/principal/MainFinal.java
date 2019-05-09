@@ -134,10 +134,49 @@ public class MainFinal {
 					}while(opc!=5);
 					break;
 				case 6:
+					do {
+						System.out.println("Seleccione opcion deseada:\n 1.Consultar Gasolinera\n 2.Insertar nueva Gasolinera");
+						System.out.println(" 3.Borrar Gasolinera\n 4.Modificar datos Gasolinera\n 5.Salir");
+					    opc=sc.nextInt();
+						switch(opc) {
+						case 1:
+							break;
+						case 2:
+							break;
+						case 3:
+							break;
+						case 4:
+							break;
+						case 5:
+							break;
+						default:
+							System.out.println("Opcion incorrecta");
+						}
+					}while(opc!=5);
 					break;
 				case 7:
+					do {
+						System.out.println("Seleccione opcion deseada:\n 1.Buscar carburante\n 2.Insertar nuevo carburante");
+						System.out.println(" 3.Modificar precio carburante\n 4.Borrar carburante gasolinera\n 5.Salir");
+					    opc=sc.nextInt();
+						switch(opc) {
+						case 1:
+							break;
+						case 2:
+							break;
+						case 3:
+							break;
+						case 4:
+							break;
+						case 5:
+							break;
+						default:
+							System.out.println("Opcion incorrecta");
+						}
+					}while(opc!=5);
 					break;
 				case 8:
+					System.out.println("--Todos los modificaciones--");
 					break;
 				case 9:
 					System.out.println("Adios!");
@@ -161,8 +200,8 @@ public class MainFinal {
 			} while (nombreUsu == null);
 			System.out.println("Bienvenido estimado cliente "+nombreUsu+", elige un campo que deseas operar:");
 			do {
-				System.out.println("1.Búsqueda Gasolinera\n2.Opcion Incidencia\n3.Consulta Cuentas");
-				System.out.println("4.Salir");
+				System.out.println("1.Búsqueda Gasolinera\n2.Opcion Incidencia\n3.Consulta Cuentas\n4.Perfil Usuario");
+				System.out.println("5.Salir");
 				opc=sc.nextInt();
 				switch(opc) {
 				case 1:
@@ -188,7 +227,7 @@ public class MainFinal {
 					break;
 				case 2:
 					do {
-						System.out.println("Seleccione opcion deseada:\n 1.Reporta incidencia\n 2.anular incidencia\n 3.Salir");
+						System.out.println("Seleccione opcion deseada:\n 1.Reporta incidencia\n 2.Anular incidencia\n 3.Mostrar incidencia\n 4.Salir");
 						opc=sc.nextInt();
 					}while(opc!=3);
 					switch(opc) {
@@ -197,6 +236,8 @@ public class MainFinal {
 					case 2:
 						break;
 					case 3:
+						break;
+					case 4:
 						break;
 					default:
 						System.out.println("Opcion incorrecta");
@@ -221,6 +262,22 @@ public class MainFinal {
 					}
 					break;
 				case 4:
+					do {
+						System.out.println("Seleccione opcion deseada:\n 1.Mostrar dato perfil\n 2.Modificar datos\n 3.Salir");
+						opc=sc.nextInt();
+					}while(opc!=4);
+					switch(opc) {
+					case 1:
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+					default:
+						System.out.println("Opcion incorrecta");
+					}
+					break;
+				case 5:
 					System.out.println("Gracias por tu visita,Adios!");
 					break;
 				default:
