@@ -34,6 +34,20 @@ public class Usuario {
 		this.localidad = localidad;
 		this.fechaNacimiento = fechaNacimiento;
 	}
+	
+	//Costructor para sacar todos los datos por select menos password
+	public Usuario(String nombre, String dni, LocalDate fechaNacimiento, String correo, String localidad, String direccion,
+			String codPostal, String telefono) {
+		super();
+		this.dni = dni;
+		this.nombre = nombre;
+		this.correo = correo;
+		this.direccion = direccion;
+		this.codPostal = codPostal;
+		this.Telefono = telefono;
+		this.localidad = localidad;
+		this.fechaNacimiento = fechaNacimiento;
+	}
 
 	public String getDni() {
 		return dni;

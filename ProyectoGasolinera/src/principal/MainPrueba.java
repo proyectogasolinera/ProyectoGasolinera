@@ -302,45 +302,66 @@ public class MainPrueba {
 						System.out.println(lista1.get(i).toString());
 					break;
 					
-				case 16:
-					sc.nextLine();
-					System.out.println("cod admin");
-					cod=sc.nextLine();
-					System.out.println("Esta resuelta?");
-					System.out.println("1.Si");
-					System.out.println("2.No");
-					int decision=sc.nextInt();
-					String entrada;
-					if(decision==1)
-						entrada="not null";
-					else
-						entrada="null";
-						
-					Vector<Incidencia> lista2=bdi.incAdminListResolve(cod,entrada);
-					System.out.println("\n\nLISTADO INCIDENCIAS");
-					for (int i=0;i<lista2.size();i++)									
-						System.out.println(lista2.get(i).toString());
-					break;
+
 					
 				case 17:
 					sc.nextLine();
-					System.out.println("dni");
-					dni=sc.nextLine();
-					System.out.println("Esta resuelta?");
+					System.out.println("Quieres buscar por administrador o usuario ?");
+					System.out.println("1.Administrador");
+					System.out.println("2.Usuario");
+					int opcion=sc.nextInt();
+						if(opcion==1)
+							campo="id_admin";
+						else
+							campo="dni_usuario";
+					sc.nextLine();
+					System.out.println("Introduce su identificador");
+					String identificador=sc.nextLine();
+					System.out.println("Esta resuelta la incidencia?");
 					System.out.println("1.Si");
 					System.out.println("2.No");
-					decision=sc.nextInt();
-					if(decision==1)
-						entrada="not null";
-					else
-						entrada="null";
-						
-					Vector<Incidencia> lista3=bdi.incUserListResolve(dni, entrada);
+					opcion=sc.nextInt();
+					String entrada;
+						if(opcion==1)
+							entrada="not null";
+						else
+							entrada="null";
+							
+					Vector<Incidencia> lista3=bdi.incUserListResolve(identificador,campo,entrada);
 					System.out.println("\n\nLISTADO INCIDENCIAS");
 					for (int i=0;i<lista3.size();i++)									
 						System.out.println(lista3.get(i).toString());
 					break;
 				
+				case 18:
+					//Opcion para buscar visita de un usuario a una gasolinera concreta
+					sc.nextLine();
+					System.out.println("DNI");
+					dni=sc.nextLine();
+					System.out.println("Introduce cod de gasolinera");
+					codigo=sc.nextInt();
+					
+					Vector<Visita> listaVisita=bdv.visitListGas(dni, codigo);
+					System.out.println("\n\nLISTADO VISITAS DE "+ dni.toUpperCase()+" a la gasolinera "+codigo);
+					for (int i=0;i<listaVisita.size();i++)									
+						System.out.println(listaVisita.get(i).toString());
+					break;
+					
+				case 19:
+					//Opcion para buscar visita de un usuario en una fecha determinada
+					sc.nextLine();
+					System.out.println("DNI");
+					dni=sc.nextLine();
+					System.out.println("Introduce fecha de visita");
+					fecha=sc.nextLine();
+					fechaVisita=LocalDate.parse(fecha,fechaFormateada);
+					
+					
+					Vector<Visita> listaVisita1=bdv.visitListGas(dni, fechaVisita);
+					System.out.println("\n\nLISTADO VISITAS DE "+ dni.toUpperCase()+" la fecha "+fechaVisita);
+					for (int i=0;i<listaVisita1.size();i++)									
+						System.out.println(listaVisita1.get(i).toString());
+					break;	
 					
 					
 					
