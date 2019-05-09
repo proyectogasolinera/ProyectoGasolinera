@@ -26,9 +26,11 @@ public class Main {
 		Vector<Gasolinera> listaGas;
 		int op;
 		int filas;
-		String campo="";
+		String campo1="";
 		int datoN=0;
-		String datoS="";
+		String datoS1="";
+		String datoS2="";
+		String campo2="";
 		//datos admin
 		String id_admin;
 		String nombre_admin;
@@ -140,11 +142,11 @@ public class Main {
 				System.out.println("identificador del administrador:");
 				id_admin=sc.nextLine();
 				System.out.println("campo que desea cambiar:");
-				campo=sc.nextLine();
-				System.out.println("Nuevo valor de "+campo);
+				campo1=sc.nextLine();
+				System.out.println("Nuevo valor de "+campo1);
 				String nuevoValor;
 				nuevoValor=sc.nextLine();
-				filas=bdA.updateAdminS(id_admin,campo,nuevoValor);
+				filas=bdA.updateAdminS(id_admin,campo1,nuevoValor);
 				if(filas==1){
 					System.out.println("Datos cambiados correctamente");
 				}
@@ -155,45 +157,69 @@ public class Main {
 			case 5:
 				int op2;
 				do{
-					System.out.println("CASOS DE FIltrado");
+					System.out.println("CASOS DE FILTRADO");
 					System.out.println("1.Para filtrar");
 					op2=sc.nextInt();
 					switch(op2){
 					case 1:
 						
-						System.out.println("Campo de busqueda 1.identificador gasolinera, 2.codigo postal 3.Marca 4.Municipio");
+						System.out.println("Campo de busqueda 1.identificador gasolinera, 2.codigo postal 3.Marca 4.Municipio 5.Marca y Municipio,6.Codigo postal y Marca");
 						int op3=sc.nextInt();
 						if (op3==1){
-							campo="id_gasolinera";
+							campo1="id_gasolinera";
 							System.out.println("identificador Gasolinera: ");
 							datoN=sc.nextInt();
-							listaGas=bdG.selectGasolinera(datoN,campo);
+							listaGas=bdG.selectGasolinera(datoN,campo1);
 						}
 						else{
 							if(op3==2){
-								campo="codpostal";
+								campo1="codpostal";
 								System.out.println("Codigo postal: ");
 								datoN=sc.nextInt();
-								listaGas=bdG.selectGasolinera(datoN,campo);
+								listaGas=bdG.selectGasolinera(datoN,campo1);
 							}
 								else{
 									if (op3==3){
 										sc.nextLine();
-										campo="empresa";
+										campo1="empresa";
 										System.out.println("Marca");
-										datoS=sc.nextLine();
-										listaGas=bdG.selectGasolinera(datoS,campo);
+										datoS1=sc.nextLine();
+										listaGas=bdG.selectGasolinera(datoS1,campo1);
 									}
 									else{
 										if (op3==4){
 											sc.nextLine();
-											campo="municipio";
+											campo1="municipio";
 											System.out.println("Municipio:");
-											datoS=sc.nextLine();
-											listaGas=bdG.selectGasolinera(datoS,campo);
+											datoS1=sc.nextLine();
+											listaGas=bdG.selectGasolinera(datoS1,campo1);
 										}
 										else{
-											break;
+											if (op3==5){
+												sc.nextLine();
+												campo1="municipio";
+												System.out.println("Municipio:");
+												datoS1=sc.nextLine();
+												campo2="empresa";
+												System.out.println("Empresa");
+												datoS2=sc.nextLine();
+												listaGas=bdG.selectGasolinera(datoS1, datoS2, campo1, campo2);
+											}
+											else {
+												if (op3==6){
+													sc.nextLine();
+													campo1="empresa";
+													System.out.println("Empresa:");
+													datoS1=sc.nextLine();
+													campo2="codpostal";
+													System.out.println("Codigo postal:");
+													datoN=sc.nextInt();
+													listaGas=bdG.selectGasolinera(datoS1, datoN, campo1, campo2);
+												}
+												else {
+													break;
+												}
+											}
 										}
 									}
 							
