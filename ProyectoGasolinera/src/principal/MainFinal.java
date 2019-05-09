@@ -25,7 +25,7 @@ public class MainFinal {
 			System.out.println("¿Quien eres?(admin/cliente)");
 			tipo = sc.nextLine();
 			if(!tipo.equalsIgnoreCase("admin") && !tipo.equalsIgnoreCase("cliente"))
-				System.out.println("Introducido incorrecto");
+				System.out.println("Introducido incorrecto, por favor introduce de nuevo");
 		}while(!tipo.equalsIgnoreCase("admin") && !tipo.equalsIgnoreCase("cliente"));
 		
 		switch (tipo) {
