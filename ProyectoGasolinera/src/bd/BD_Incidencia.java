@@ -26,8 +26,29 @@ public class BD_Incidencia extends BD_Conector {
 
 
 	public int add_inc(Incidencia inc){	
-		String cadenaSQL="INSERT INTO incidencias VALUES('" + inc.getCod_incid() + "','" +
-		inc.getDniUsuario()+"','"+ inc.getId_admin() +"','"+ inc.getFechaIncidencia()+"',null,'"+inc.getDescripcion()+"','"+inc.getId_gasolinera()+"')";
+		
+		int nRegistros;
+		int max=0;
+		try{
+			//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery("SELECT substr(cod_incidencia,-1) as total from incidencias"); 
+			while(reg.next()) {
+				nRegistros=Integer.parseInt(reg.getString("total"));
+					if (nRegistros>max)
+						max=nRegistros;
+						
+			}
+				
+			max=max+1;
+		}
+		catch ( SQLException e){			
+			return -1;
+		}
+		
+		String cadenaSQL="INSERT INTO incidencias VALUES('" +"INC00000"+ max + "','" +
+				inc.getDniUsuario()+"','"+ inc.getId_admin() +"','"+ inc.getFechaIncidencia()+"',null,'"+inc.getDescripcion()+"','"+inc.getId_gasolinera()+"')";
 		
 		try{
 			//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
@@ -82,6 +103,8 @@ public class BD_Incidencia extends BD_Conector {
 	public  Vector<Incidencia> incUserList(String dni){
 		String cadenaSQL="SELECT * from incidencias WHERE dni_usuario='"+dni+"'";
 		Vector<Incidencia> listaIncidencias=new Vector<Incidencia>();
+		
+		
 		try{
 			this.abrir();
 			s=c.createStatement();

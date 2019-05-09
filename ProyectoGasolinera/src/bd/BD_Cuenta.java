@@ -25,7 +25,9 @@ public class BD_Cuenta extends BD_Conector {
 	}
 	
 	public int add_cuenta(Cuenta cuenta){
-		String cadenaSQL="INSERT INTO cuentas VALUES('" + cuenta.getNumTarjeta() + "','" +
+		
+		
+		String cadenaSQL="INSERT INTO cuentas VALUES('" + cuenta.getNumTarjeta()+"','" +
 		cuenta.getDniTitular()+"','"+ cuenta.getSaldo() +"','"+ cuenta.getPunto()+"','"+
 				cuenta.getTipoCuenta()+"','"+cuenta.getFechaAlt()+"')";
 		
@@ -43,6 +45,25 @@ public class BD_Cuenta extends BD_Conector {
 			}
 	
 	}
+	
+	//Update de campo a elegir por el usuario, el usuario solo puede cambiar, Mail,Direccion,Cod_postal,password y localidad
+		public int updateCuenta(String dni,String campo,String cambio) {
+
+		    String cadena = "UPDATE cuentas SET "+campo+" = '"+cambio+"' WHERE dni_usuario = '" + dni + "'";
+
+		    try{
+		        this.abrir();
+		        s=c.createStatement();
+		        int filas=s.executeUpdate(cadena);
+		        s.close();
+		        this.cerrar();
+		        return filas;
+		    }
+		    catch ( SQLException e){
+		        return -1;
+		    }
+
+		}
 	
 	
 	public int borrarCuenta(String dni){
