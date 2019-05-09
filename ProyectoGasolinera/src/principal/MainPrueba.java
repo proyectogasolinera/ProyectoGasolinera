@@ -127,8 +127,6 @@ public class MainPrueba {
 					break;
 				case 5:
 					sc.nextLine();
-					System.out.println("Introduce cod inc");
-					String cod=sc.nextLine();
 					System.out.println("Introduce DNI usuario");
 					dni=sc.nextLine();
 					System.out.println("Introduce id_admin");
@@ -138,10 +136,8 @@ public class MainPrueba {
 					System.out.println("Introduce id_gasolinera");
 					id=sc.nextInt();
 					
-					LocalDate fcha1=LocalDate.now();
-					LocalDate fcha2=LocalDate.now();
 					
-					Incidencia inc=new Incidencia(cod,dni,id_admin,fcha1,fcha2,descripcion,id);
+					Incidencia inc=new Incidencia(dni,id_admin,descripcion,id);
 					
 					System.out.println(inc.toString());
 					filas=bdi.add_inc(inc);
@@ -164,8 +160,6 @@ public class MainPrueba {
 				//Metodos Cuentas
 				case 7:
 					sc.nextLine();
-					System.out.println("Num tarjeta");
-					String num_tarj=sc.nextLine();
 					System.out.println("DNI");
 					dni=sc.nextLine();
 					System.out.println("Saldo");
@@ -176,7 +170,7 @@ public class MainPrueba {
 					System.out.println("Tipo cuenta");
 					tipo=sc.nextLine();
 					
-					Cuenta cuenta=new Cuenta(num_tarj,dni,saldo,puntos,tipo);
+					Cuenta cuenta=new Cuenta(dni,saldo,puntos,tipo);
 					
 					System.out.println(cuenta.toString());
 					filas=bdc.add_cuenta(cuenta);
@@ -295,7 +289,7 @@ public class MainPrueba {
 				case 15:
 					sc.nextLine();
 					System.out.println("cod admin");
-					cod=sc.nextLine();
+					String cod=sc.nextLine();
 					Vector<Incidencia> lista1=bdi.incAdminList(cod);
 					System.out.println("\n\nLISTADO INCIDENCIAS");
 					for (int i=0;i<lista1.size();i++)									
