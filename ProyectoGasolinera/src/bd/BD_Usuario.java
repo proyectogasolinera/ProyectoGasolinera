@@ -26,7 +26,7 @@ public class BD_Usuario extends BD_Conector {
 	//Metodo para añadir usuarios
 	public int add_usuario(Usuario usu){	
 		String cadenaSQL="INSERT INTO clientes VALUES('" + usu.getNombre() + "','" +
-		usu.getDni()+"','"+ usu.getFechaNacimiento() +"','"+ usu.getCorreo()+"','"+
+		usu.getDni()+"','"+ usu.getFechaNacimiento() +"','"+ usu.getMail()+"','"+
 				usu.getLocalidad()+"','"+usu.getDireccion()+"','"+usu.getCodPostal()+"','"+
 				usu.getTelefono()+"','"+usu.getPassword()+"')";
 		
