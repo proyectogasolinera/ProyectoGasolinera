@@ -5,11 +5,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.Vector;
 
+import bd.BD_Administrador;
 import bd.BD_Conector;
 import bd.BD_Cuenta;
 import bd.BD_Incidencia;
 import bd.BD_Usuario;
 import bd.BD_Visita;
+import modelo.Administrador;
 import modelo.Cuenta;
 import modelo.Incidencia;
 import modelo.Usuario;
@@ -28,6 +30,7 @@ public class MainPrueba {
 		BD_Visita bdv=new BD_Visita();
 		BD_Incidencia bdi=new BD_Incidencia();
 		BD_Cuenta bdc=new BD_Cuenta();
+		BD_Administrador bda=new BD_Administrador();
 		
 		int opc;
 		String dni_usu;
@@ -129,15 +132,13 @@ public class MainPrueba {
 					sc.nextLine();
 					System.out.println("Introduce DNI usuario");
 					dni=sc.nextLine();
-					System.out.println("Introduce id_admin");
-					String id_admin=sc.nextLine();
 					System.out.println("Descibe problema");
 					String descripcion=sc.nextLine();
 					System.out.println("Introduce id_gasolinera");
 					id=sc.nextInt();
 					
 					
-					Incidencia inc=new Incidencia(dni,id_admin,descripcion,id);
+					Incidencia inc=new Incidencia(dni,descripcion,id);
 					
 					System.out.println(inc.toString());
 					filas=bdi.add_inc(inc);
@@ -357,12 +358,41 @@ public class MainPrueba {
 						System.out.println(listaVisita1.get(i).toString());
 					break;	
 					
+				case 20:
+					sc.nextLine();
+					System.out.println("Nombre");
+					nombre=sc.nextLine();
+					System.out.println("password");
+					password=sc.nextLine();
+					System.out.println("dni");
+					dni=sc.nextLine();
+					System.out.println("correo");
+					correo=sc.nextLine();
+					System.out.println("tfno");
+					String tfno=sc.nextLine();
+					System.out.println("direccion");
+					direccion=sc.nextLine();
+					System.out.println("cod");
+					cod=sc.nextLine();
+					
+					Administrador ad=new Administrador(nombre,password,dni,correo,tfno,direccion,cod);
+					
+					System.out.println(ad.toString());
+					int filasAd=bda.add_admin(ad);
+					if(filasAd==1)
+						System.out.println("Usuario añadido con exito");
+					else
+						System.out.println("Error - "+filasAd);
+					
+					break;
+					
+					
 					
 					
 					
 			}
 			
-		}while(opc!=20);
+		}while(opc!=30);
 
 		
 		

@@ -27,8 +27,34 @@ public class BD_Incidencia extends BD_Conector {
 
 	public int add_inc(Incidencia inc){	
 		
+		
+		//Sacamos el numero de admins
+		int nAdmins = 0;
+		int aleatorio=0;
+		String adminAsignado;
+		try{
+			//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery("SELECT count(*) as total from administrador"); 
+			while(reg.next()) {
+				nAdmins=Integer.parseInt(reg.getString("total"));
+						
+			}
+			
+			aleatorio= (int) (Math.random() * nAdmins) + 1;
+			adminAsignado="AD"+aleatorio;
+
+		}
+		catch ( SQLException e){			
+			return -1;
+		}
+		
+		
+		
 		int nRegistros;
 		int max=0;
+		//Sacamos la ultima incidencia
 		try{
 			//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
 			this.abrir();
@@ -48,7 +74,7 @@ public class BD_Incidencia extends BD_Conector {
 		}
 		
 		String cadenaSQL="INSERT INTO incidencias VALUES('" +"INC00000"+ max + "','" +
-				inc.getDniUsuario()+"','"+ inc.getId_admin() +"','"+ inc.getFechaIncidencia()+"',null,'"+inc.getDescripcion()+"','"+inc.getId_gasolinera()+"')";
+				inc.getDniUsuario()+"','"+ adminAsignado +"','"+ inc.getFechaIncidencia()+"',null,'"+inc.getDescripcion()+"','"+inc.getId_gasolinera()+"')";
 		
 		try{
 			//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 

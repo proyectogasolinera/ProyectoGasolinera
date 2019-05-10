@@ -17,10 +17,9 @@ public class Incidencia {
 	 
 	
 	//Costructor de nueva incidencia
-	public Incidencia(String dniUsuario, String id_admin, String descripcion,int id_gasolinera) {
+	public Incidencia(String dniUsuario, String descripcion,int id_gasolinera) {
 		super();
 		DniUsuario = dniUsuario;
-		this.id_admin = id_admin;
 		this.id_gasolinera = id_gasolinera;
 		this.descripcion = descripcion;
 		this.fechaIncidencia = LocalDate.now();

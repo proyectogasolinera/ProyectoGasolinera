@@ -23,15 +23,18 @@ public class BD_Administrador extends BD_Conector{
 		
 		
 		int nRegistros = 0;
+		int num=0;
 		try{
 			//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
 			this.abrir();
 			s=c.createStatement();
-			reg=s.executeQuery("SELECT * as total from administradores"); 
+			reg=s.executeQuery("SELECT count(*) as total from administrador"); 
 			while(reg.next()) {
 				nRegistros=Integer.parseInt(reg.getString("total"));
 						
 			}
+			
+			num=nRegistros+1;
 
 		}
 		catch ( SQLException e){			
@@ -41,7 +44,7 @@ public class BD_Administrador extends BD_Conector{
 		
 		
 		
-		String cadenaSQL="INSERT INTO administrador VALUES('" + "AD"+nRegistros+1 + "','" +
+		String cadenaSQL="INSERT INTO administrador VALUES('" + "AD"+num+ "','" +
 		admin.getNombre_admin()+"','"+ admin.getPassword() +"','"+ admin.getDni()+"','"+
 				admin.getCorreo()+"','"+admin.getTelefono()+"','"+admin.getDireccion()+"','"+
 				admin.getCodPostal()+"','"+admin.getFechaAlt()+"')";
