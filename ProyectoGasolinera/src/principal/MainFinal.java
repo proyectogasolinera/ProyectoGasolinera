@@ -20,7 +20,7 @@ public class MainFinal {
 		String tipo,id,password,dni;
 		String nombreAdmin,nombreUsu;
 		int opc;
-		System.out.println("-----Hola! Bienvenido-----");
+		System.out.println("---Hola! Bienvenido al nuestro aplicacion---");
 		do {
 			System.out.println("¿Quien eres?(admin/cliente)");
 			tipo = sc.nextLine();
@@ -73,7 +73,7 @@ public class MainFinal {
 					break;
 				case 2:
 					do {
-						System.out.println("Seleccione opcion deseada:\n 1.mostrar Cliente.\n 2.Insertar nuevo Cliente");
+						System.out.println("Seleccione opcion deseada:\n 1.Mostrar Cliente.\n 2.Insertar nuevo Cliente");
 						System.out.println(" 3.Elimina Cliente\n 4.Modificar datos Cliente\n 5.Salir");
 						opc=sc.nextInt();
 						switch(opc) {
