@@ -19,8 +19,29 @@ public class BD_Administrador extends BD_Conector{
 	
 	
 //insert
-	public int add_admin(Administrador admin){	
-		String cadenaSQL="INSERT INTO administrador VALUES('" + admin.getId_admin() + "','" +
+	public int add_admin(Administrador admin){
+		
+		
+		int nRegistros = 0;
+		try{
+			//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery("SELECT * as total from administradores"); 
+			while(reg.next()) {
+				nRegistros=Integer.parseInt(reg.getString("total"));
+						
+			}
+
+		}
+		catch ( SQLException e){			
+			return -1;
+		}
+		
+		
+		
+		
+		String cadenaSQL="INSERT INTO administrador VALUES('" + "AD"+nRegistros+1 + "','" +
 		admin.getNombre_admin()+"','"+ admin.getPassword() +"','"+ admin.getDni()+"','"+
 				admin.getCorreo()+"','"+admin.getTelefono()+"','"+admin.getDireccion()+"','"+
 				admin.getCodPostal()+"','"+admin.getFechaAlt()+"')";
