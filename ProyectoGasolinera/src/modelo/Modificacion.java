@@ -9,7 +9,13 @@ public class Modificacion {
 	private LocalDate fecha;
 	private String id_admin;
 	private int id_gasolinera;
-	
+	/*
+	 * 
+	 * Tipo de modificaciones: 
+	 *	- modificacion de precio [M
+	 * 	- modificacion de datos gasolinera Mod
+	 *
+	 */
 	
 	public Modificacion(int cod_mod, String tipo, LocalDate fecha, String id_admin, int id_gasolinera) {
 		super();

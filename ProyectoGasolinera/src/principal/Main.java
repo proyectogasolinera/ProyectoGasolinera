@@ -26,8 +26,10 @@ public class Main {
 		Vector<Gasolinera> listaGas;
 		int op;
 		int filas;
+		String campo;
 		String campo1="";
 		int datoN=0;
+		String dato;
 		String datoS1="";
 		String datoS2="";
 		String campo2="";
@@ -42,7 +44,7 @@ public class Main {
 		String codpostal;
 		//datos Gasolinera
 		int id_Gas;
-		
+		int h=0;
 		String empresa;
 		String provincia;
 		String municipio;
@@ -83,6 +85,8 @@ public class Main {
 			System.out.println("12.Borrar carburante Gasolinera");
 			System.out.println("-------Opciones Modificacion---------");
 			System.out.println("13. Ver modificaciones");
+			System.out.println("-----------Prueba HASMAP-----------");
+			System.out.println("14. probar select gasolineras con hasmap");
 			op=sc.nextInt();
 			switch (op) {
 			case 1:
@@ -352,6 +356,48 @@ public class Main {
 					
 				
 				break;
+			case 14:
+				sc.nextLine();
+				
+				do {
+					
+				System.out.println("Campos por los que desea filtrar:");
+				System.out.println("1.empresa");
+				System.out.println("2.Municipio");
+				System.out.println("3.codigo postal");
+				System.out.println("Campos por los que desea filtrar:");
+				int op4=sc.nextInt();
+				switch (op4) {
+				case 1:
+					sc.nextLine();
+					campo="empresa";
+					System.out.println("empresa:");
+					dato=sc.nextLine();
+					bdG.addHMG(campo, dato);
+					break;
+				case 2:
+					sc.nextLine();
+					campo="municipio";
+					System.out.println("municipio:");
+					dato=sc.nextLine();
+					bdG.addHMG(campo, dato);
+					break;
+				
+				
+				case 3:
+					sc.nextLine();
+					campo="codpostal";
+					System.out.println("codigo postal:");
+					dato=sc.nextLine();
+					bdG.addHMG(campo, dato);
+					break;
+				
+				}
+				System.out.println("desea introduccir otro filtro 1/si 2/no");
+				h=sc.nextInt();
+				}while(h!=2);
+				bdG.mostrarHMG();
+				
 				
 				
 				

@@ -6,6 +6,7 @@ package bd;
  */
 import java.sql.*;
 import java.util.*;
+import java.util.Map.Entry;
 
 import modelo.Administrador;
 import modelo.Gasolinera;
@@ -16,7 +17,7 @@ import java.time.LocalDate;
 public class BD_Gasolinera extends BD_Conector{
 	private static Statement s;	
 	private static ResultSet reg;
-
+	private HashMap<String,String> HMG = new HashMap<String,String>();
 
 
 /*fWigo postal
@@ -168,4 +169,34 @@ public int borrarGas(int id){
 		return -1;
 	}
 }
+//
+//Metodos HashMap
+	public void addHMG(String campo, String dato){
+	
+	    if (HMG.containsKey(campo)) {
+	        System.out.println("No se puede introducir el producto. El código esta repetido.");
+	        
+	    } else {
+	        HMG.put(campo, dato);       
+	        System.out.println("Dato capturado correctamente");
+	    }
+	}
+	
+	
+	
+	
+	public void reset(){
+		HMG.clear();
+	}
+	public void mostrarHMG() {
+	    String clave;
+	    Iterator productos =HMG.entrySet().iterator();
+	    System.out.println("Hay los siguientes productos:");
+	    Map.Entry<String, String> producto;
+	    while (productos.hasNext()){
+	        	producto=(Map.Entry<String, String>) productos.next();
+	        	System.out.println("clave" + " - " + producto.getKey() );
+	        	System.out.println("valor" + " - " + producto.getValue() );
+	    }        
+	}
 }

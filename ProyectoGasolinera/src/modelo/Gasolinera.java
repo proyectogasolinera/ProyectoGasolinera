@@ -1,4 +1,8 @@
 package modelo;
+
+import java.util.HashMap;
+import java.util.Iterator;
+
 //Problema tipo de datos del modelo no coincidQen con el tipo de datos la base de datos 
 public class Gasolinera {
 	private int id_gasolinera;
@@ -12,6 +16,8 @@ public class Gasolinera {
 	private float longitud;
 	private float latitud;
 	private String horario;
+	
+
 	
 	public Gasolinera(int id_gasolinera, String empresa, String provincia, String municipio, String localidad,
 			String codpostal, String direccion, char margen, float longitud, float latitud, String Horario) {
@@ -124,6 +130,7 @@ public class Gasolinera {
 	public void setHorario(String horario) {
 		horario = horario;
 	}
+	
 
 	
 }
