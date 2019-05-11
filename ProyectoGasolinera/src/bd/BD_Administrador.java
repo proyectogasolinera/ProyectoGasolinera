@@ -8,16 +8,15 @@ package bd;
 import java.sql.*;
 import java.util.*;
 import modelo.Administrador;
+import modelo.Gasolinera;
+
 import java.time.LocalDate;
 
 public class BD_Administrador extends BD_Conector{
 	private static Statement s;	
 	private static ResultSet reg;
-	
-	
-	
-	
-	
+	private HashMap<String,String> HMA = new HashMap<String,String>();
+	private String cadenaSQL;
 //insert
 	public int add_admin(Administrador admin){
 		
@@ -148,4 +147,88 @@ public int borrarAdmin(String id){
 	}
 }
 
+//Metodos HashMap
+	public void addHMA(String campo, String dato){
+	
+	    if (HMA.containsKey(campo)) {
+	        System.out.println("No se puede introducir el producto. El código esta repetido.");
+	        
+	    } else {
+	        HMA.put(campo, dato);       
+	        System.out.println("Dato capturado correctamente");
+	    }
+	}
+	
+	public void reset(){
+		HMA.clear();
+	}
+	public void mostrarHMA() {
+	    String clave;
+	    Iterator productos =HMA.entrySet().iterator();
+	    System.out.println("Hay los siguientes campos:");
+	    Map.Entry<String, String> producto;
+	    while (productos.hasNext()){
+	        	producto=(Map.Entry<String, String>) productos.next();
+	        	System.out.println("clave" + " - " + producto.getKey() );
+	        	System.out.println("valor" + " - " + producto.getValue() );
+	    }        
+	}
+	
+
+	public  Vector<Administrador> selectAdminHM(){ //se puede optimizr con size
+		String campo1="",campo2="",campo3="";
+		String dato1="",dato2="",dato3="";
+		int i=1;
+		   Iterator administradores =HMA.entrySet().iterator();
+
+
+		    Map.Entry<String, String> administrador;
+		    while (administradores.hasNext()){
+		        	administrador=(Map.Entry<String, String>) administradores.next();
+		        
+		        	if (i==1){
+		        		campo1=administrador.getKey();
+		        		dato1=administrador.getValue();
+		        		 cadenaSQL="SELECT * from administrador WHERE "+campo1+" ='"+dato1+"'";
+		        	}
+		        	if (i==2){
+		        		campo2=administrador.getKey();
+		        		dato2=administrador.getValue();
+		        		cadenaSQL="SELECT * from administrador WHERE "+campo1+"  ='"+dato1+"' and "+campo2+"  ='"+dato2+"'";
+		        	}
+		        	if (i==3){
+		        		campo3=administrador.getKey();
+		        		dato3=administrador.getValue();
+		        		cadenaSQL="SELECT * from administrador WHERE "+campo1+"  ='"+dato1+"' and "+campo2+"  ='"+dato2+"' and "+campo3+" = '"+dato3+"' ";
+		        	}
+		        	i++;
+		        	
+		    }
+		Vector<Administrador> listadoAdmin=new Vector<Administrador>();
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			
+			
+			while ( reg.next()){
+				java.sql.Date f=reg.getDate("Fecha_alta");
+				LocalDate f_alta=f.toLocalDate();
+				listadoAdmin.add(new Administrador(reg.getString("id_admin")
+						,reg.getString("Nombre_admin"),reg.getString("Password")
+						,reg.getString("dni"),reg.getString("Correo_admin")
+						,reg.getString("Tlfono_admin"),reg.getString("Direccion_admin"),reg.getString("cod_post"),f_alta));
+			}
+			reset();
+			s.close();
+			this.cerrar();
+			return listadoAdmin;
+
+		}
+		catch ( SQLException e){		
+			return null;			
+		}
+	}
+	
+	
 }
