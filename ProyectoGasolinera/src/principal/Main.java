@@ -76,7 +76,7 @@ public class Main {
 			System.out.println("Seleccione opcion deseada:\n 1: mostrar Administrador.\n 2: Insertar nuevo Administrador\n 3.Borrar administrador\n 4.Modificar datos Administrador");
 			System.out.println("************************");
 			System.out.println("-------Opciones Gasolinera---------");
-			System.out.println("\n 5:Seleccione Gasolinera\n 6: Insertar nueva Gasolinera\n 7: Borrar Gasolinera\n 8:Modificar datos Gasolinera");
+			System.out.println("\n 5:Seleccione Gasolinera(id)\n 6: Insertar nueva Gasolinera\n 7: Borrar Gasolinera\n 8:Modificar datos Gasolinera");
 			System.out.println("************************");
 			System.out.println("-------Opciones Carburantes---------");
 			System.out.println("9.Buscar Carburante");
@@ -86,7 +86,8 @@ public class Main {
 			System.out.println("-------Opciones Modificacion---------");
 			System.out.println("13. Ver modificaciones");
 			System.out.println("-----------Prueba HASMAP-----------");
-			System.out.println("14. probar select gasolineras con hasmap");
+			System.out.println("14. probar select gasolineras con hasmap (cod/empresa/municipio)");
+			System.out.println("15. Probar select administrador con hasmap");
 			op=sc.nextInt();
 			switch (op) {
 			case 1:
@@ -167,77 +168,26 @@ public class Main {
 					switch(op2){
 					case 1:
 						
-						System.out.println("Campo de busqueda 1.identificador gasolinera, 2.codigo postal 3.Marca 4.Municipio 5.Marca y Municipio,6.Codigo postal y Marca");
+						System.out.println("Campo de busqueda 1.identificador gasolinera,");
 						int op3=sc.nextInt();
 						if (op3==1){
 							campo1="id_gasolinera";
 							System.out.println("identificador Gasolinera: ");
 							datoN=sc.nextInt();
 							listaGas=bdG.selectGasolinera(datoN,campo1);
-						}
-						else{
-							if(op3==2){
-								campo1="codpostal";
-								System.out.println("Codigo postal: ");
-								datoN=sc.nextInt();
-								listaGas=bdG.selectGasolinera(datoN,campo1);
+							for(int i=0; i<listaGas.size();i++){
+								System.out.println(listaGas.get(i).toString());
 							}
-								else{
-									if (op3==3){
-										sc.nextLine();
-										campo1="empresa";
-										System.out.println("Marca");
-										datoS1=sc.nextLine();
-										listaGas=bdG.selectGasolinera(datoS1,campo1);
-									}
-									else{
-										if (op3==4){
-											sc.nextLine();
-											campo1="municipio";
-											System.out.println("Municipio:");
-											datoS1=sc.nextLine();
-											listaGas=bdG.selectGasolinera(datoS1,campo1);
-										}
-										else{
-											if (op3==5){
-												sc.nextLine();
-												campo1="municipio";
-												System.out.println("Municipio:");
-												datoS1=sc.nextLine();
-												campo2="empresa";
-												System.out.println("Empresa");
-												datoS2=sc.nextLine();
-												listaGas=bdG.selectGasolinera(datoS1, datoS2, campo1, campo2);
-											}
-											else {
-												if (op3==6){
-													sc.nextLine();
-													campo1="empresa";
-													System.out.println("Empresa:");
-													datoS1=sc.nextLine();
-													campo2="codpostal";
-													System.out.println("Codigo postal:");
-													datoN=sc.nextInt();
-													listaGas=bdG.selectGasolinera(datoS1, datoN, campo1, campo2);
-												}
-												else {
-													break;
-												}
-											}
-										}
-									}
-							
 						}
 						
+							break;				
 						}
 					
 					
-						for(int i=0; i<listaGas.size();i++){
-							System.out.println(listaGas.get(i).toString());
-						}
 						
-						break;
-					}
+						
+						
+		
 					
 				}while(op2!=100);
 			
@@ -366,8 +316,8 @@ public class Main {
 				System.out.println("2.Municipio");
 				System.out.println("3.codigo postal");
 				System.out.println("Campos por los que desea filtrar:");
-				int op4=sc.nextInt();
-				switch (op4) {
+				 op=sc.nextInt();
+				switch (op) {
 				case 1:
 					sc.nextLine();
 					campo="empresa";
@@ -397,13 +347,60 @@ public class Main {
 				h=sc.nextInt();
 				}while(h!=2);
 				bdG.mostrarHMG();
+				Vector<Gasolinera> listaGasHM=bdG.selectGasolineraHM();
+				for(int i=0; i<listaGasHM.size();i++){
+					System.out.println(listaGasHM.get(i).toString());
+				}
+				break;
+				
+			case 15:
+				sc.nextLine();
+				
+				do {
+					
+				System.out.println("Campos por los que desea filtrar:");
+				System.out.println("1.Identificador");
+				System.out.println("2.Dni");
+				System.out.println("3.correo");
+				System.out.println("Campos por los que desea filtrar:");
+				 op=sc.nextInt();
+				switch (op) {
+				case 1:
+					sc.nextLine();
+					campo="id_admin";
+					System.out.println("identificador:");
+					dato=sc.nextLine();
+					bdA.addHMA(campo, dato);
+					break;
+				case 2:
+					sc.nextLine();
+					campo="dni";
+					System.out.println("dni:");
+					dato=sc.nextLine();
+					bdA.addHMA(campo, dato);
+					break;
 				
 				
-				
-				
+				case 3:
+					sc.nextLine();
+					campo="Correo_admin";
+					System.out.println("Correo del administrador:");
+					dato=sc.nextLine();
+					bdG.addHMG(campo, dato);
+					break;
 
-			
+				}
+				System.out.println("desea introduccir otro filtro 1/si 2/no");
+				h=sc.nextInt();
+				}while(h!=2);
+				Vector <Administrador> listaAdminHM=bdA.selectAdminHM();
+				for (int i=0;i<listaAdminHM.size();i++)									
+					System.out.println(listaAdminHM.get(i).toString());
+				break;
 			}
+			
+				
+			
 		}while(op!=77);
 	}
 
