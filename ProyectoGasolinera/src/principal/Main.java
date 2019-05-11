@@ -23,6 +23,7 @@ public class Main {
 		BD_Gasolinera bdG=new BD_Gasolinera();
 		BD_Carburante bdC=new BD_Carburante();
 		BD_Modificacion bdM=new BD_Modificacion();
+		BD_Usuario bdU=new BD_Usuario();
 		Vector<Gasolinera> listaGas;
 		int op;
 		int filas;
@@ -88,6 +89,8 @@ public class Main {
 			System.out.println("-----------Prueba HASMAP-----------");
 			System.out.println("14. probar select gasolineras con hasmap (cod/empresa/municipio)");
 			System.out.println("15. Probar select administrador con hasmap");
+			System.out.println("16. Probar select Usuarios con hasmap");
+			
 			op=sc.nextInt();
 			switch (op) {
 			case 1:
@@ -386,7 +389,7 @@ public class Main {
 					campo="Correo_admin";
 					System.out.println("Correo del administrador:");
 					dato=sc.nextLine();
-					bdG.addHMG(campo, dato);
+					bdA.addHMA(campo, dato);
 					break;
 
 				}
@@ -396,6 +399,51 @@ public class Main {
 				Vector <Administrador> listaAdminHM=bdA.selectAdminHM();
 				for (int i=0;i<listaAdminHM.size();i++)									
 					System.out.println(listaAdminHM.get(i).toString());
+				break;
+				
+			case 16:
+				sc.nextLine();
+				
+				do {
+					
+				System.out.println("Campos por los que desea filtrar:");
+				System.out.println("1.dni:");
+				System.out.println("2.Localidad");
+				System.out.println("3.Codigo postal");
+				System.out.println("Campos por los que desea filtrar:");
+				 op=sc.nextInt();
+				switch (op) {
+				case 1:
+					sc.nextLine();
+					campo="dni_usuario";
+					System.out.println("dni");
+					dato=sc.nextLine();
+					bdU.addHMU(campo, dato);
+					break;
+				case 2:
+					sc.nextLine();
+					campo="localidad";
+					System.out.println("localidad:");
+					dato=sc.nextLine();
+					bdU.addHMU(campo, dato);
+					break;
+				
+				
+				case 3:
+					sc.nextLine();
+					campo="cod_post";
+					System.out.println("Codigo Postal:");
+					dato=sc.nextLine();
+					bdU.addHMU(campo, dato);
+					break;
+
+				}
+				System.out.println("desea introduccir otro filtro 1/si 2/no");
+				h=sc.nextInt();
+				}while(h!=2);
+				Vector <Usuario> listaUserHM=bdU.selectUserHM();
+				for (int i=0;i<listaUserHM.size();i++)									
+					System.out.println(listaUserHM.get(i).toString());
 				break;
 			}
 			

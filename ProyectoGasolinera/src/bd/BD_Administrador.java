@@ -8,7 +8,6 @@ package bd;
 import java.sql.*;
 import java.util.*;
 import modelo.Administrador;
-import modelo.Gasolinera;
 
 import java.time.LocalDate;
 
@@ -204,6 +203,7 @@ public int borrarAdmin(String id){
 		        	i++;
 		        	
 		    }
+		    
 		Vector<Administrador> listadoAdmin=new Vector<Administrador>();
 		try{
 			this.abrir();
