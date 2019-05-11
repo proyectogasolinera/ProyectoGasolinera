@@ -10,7 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Vector;
+
 
 import modelo.Usuario;
 
@@ -18,7 +22,8 @@ public class BD_Usuario extends BD_Conector {
 	
 	private static Statement s;	
 	private static ResultSet reg;
-	
+	private HashMap<String,String> HMU = new HashMap<String,String>();
+	private String cadenaSQL;
 	public BD_Usuario(){
 		super();
 	}
@@ -122,4 +127,85 @@ public class BD_Usuario extends BD_Conector {
 			return false;			
 		}
 	}
+	//Metodos HashMap
+		public void addHMU(String campo, String dato){
+		
+		    if (HMU.containsKey(campo)) {
+		        System.out.println("No se puede introducir el producto. El código esta repetido.");
+		        
+		    } else {
+		        HMU.put(campo, dato);       
+		        System.out.println("Dato capturado correctamente");
+		    }
+		}
+		
+		public void reset(){
+			HMU.clear();
+		}
+		public void mostrarHMA() {
+		    String clave;
+		    Iterator usuarios =HMU.entrySet().iterator();
+		    System.out.println("Hay los siguientes campos:");
+		    Map.Entry<String, String> usuario;
+		    while (usuarios.hasNext()){
+		        	usuario=(Map.Entry<String, String>) usuarios.next();
+		        	System.out.println("clave" + " - " + usuario.getKey() );
+		        	System.out.println("valor" + " - " + usuario.getValue() );
+		    }        
+		}
+		public  Vector<Usuario> selectUserHM(){ //se puede optimizr con size
+			String campo1="",campo2="",campo3="";
+			String dato1="",dato2="",dato3="";
+			int i=1;
+			   Iterator usuarios =HMU.entrySet().iterator();
+			   
+			    Map.Entry<String, String> usuario;
+			    
+			    while (usuarios.hasNext()){
+			        	usuario=(Map.Entry<String, String>) usuarios.next();
+			        
+			        	if (i==1){
+			        		campo1=usuario.getKey();
+			        		dato1=usuario.getValue();
+			        		 cadenaSQL="SELECT * from clientes WHERE "+campo1+" ='"+dato1+"'";
+			        	}
+			        	if (i==2){
+			        		campo2=usuario.getKey();
+			        		dato2=usuario.getValue();
+			        		cadenaSQL="SELECT * from clientes WHERE "+campo1+"  ='"+dato1+"' and "+campo2+"  ='"+dato2+"'";
+			        	}
+			        	if (i==3){
+			        		campo3=usuario.getKey();
+			        		dato3=usuario.getValue();
+			        		cadenaSQL="SELECT * from clientes WHERE "+campo1+"  ='"+dato1+"' and "+campo2+"  ='"+dato2+"' and "+campo3+" = '"+dato3+"' ";
+			        	}
+			        	i++;
+			        	
+			    }
+			    Vector<Usuario> listadoUser=new Vector<Usuario>();
+				try{
+					this.abrir();
+					s=c.createStatement();
+					reg=s.executeQuery(cadenaSQL);
+					
+					
+					while ( reg.next()){
+						// La fecha que se extrae de la bbdd es sql.Date, hay que transformarla a LocalDate
+						java.sql.Date f=reg.getDate("fecha_naci");
+						LocalDate fBuena=f.toLocalDate();
+						listadoUser.add(new Usuario(reg.getString("nombre"),reg.getString("dni_usuario"),fBuena,reg.getString("mail"),reg.getString("localidad"),reg.getString("direccion"),reg.getString("cod_post"),reg.getString("tlf")));
+						
+					}
+					reset();
+					s.close();
+					this.cerrar();
+					return listadoUser;
+
+				}
+				catch ( SQLException e){		
+					return null;			
+				}
+
+		}
+	
 }
