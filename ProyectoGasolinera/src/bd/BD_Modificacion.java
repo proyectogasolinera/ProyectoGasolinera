@@ -16,7 +16,7 @@ public class BD_Modificacion extends BD_Conector{
 	private static ResultSet reg;
 	
 //selects
-	
+
 
 //INSERT
 	public int add_modificacion(Modificacion mod){	
