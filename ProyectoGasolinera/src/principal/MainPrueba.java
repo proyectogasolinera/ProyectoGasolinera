@@ -218,7 +218,7 @@ public class MainPrueba {
 					LocalDate fechaVisita=LocalDate.parse(fecha,fechaFormateada);
 					
 					
-					filas=bdv.borrarVisita(dni,codigo,fechaVisita);
+					filas=bdv.borrarVisita(dni);
 					if(filas==1)
 						System.out.println("Visita eliminada con exito");
 					else

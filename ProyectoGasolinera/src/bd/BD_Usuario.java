@@ -50,7 +50,7 @@ public class BD_Usuario extends BD_Conector {
 	
 	}
 	
-	//Update de campo a elegir por el usuario, el usuario solo puede cambiar, Mail,Direccion,Cod_postal,password y localidad
+	//Update de campo a elegir por el usuario, el usuario solo puede cambiar, 
 	public int updateUser(String dni,String campo,String cambio) {
 
 	    String cadena = "UPDATE clientes SET "+campo+" = '"+cambio+"' WHERE dni_usuario = '" + dni + "'";
