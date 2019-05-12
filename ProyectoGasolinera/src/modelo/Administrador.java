@@ -14,6 +14,24 @@ public class Administrador {
 	private String codPostal;
 	private LocalDate fechaAlt;
 	
+	
+	
+	
+	public Administrador( String Nombre_admin, String Password, String dni, String correo,
+			String telefono,String direccion,String codPostal) {
+		super();
+		this.Nombre_admin = Nombre_admin;
+		this.Password = Password;
+		this.dni = dni;
+		this.correo = correo;
+		this.telefono = telefono;
+		this.direccion = direccion;
+		this.codPostal = codPostal;
+		this.fechaAlt = LocalDate.now();
+		
+	}
+	
+	
 	public Administrador(String id_admin, String Nombre_admin, String Password, String dni, String correo,
 			String telefono,String direccion,String codPostal,LocalDate fechaAlt) {
 		super();

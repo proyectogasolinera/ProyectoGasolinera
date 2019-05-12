@@ -8,42 +8,47 @@ package bd;
 import java.sql.*;
 import java.util.*;
 import modelo.Administrador;
+
 import java.time.LocalDate;
 
 public class BD_Administrador extends BD_Conector{
 	private static Statement s;	
 	private static ResultSet reg;
-	
-/*	
-//Verifica 
-	public String VerificaClave(String id, String clave) {
-		String cadenaSQL = "SELECT Nombre_admin from administrador WHERE id_admin='" + id + "'AND Password='" + clave + "'";
-		String Dni = null; 
-		try {
-			this.abrir();
-			s = c.createStatement();
-			reg = s.executeQuery(cadenaSQL);
-			if (reg.next()) {
-				Dni = reg.getString("Nombre_admin");
-			}
-			s.close();
-			this.cerrar();
-			return Dni;
-		} catch (SQLException e) {
-			return null;  
-		}
-	}
-*/
-	
+	private HashMap<String,String> HMA = new HashMap<String,String>();
+	private String cadenaSQL;
 //insert
-	public int add_admin(Administrador admin){	
-		String cadenaSQL="INSERT INTO administrador VALUES('" + admin.getId_admin() + "','" +
+	public int add_admin(Administrador admin){
+		
+		
+		int nRegistros = 0;
+		int num=0;
+		try{
+			//Si las filas retorna 1 el usuario ha sido aé¦»dido, si devuelve 0, el usuario no se aé¦»dio, si devuelve -1 no se aé¦»de por algun error de BD 
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery("SELECT count(*) as total from administrador"); 
+			while(reg.next()) {
+				nRegistros=Integer.parseInt(reg.getString("total"));
+						
+			}
+			
+			num=nRegistros+1;
+
+		}
+		catch ( SQLException e){			
+			return -1;
+		}
+		
+		
+		
+		
+		String cadenaSQL="INSERT INTO administrador VALUES('" + "AD"+num+ "','" +
 		admin.getNombre_admin()+"','"+ admin.getPassword() +"','"+ admin.getDni()+"','"+
 				admin.getCorreo()+"','"+admin.getTelefono()+"','"+admin.getDireccion()+"','"+
 				admin.getCodPostal()+"','"+admin.getFechaAlt()+"')";
 		
 		try{
-			//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
+			//Si las filas retorna 1 el usuario ha sido aé¦»dido, si devuelve 0, el usuario no se aé¦»dio, si devuelve -1 no se aé¦»de por algun error de BD 
 			this.abrir();
 			s=c.createStatement();
 			int filas=s.executeUpdate(cadenaSQL);
@@ -141,4 +146,89 @@ public int borrarAdmin(String id){
 	}
 }
 
+//Metodos HashMap
+	public void addHMA(String campo, String dato){
+	
+	    if (HMA.containsKey(campo)) {
+	        System.out.println("No se puede introducir el producto. El código esta repetido.");
+	        
+	    } else {
+	        HMA.put(campo, dato);       
+	        System.out.println("Dato capturado correctamente");
+	    }
+	}
+	
+	public void reset(){
+		HMA.clear();
+	}
+	public void mostrarHMA() {
+	    String clave;
+	    Iterator productos =HMA.entrySet().iterator();
+	    System.out.println("Hay los siguientes campos:");
+	    Map.Entry<String, String> producto;
+	    while (productos.hasNext()){
+	        	producto=(Map.Entry<String, String>) productos.next();
+	        	System.out.println("clave" + " - " + producto.getKey() );
+	        	System.out.println("valor" + " - " + producto.getValue() );
+	    }        
+	}
+	
+
+	public  Vector<Administrador> selectAdminHM(){ //se puede optimizr con size
+		String campo1="",campo2="",campo3="";
+		String dato1="",dato2="",dato3="";
+		int i=1;
+		   Iterator administradores =HMA.entrySet().iterator();
+
+
+		    Map.Entry<String, String> administrador;
+		    while (administradores.hasNext()){
+		        	administrador=(Map.Entry<String, String>) administradores.next();
+		        
+		        	if (i==1){
+		        		campo1=administrador.getKey();
+		        		dato1=administrador.getValue();
+		        		 cadenaSQL="SELECT * from administrador WHERE "+campo1+" ='"+dato1+"'";
+		        	}
+		        	if (i==2){
+		        		campo2=administrador.getKey();
+		        		dato2=administrador.getValue();
+		        		cadenaSQL="SELECT * from administrador WHERE "+campo1+"  ='"+dato1+"' and "+campo2+"  ='"+dato2+"'";
+		        	}
+		        	if (i==3){
+		        		campo3=administrador.getKey();
+		        		dato3=administrador.getValue();
+		        		cadenaSQL="SELECT * from administrador WHERE "+campo1+"  ='"+dato1+"' and "+campo2+"  ='"+dato2+"' and "+campo3+" = '"+dato3+"' ";
+		        	}
+		        	i++;
+		        	
+		    }
+		    
+		Vector<Administrador> listadoAdmin=new Vector<Administrador>();
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			
+			
+			while ( reg.next()){
+				java.sql.Date f=reg.getDate("Fecha_alta");
+				LocalDate f_alta=f.toLocalDate();
+				listadoAdmin.add(new Administrador(reg.getString("id_admin")
+						,reg.getString("Nombre_admin"),reg.getString("Password")
+						,reg.getString("dni"),reg.getString("Correo_admin")
+						,reg.getString("Tlfono_admin"),reg.getString("Direccion_admin"),reg.getString("cod_post"),f_alta));
+			}
+			reset();
+			s.close();
+			this.cerrar();
+			return listadoAdmin;
+
+		}
+		catch ( SQLException e){		
+			return null;			
+		}
+	}
+	
+	
 }

@@ -13,7 +13,7 @@ public class Usuario {
 	private String nombre;
 	private String dni;
 	private LocalDate fechaNacimiento;
-	private String correo;
+	private String mail;
 	private String localidad;
 	private String direccion;
 	private String codPostal;
@@ -21,13 +21,27 @@ public class Usuario {
 	private String password;	
 	
 	
-	public Usuario(String nombre, String dni, LocalDate fechaNacimiento, String correo, String localidad, String direccion,
+	public Usuario(String nombre, String dni, LocalDate fechaNacimiento, String mail, String localidad, String direccion,
 			String codPostal, String telefono, String password) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
 		this.password = password;
-		this.correo = correo;
+		this.mail = mail;
+		this.direccion = direccion;
+		this.codPostal = codPostal;
+		this.Telefono = telefono;
+		this.localidad = localidad;
+		this.fechaNacimiento = fechaNacimiento;
+	}
+	
+	//Costructor para sacar todos los datos por select menos password
+	public Usuario(String nombre, String dni, LocalDate fechaNacimiento, String mail, String localidad, String direccion,
+			String codPostal, String telefono) {
+		super();
+		this.dni = dni;
+		this.nombre = nombre;
+		this.mail = mail;
 		this.direccion = direccion;
 		this.codPostal = codPostal;
 		this.Telefono = telefono;
@@ -49,8 +63,8 @@ public class Usuario {
 		return password;
 	}
 
-	public String getCorreo() {
-		return correo;
+	public String getMail() {
+		return mail;
 	}
 
 	public String getDireccion() {
@@ -75,7 +89,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [dni=" + dni + ", nombre=" + nombre + ", password=" + password + ", correo=" + correo
+		return "Usuario [dni=" + dni + ", nombre=" + nombre + ", password=" + password + ", correo=" + mail
 				+ ", direccion=" + direccion + ", codigo Postal=" + codPostal + ", Telefono=" + Telefono + ", localidad="
 				+ localidad + ", fecha Nacimiento=" + fechaNacimiento + "]";
 	}

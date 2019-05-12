@@ -5,11 +5,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.Vector;
 
+import bd.BD_Administrador;
 import bd.BD_Conector;
 import bd.BD_Cuenta;
 import bd.BD_Incidencia;
 import bd.BD_Usuario;
 import bd.BD_Visita;
+import modelo.Administrador;
 import modelo.Cuenta;
 import modelo.Incidencia;
 import modelo.Usuario;
@@ -28,6 +30,7 @@ public class MainPrueba {
 		BD_Visita bdv=new BD_Visita();
 		BD_Incidencia bdi=new BD_Incidencia();
 		BD_Cuenta bdc=new BD_Cuenta();
+		BD_Administrador bda=new BD_Administrador();
 		
 		int opc;
 		String dni_usu;
@@ -127,21 +130,15 @@ public class MainPrueba {
 					break;
 				case 5:
 					sc.nextLine();
-					System.out.println("Introduce cod inc");
-					String cod=sc.nextLine();
 					System.out.println("Introduce DNI usuario");
 					dni=sc.nextLine();
-					System.out.println("Introduce id_admin");
-					String id_admin=sc.nextLine();
 					System.out.println("Descibe problema");
 					String descripcion=sc.nextLine();
 					System.out.println("Introduce id_gasolinera");
 					id=sc.nextInt();
 					
-					LocalDate fcha1=LocalDate.now();
-					LocalDate fcha2=LocalDate.now();
 					
-					Incidencia inc=new Incidencia(cod,dni,id_admin,fcha1,fcha2,descripcion,id);
+					Incidencia inc=new Incidencia(dni,descripcion,id);
 					
 					System.out.println(inc.toString());
 					filas=bdi.add_inc(inc);
@@ -164,8 +161,6 @@ public class MainPrueba {
 				//Metodos Cuentas
 				case 7:
 					sc.nextLine();
-					System.out.println("Num tarjeta");
-					String num_tarj=sc.nextLine();
 					System.out.println("DNI");
 					dni=sc.nextLine();
 					System.out.println("Saldo");
@@ -176,7 +171,7 @@ public class MainPrueba {
 					System.out.println("Tipo cuenta");
 					tipo=sc.nextLine();
 					
-					Cuenta cuenta=new Cuenta(num_tarj,dni,saldo,puntos,tipo);
+					Cuenta cuenta=new Cuenta(dni,saldo,puntos,tipo);
 					
 					System.out.println(cuenta.toString());
 					filas=bdc.add_cuenta(cuenta);
@@ -295,59 +290,109 @@ public class MainPrueba {
 				case 15:
 					sc.nextLine();
 					System.out.println("cod admin");
-					cod=sc.nextLine();
+					String cod=sc.nextLine();
 					Vector<Incidencia> lista1=bdi.incAdminList(cod);
 					System.out.println("\n\nLISTADO INCIDENCIAS");
 					for (int i=0;i<lista1.size();i++)									
 						System.out.println(lista1.get(i).toString());
 					break;
 					
-				case 16:
-					sc.nextLine();
-					System.out.println("cod admin");
-					cod=sc.nextLine();
-					System.out.println("Esta resuelta?");
-					System.out.println("1.Si");
-					System.out.println("2.No");
-					int decision=sc.nextInt();
-					String entrada;
-					if(decision==1)
-						entrada="not null";
-					else
-						entrada="null";
-						
-					Vector<Incidencia> lista2=bdi.incAdminListResolve(cod,entrada);
-					System.out.println("\n\nLISTADO INCIDENCIAS");
-					for (int i=0;i<lista2.size();i++)									
-						System.out.println(lista2.get(i).toString());
-					break;
+
 					
 				case 17:
 					sc.nextLine();
-					System.out.println("dni");
-					dni=sc.nextLine();
-					System.out.println("Esta resuelta?");
+					System.out.println("Quieres buscar por administrador o usuario ?");
+					System.out.println("1.Administrador");
+					System.out.println("2.Usuario");
+					int opcion=sc.nextInt();
+						if(opcion==1)
+							campo="id_admin";
+						else
+							campo="dni_usuario";
+					sc.nextLine();
+					System.out.println("Introduce su identificador");
+					String identificador=sc.nextLine();
+					System.out.println("Esta resuelta la incidencia?");
 					System.out.println("1.Si");
 					System.out.println("2.No");
-					decision=sc.nextInt();
-					if(decision==1)
-						entrada="not null";
-					else
-						entrada="null";
-						
-					Vector<Incidencia> lista3=bdi.incUserListResolve(dni, entrada);
+					opcion=sc.nextInt();
+					String entrada;
+						if(opcion==1)
+							entrada="not null";
+						else
+							entrada="null";
+							
+					Vector<Incidencia> lista3=bdi.incUserListResolve(identificador,campo,entrada);
 					System.out.println("\n\nLISTADO INCIDENCIAS");
 					for (int i=0;i<lista3.size();i++)									
 						System.out.println(lista3.get(i).toString());
 					break;
 				
+				case 18:
+					//Opcion para buscar visita de un usuario a una gasolinera concreta
+					sc.nextLine();
+					System.out.println("DNI");
+					dni=sc.nextLine();
+					System.out.println("Introduce cod de gasolinera");
+					codigo=sc.nextInt();
+					
+					Vector<Visita> listaVisita=bdv.visitListGas(dni, codigo);
+					System.out.println("\n\nLISTADO VISITAS DE "+ dni.toUpperCase()+" a la gasolinera "+codigo);
+					for (int i=0;i<listaVisita.size();i++)									
+						System.out.println(listaVisita.get(i).toString());
+					break;
+					
+				case 19:
+					//Opcion para buscar visita de un usuario en una fecha determinada
+					sc.nextLine();
+					System.out.println("DNI");
+					dni=sc.nextLine();
+					System.out.println("Introduce fecha de visita");
+					fecha=sc.nextLine();
+					fechaVisita=LocalDate.parse(fecha,fechaFormateada);
+					
+					
+					Vector<Visita> listaVisita1=bdv.visitListGas(dni, fechaVisita);
+					System.out.println("\n\nLISTADO VISITAS DE "+ dni.toUpperCase()+" la fecha "+fechaVisita);
+					for (int i=0;i<listaVisita1.size();i++)									
+						System.out.println(listaVisita1.get(i).toString());
+					break;	
+					
+				case 20:
+					sc.nextLine();
+					System.out.println("Nombre");
+					nombre=sc.nextLine();
+					System.out.println("password");
+					password=sc.nextLine();
+					System.out.println("dni");
+					dni=sc.nextLine();
+					System.out.println("correo");
+					correo=sc.nextLine();
+					System.out.println("tfno");
+					String tfno=sc.nextLine();
+					System.out.println("direccion");
+					direccion=sc.nextLine();
+					System.out.println("cod");
+					cod=sc.nextLine();
+					
+					Administrador ad=new Administrador(nombre,password,dni,correo,tfno,direccion,cod);
+					
+					System.out.println(ad.toString());
+					int filasAd=bda.add_admin(ad);
+					if(filasAd==1)
+						System.out.println("Usuario añadido con exito");
+					else
+						System.out.println("Error - "+filasAd);
+					
+					break;
+					
 					
 					
 					
 					
 			}
 			
-		}while(opc!=20);
+		}while(opc!=30);
 
 		
 		

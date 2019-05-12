@@ -16,7 +16,18 @@ public class Incidencia {
 	private int id_gasolinera; 
 	 
 	
-	public Incidencia(String cod_incid, String dniUsuario, String id_admin, LocalDate fechaIncidencia, LocalDate fechaArreglo,String descripcion,int id_gasolinera) {
+	//Costructor de nueva incidencia
+	public Incidencia(String dniUsuario, String descripcion,int id_gasolinera) {
+		super();
+		DniUsuario = dniUsuario;
+		this.id_gasolinera = id_gasolinera;
+		this.descripcion = descripcion;
+		this.fechaIncidencia = LocalDate.now();
+		this.fechaArreglo = null;
+	}
+	
+	//Costructor para sacar informacion de las incidencias resueltas
+	public Incidencia(String cod_incid, String dniUsuario, String id_admin, LocalDate fechaIncidencia,LocalDate fechaArreglo,String descripcion,int id_gasolinera) {
 		super();
 		this.cod_incid = cod_incid;
 		DniUsuario = dniUsuario;
@@ -24,8 +35,20 @@ public class Incidencia {
 		this.id_gasolinera = id_gasolinera;
 		this.descripcion = descripcion;
 		this.fechaIncidencia = fechaIncidencia;
-		this.fechaArreglo = fechaArreglo;
+		this.fechaArreglo=fechaArreglo;
 	}
+	
+	public Incidencia(String cod_incid, String dniUsuario, String id_admin, LocalDate fechaIncidencia,String descripcion,int id_gasolinera) {
+		super();
+		this.cod_incid = cod_incid;
+		DniUsuario = dniUsuario;
+		this.id_admin = id_admin;
+		this.id_gasolinera = id_gasolinera;
+		this.descripcion = descripcion;
+		this.fechaIncidencia = fechaIncidencia;
+	}
+	
+
 
 	public String getCod_incid() {
 		return cod_incid;

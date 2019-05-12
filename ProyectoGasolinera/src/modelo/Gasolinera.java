@@ -1,20 +1,26 @@
 package modelo;
-//Problema tipo de datos del modelo no coinciden con el tipo de datos la base de datos 
+
+import java.util.HashMap;
+import java.util.Iterator;
+
+//Problema tipo de datos del modelo no coincidQen con el tipo de datos la base de datos 
 public class Gasolinera {
 	private int id_gasolinera;
 	private String empresa;
 	private String provincia;
 	private String municipio;
 	private String localidad;
-	private int codpostal;
+	private String codpostal;
 	private String direccion;
 	private char margen;
 	private float longitud;
 	private float latitud;
 	private String horario;
 	
+
+	
 	public Gasolinera(int id_gasolinera, String empresa, String provincia, String municipio, String localidad,
-			int codpostal, String direccion, char margen, float longitud, float latitud, String Horario) {
+			String codpostal, String direccion, char margen, float longitud, float latitud, String Horario) {
 		super();
 		this.id_gasolinera = id_gasolinera;
 		this.empresa = empresa;
@@ -77,11 +83,11 @@ public class Gasolinera {
 		this.localidad = localidad;
 	}
 
-	public int getCodpostal() {
+	public String getCodpostal() {
 		return codpostal;
 	}
 
-	public void setCodpostal(int codpostal) {
+	public void setCodpostal(String codpostal) {
 		this.codpostal = codpostal;
 	}
 
@@ -124,6 +130,7 @@ public class Gasolinera {
 	public void setHorario(String horario) {
 		horario = horario;
 	}
+	
 
 	
 }

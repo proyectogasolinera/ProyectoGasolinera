@@ -14,15 +14,19 @@ public class Cuenta {
 	private String tipoCuenta;
 	private LocalDate fechaAlt;
 	
-	public Cuenta(String numTarjeta, String dniTitular, double saldo, int punto, String tipoCuenta) {
+	public Cuenta(String dniTitular, double saldo, int punto, String tipoCuenta) {
 		super();
-		this.numTarjeta = numTarjeta;
+		int cod1= (int) (Math.random() * 9999) + 1;
+		int cod2= (int) (Math.random() * 9999) + 1;
+		int cod3= (int) (Math.random() * 9999) + 1;
+		int cod4= (int) (Math.random() * 9999) + 1;
+		
+		this.numTarjeta=cod1+" "+cod2+" "+cod3+" "+cod4;
 		DniTitular = dniTitular;
 		this.saldo = saldo;
 		this.punto = punto;
 		this.tipoCuenta = tipoCuenta;
-		LocalDate fecha=LocalDate.now();
-		this.fechaAlt = fecha;
+		this.fechaAlt = LocalDate.now();
 	}
 	
 	

@@ -15,7 +15,7 @@ public class BD_Modificacion extends BD_Conector{
 	private static Statement s;	
 	private static ResultSet reg;
 	
-//select
+//selects
 	
 
 //INSERT

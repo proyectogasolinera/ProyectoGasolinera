@@ -15,7 +15,7 @@ import java.util.*;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stubW
 		Scanner sc= new Scanner(System.in);
 		BD_Conector.BD_Ini("aldautomotivebbdd");
 		//DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("yyyy-LL-dd");
@@ -23,8 +23,17 @@ public class Main {
 		BD_Gasolinera bdG=new BD_Gasolinera();
 		BD_Carburante bdC=new BD_Carburante();
 		BD_Modificacion bdM=new BD_Modificacion();
+		BD_Usuario bdU=new BD_Usuario();
+		Vector<Gasolinera> listaGas;
 		int op;
 		int filas;
+		String campo;
+		String campo1="";
+		int datoN=0;
+		String dato;
+		String datoS1="";
+		String datoS2="";
+		String campo2="";
 		//datos admin
 		String id_admin;
 		String nombre_admin;
@@ -33,15 +42,15 @@ public class Main {
 		String correo;
 		String telefono;
 		String direccion;
-		String codPostal;
+		String codpostal;
 		//datos Gasolinera
 		int id_Gas;
-		
+		int h=0;
 		String empresa;
 		String provincia;
 		String municipio;
 		String localidad;
-		int codpostal;
+		int codPostalGas;
 		
 		char margen;
 		float longitud;
@@ -68,7 +77,7 @@ public class Main {
 			System.out.println("Seleccione opcion deseada:\n 1: mostrar Administrador.\n 2: Insertar nuevo Administrador\n 3.Borrar administrador\n 4.Modificar datos Administrador");
 			System.out.println("************************");
 			System.out.println("-------Opciones Gasolinera---------");
-			System.out.println("\n 5:Seleccione Gasolinera\n 6: Insertar nueva Gasolinera\n 7: Borrar Gasolinera\n 8:Modificar datos Gasolinera");
+			System.out.println("\n 5:Seleccione Gasolinera(id)\n 6: Insertar nueva Gasolinera\n 7: Borrar Gasolinera\n 8:Modificar datos Gasolinera");
 			System.out.println("************************");
 			System.out.println("-------Opciones Carburantes---------");
 			System.out.println("9.Buscar Carburante");
@@ -77,6 +86,11 @@ public class Main {
 			System.out.println("12.Borrar carburante Gasolinera");
 			System.out.println("-------Opciones Modificacion---------");
 			System.out.println("13. Ver modificaciones");
+			System.out.println("-----------Prueba HASMAP-----------");
+			System.out.println("14. probar select gasolineras con hasmap (cod/empresa/municipio)");
+			System.out.println("15. Probar select administrador con hasmap");
+			System.out.println("16. Probar select Usuarios con hasmap");
+			
 			op=sc.nextInt();
 			switch (op) {
 			case 1:
@@ -106,10 +120,10 @@ public class Main {
 				 System.out.println("dirrecion:");
 				 direccion=sc.nextLine();
 				 System.out.println("Codigo postal:");
-				 codPostal=sc.nextLine();	 
+				 codpostal=sc.nextLine();	 
 				 LocalDate fechaAlt=LocalDate.now();
 				 
-				 Administrador admin=new Administrador(id_admin,nombre_admin,password,dni_adm,correo,telefono,direccion,codPostal,fechaAlt);
+				 Administrador admin=new Administrador(id_admin,nombre_admin,password,dni_adm,correo,telefono,direccion,codpostal,fechaAlt);
 				 filas=bdA.add_admin(admin);
 				 if(filas==1){
 						System.out.println("Administrador nuevo introduccido");
@@ -136,11 +150,11 @@ public class Main {
 				System.out.println("identificador del administrador:");
 				id_admin=sc.nextLine();
 				System.out.println("campo que desea cambiar:");
-				String campo=sc.nextLine();
-				System.out.println("Nuevo valor de "+campo);
+				campo1=sc.nextLine();
+				System.out.println("Nuevo valor de "+campo1);
 				String nuevoValor;
 				nuevoValor=sc.nextLine();
-				filas=bdA.updateAdminS(id_admin,campo,nuevoValor);
+				filas=bdA.updateAdminS(id_admin,campo1,nuevoValor);
 				if(filas==1){
 					System.out.println("Datos cambiados correctamente");
 				}
@@ -149,13 +163,38 @@ public class Main {
 				
 				break;
 			case 5:
-				sc.nextLine();
-				System.out.println("identificador Gasolinera: ");
-				id_Gas=sc.nextInt();
-				Vector<Gasolinera> listaGas=bdG.selectGasolinera(id_Gas);
-				for(int i=0; i<listaGas.size();i++){
-					System.out.println(listaGas.get(i).toString());
-				}
+				int op2;
+				do{
+					System.out.println("CASOS DE FILTRADO");
+					System.out.println("1.Para filtrar");
+					op2=sc.nextInt();
+					switch(op2){
+					case 1:
+						
+						System.out.println("Campo de busqueda 1.identificador gasolinera,");
+						int op3=sc.nextInt();
+						if (op3==1){
+							campo1="id_gasolinera";
+							System.out.println("identificador Gasolinera: ");
+							datoN=sc.nextInt();
+							listaGas=bdG.selectGasolinera(datoN,campo1);
+							for(int i=0; i<listaGas.size();i++){
+								System.out.println(listaGas.get(i).toString());
+							}
+						}
+						
+							break;				
+						}
+					
+					
+						
+						
+						
+		
+					
+				}while(op2!=100);
+			
+				
 				break;
 			case 6:
 				sc.nextLine();
@@ -168,7 +207,7 @@ public class Main {
 				 System.out.println("Localidad:");
 				 localidad=sc.nextLine();
 				 System.out.println("Codigo postal:");
-				 codpostal=sc.nextInt();
+				 codpostal=sc.nextLine();
 				 sc.nextLine();
 				 System.out.println("Direccion:");
 				 direccion=sc.nextLine();
@@ -270,12 +309,146 @@ public class Main {
 					
 				
 				break;
+			case 14:
+				sc.nextLine();
+				
+				do {
+					
+				System.out.println("Campos por los que desea filtrar:");
+				System.out.println("1.empresa");
+				System.out.println("2.Municipio");
+				System.out.println("3.codigo postal");
+				System.out.println("Campos por los que desea filtrar:");
+				 op=sc.nextInt();
+				switch (op) {
+				case 1:
+					sc.nextLine();
+					campo="empresa";
+					System.out.println("empresa:");
+					dato=sc.nextLine();
+					bdG.addHMG(campo, dato);
+					break;
+				case 2:
+					sc.nextLine();
+					campo="municipio";
+					System.out.println("municipio:");
+					dato=sc.nextLine();
+					bdG.addHMG(campo, dato);
+					break;
 				
 				
+				case 3:
+					sc.nextLine();
+					campo="codpostal";
+					System.out.println("codigo postal:");
+					dato=sc.nextLine();
+					bdG.addHMG(campo, dato);
+					break;
 				
+				}
+				System.out.println("desea introduccir otro filtro 1/si 2/no");
+				h=sc.nextInt();
+				}while(h!=2);
+				bdG.mostrarHMG();
+				Vector<Gasolinera> listaGasHM=bdG.selectGasolineraHM();
+				for(int i=0; i<listaGasHM.size();i++){
+					System.out.println(listaGasHM.get(i).toString());
+				}
+				break;
+				
+			case 15:
+				sc.nextLine();
+				
+				do {
+					
+				System.out.println("Campos por los que desea filtrar:");
+				System.out.println("1.Identificador");
+				System.out.println("2.Dni");
+				System.out.println("3.correo");
+				System.out.println("Campos por los que desea filtrar:");
+				 op=sc.nextInt();
+				switch (op) {
+				case 1:
+					sc.nextLine();
+					campo="id_admin";
+					System.out.println("identificador:");
+					dato=sc.nextLine();
+					bdA.addHMA(campo, dato);
+					break;
+				case 2:
+					sc.nextLine();
+					campo="dni";
+					System.out.println("dni:");
+					dato=sc.nextLine();
+					bdA.addHMA(campo, dato);
+					break;
+				
+				
+				case 3:
+					sc.nextLine();
+					campo="Correo_admin";
+					System.out.println("Correo del administrador:");
+					dato=sc.nextLine();
+					bdA.addHMA(campo, dato);
+					break;
 
-			
+				}
+				System.out.println("desea introduccir otro filtro 1/si 2/no");
+				h=sc.nextInt();
+				}while(h!=2);
+				Vector <Administrador> listaAdminHM=bdA.selectAdminHM();
+				for (int i=0;i<listaAdminHM.size();i++)									
+					System.out.println(listaAdminHM.get(i).toString());
+				break;
+				
+			case 16:
+				sc.nextLine();
+				
+				do {
+					
+				System.out.println("Campos por los que desea filtrar:");
+				System.out.println("1.dni:");
+				System.out.println("2.Localidad");
+				System.out.println("3.Codigo postal");
+				System.out.println("Campos por los que desea filtrar:");
+				 op=sc.nextInt();
+				switch (op) {
+				case 1:
+					sc.nextLine();
+					campo="dni_usuario";
+					System.out.println("dni");
+					dato=sc.nextLine();
+					bdU.addHMU(campo, dato);
+					break;
+				case 2:
+					sc.nextLine();
+					campo="localidad";
+					System.out.println("localidad:");
+					dato=sc.nextLine();
+					bdU.addHMU(campo, dato);
+					break;
+				
+				
+				case 3:
+					sc.nextLine();
+					campo="cod_post";
+					System.out.println("Codigo Postal:");
+					dato=sc.nextLine();
+					bdU.addHMU(campo, dato);
+					break;
+
+				}
+				System.out.println("desea introduccir otro filtro 1/si 2/no");
+				h=sc.nextInt();
+				}while(h!=2);
+				Vector <Usuario> listaUserHM=bdU.selectUserHM();
+				for (int i=0;i<listaUserHM.size();i++)									
+					System.out.println(listaUserHM.get(i).toString());
+				break;
 			}
+			
+				
+			
 		}while(op!=77);
 	}
 
