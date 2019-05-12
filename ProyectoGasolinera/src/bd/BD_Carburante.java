@@ -41,6 +41,30 @@ public class BD_Carburante extends BD_Conector{
 			return null;			
 		}
 	}
+	//select para que me saque todos los cargurates con precios de la misma gasolinera
+	public  Vector<Carburante> selectCarburante(int id){
+		String cadenaSQL="SELECT * from carburante WHERE id_gasolinera='"+id+"'";
+		Vector<Carburante> listadoCarbu=new Vector<Carburante>();
+		
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			
+			while ( reg.next()){
+				java.sql.Date f=reg.getDate("fecha_mod");
+				LocalDate fecha_mod=f.toLocalDate();
+				
+				listadoCarbu.add(new Carburante(reg.getString(1),reg.getFloat(2),reg.getInt(3),fecha_mod));
+			}
+			s.close();
+			this.cerrar();
+			return listadoCarbu;
+		}
+		catch ( SQLException e){		
+			return null;			
+		}
+	}
 	// insert
 	public int add_carburante(Carburante carbu){	
 		String cadenaSQL="INSERT INTO carburante VALUES('" + carbu.getTipo_carbu()+ "','" +
