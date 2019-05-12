@@ -163,12 +163,12 @@ public class Main {
 				
 				break;
 			case 5:
-				
+				int op2;
 				do{
 					System.out.println("CASOS DE FILTRADO");
 					System.out.println("1.Para filtrar");
-					op=sc.nextInt();
-					switch(op){
+					op2=sc.nextInt();
+					switch(op2){
 					case 1:
 						
 						System.out.println("Campo de busqueda 1.identificador gasolinera,");
@@ -192,7 +192,7 @@ public class Main {
 						
 		
 					
-				}while(op!=100);
+				}while(op2!=100);
 			
 				
 				break;
@@ -244,27 +244,15 @@ public class Main {
 				
 				break;
 			case 9:
+				sc.nextLine();
+				System.out.println("Tipo de carburante a buscar:");
+				tipo=sc.nextLine();
 				System.out.println("Identificador de la Gasolinera:");
 				id_Gas=sc.nextInt();
-				sc.nextLine();
-				System.out.println("Desea buscar por tipo de carburante 1.si 2.no");
-				op=sc.nextInt();
-				if (op==1){
-					sc.nextLine();
-					System.out.println("Tipo de carburante a buscar:");
-					tipo=sc.nextLine();
-					Vector<Carburante> listaCarbu= bdC.selectCarburante(tipo,id_Gas);
-					for(int i=0; i<listaCarbu.size();i++){
-						System.out.println(listaCarbu.get(i).toString());
+				Vector<Carburante> listaCarbu= bdC.selectCarburante(tipo,id_Gas);
+				for(int i=0; i<listaCarbu.size();i++){
+					System.out.println(listaCarbu.get(i).toString());
 				}
-				}
-				else{
-					Vector<Carburante> listaCarbu= bdC.selectCarburante(id_Gas);
-					for(int i=0; i<listaCarbu.size();i++){
-						System.out.println(listaCarbu.get(i).toString());
-				}
-				}
-		
 				break;
 			case 10:
 				System.out.println("Tipo de carburante: ");
