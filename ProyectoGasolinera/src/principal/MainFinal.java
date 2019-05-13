@@ -52,7 +52,7 @@ public class MainFinal {
 				switch(opc) {
 				case 1:
 					do {
-						System.out.println("Seleccione opcion deseada:\n 1.mostrar Administrador.\n 2.Insertar nuevo Administrador");
+						System.out.println("Seleccione opcion deseada:\n 1.Mostrar Administrador.\n 2.Insertar nuevo Administrador");
 						System.out.println(" 3.Borrar administrador\n 4.Modificar datos Administrador\n 5.Salir");
 						opc=sc.nextInt();
 						switch(opc) {
@@ -98,7 +98,8 @@ public class MainFinal {
 					break;
 				case 4:
 					do {
-						System.out.println("Seleccione opcion deseada:\n 1.Mostrar incidencias\n 2.Arregla una incidencia\n 3.Salir");
+						System.out.println("Seleccione opcion deseada:\n 1.Mostrar todas las incidencias");
+						System.out.println(" 2.Mostrar todas sus incidencias, resueltas o no\n 3.Arregla una incidencia\n 4.Salir");
 						opc=sc.nextInt();
 						switch(opc) {
 						case 1:
@@ -106,6 +107,8 @@ public class MainFinal {
 						case 2:
 							break;
 						case 3:
+							break;
+						case 4:
 							break;
 						default:
 							System.out.println("Opcion incorrecta");
