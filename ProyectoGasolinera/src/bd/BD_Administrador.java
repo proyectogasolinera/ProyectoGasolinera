@@ -23,7 +23,7 @@ public class BD_Administrador extends BD_Conector{
 		int nRegistros = 0;
 		int num=0;
 		try{
-			//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
+			//Si las filas retorna 1 el usuario ha sido aé¦»dido, si devuelve 0, el usuario no se aé¦»dio, si devuelve -1 no se aé¦»de por algun error de BD 
 			this.abrir();
 			s=c.createStatement();
 			reg=s.executeQuery("SELECT count(*) as total from administrador"); 
@@ -48,7 +48,7 @@ public class BD_Administrador extends BD_Conector{
 				admin.getCodPostal()+"','"+admin.getFechaAlt()+"')";
 		
 		try{
-			//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
+			//Si las filas retorna 1 el usuario ha sido aé¦»dido, si devuelve 0, el usuario no se aé¦»dio, si devuelve -1 no se aé¦»de por algun error de BD 
 			this.abrir();
 			s=c.createStatement();
 			int filas=s.executeUpdate(cadenaSQL);
@@ -150,7 +150,7 @@ public int borrarAdmin(String id){
 	public void addHMA(String campo, String dato){
 	
 	    if (HMA.containsKey(campo)) {
-	        System.out.println("No se puede introducir el producto. El c�digo esta repetido.");
+	        System.out.println("No se puede introducir el producto. El código esta repetido.");
 	        
 	    } else {
 	        HMA.put(campo, dato);       

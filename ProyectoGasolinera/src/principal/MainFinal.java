@@ -2,11 +2,23 @@ package principal;
 
 import java.util.*;
 
+import bd.BD_Administrador;
+import bd.BD_Conector;
+import bd.BD_Usuario;
+/**
+ *  
+ * @author Weize
+ *
+ */
 public class MainFinal {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		String tipo,dni,password;
+		BD_Conector.BD_Ini("aldautomitvebbdd");
+		BD_Usuario bdu=new BD_Usuario();
+		BD_Administrador bda=new BD_Administrador();
+		String tipo,id,password,dni;
+		String nombreAdmin,nombreUsu;
 		int opc;
 		System.out.println("-----Hola! Bienvenido-----");
 		do {
@@ -19,16 +31,22 @@ public class MainFinal {
 		switch (tipo) {
 		case "ADMIN":
 		case "admin":
-			//do {
-				System.out.println("Introduce el DNI del adninistrador:");
-				dni=sc.nextLine();
-				System.out.println("Introduce el password:");
-				dni=sc.nextLine();
-			//}while(null);
 			do {
+				System.out.println("Introduce el ID del adninistrador:");
+				id=sc.nextLine();
+				System.out.println("Introduce el password:");
+				password = sc.nextLine();
+				nombreAdmin = bda.VerificaClave(id, password);
+				if (nombreAdmin == null)
+					System.out.println("Id o password invalido,intentalo de nuevo");
+			} while (nombreAdmin == null);
+			
+			System.out.println("Bienvenido querido administrador "+nombreAdmin+" :");
+			
+			do { 
 				System.out.println("---Elige un campo---");
-				System.out.println("1.Modificar Administrardor\n2.Gestionar Cliente\n3.Mostrar Visitas\n4.Gestionar Incidencias");
-				System.out.println("5.Gestionar Cuentas\n6.Modificar dato Gasolinera\n7.Gestionar Carburante\n8.Mostrar Modificacion");
+				System.out.println("1.Gestionar Administrardor\n2.Gestionar Cliente\n3.Mostrar Visitas\n4.Gestionar Incidencias");
+				System.out.println("5.Gestionar Cuentas\n6.Gestionar dato Gasolinera\n7.Gestionar Carburante\n8.Mostrar Modificacion");
 				System.out.println("9.Salir");
 				opc=sc.nextInt();
 				switch(opc) {
@@ -132,12 +150,16 @@ public class MainFinal {
 			
 		case "CLIENTE":
 		case "cliente":
-			//do {
-			System.out.println("Introduce el DNI del usuario:");
-			dni=sc.nextLine();
-			System.out.println("Introduce el password:");
-			dni=sc.nextLine();
-		//}while(null);
+			do {
+				System.out.println("Introduce el DNI del usuario:");
+				dni=sc.nextLine();
+				System.out.println("Introduce el password:");
+				password = sc.nextLine();
+				nombreUsu = bdu.VerificaUsuario(dni, password);
+				if (nombreUsu == null)
+					System.out.println("DNI o password del usuario incorrecto,intentalo de nuevo");
+			} while (nombreUsu == null);
+			System.out.println("Bienvenido estimado cliente "+nombreUsu+", elige un campo que deseas operar:");
 			do {
 				System.out.println("1.Búsqueda Gasolinera\n2.Opcion Incidencia\n3.Consulta Cuentas");
 				System.out.println("4.Salir");
@@ -192,19 +214,19 @@ public class MainFinal {
 						break;
 					case 3:
 						break;
-					case 4:
+					case 4: 
 						break;
 					default:
 						System.out.println("Opcion incorrecta");
 					}
 					break;
 				case 4:
-					System.out.println("Adios!");
+					System.out.println("Gracias por tu visita,Adios!");
 					break;
 				default:
 					System.out.println("Opcion incorrecta");
 				}
-			}while(opc!=4);
+			}while(opc!=4); 
 			break;
 		}
 

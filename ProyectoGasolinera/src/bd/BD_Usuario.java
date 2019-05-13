@@ -1,3 +1,4 @@
+
 package bd;
 
 /**
@@ -28,7 +29,7 @@ public class BD_Usuario extends BD_Conector {
 		super();
 	}
 	
-	//Metodo para a�adir usuarios
+	//Metodo para añadir usuarios
 	public int add_usuario(Usuario usu){	
 		String cadenaSQL="INSERT INTO clientes VALUES('" + usu.getNombre() + "','" +
 		usu.getDni()+"','"+ usu.getFechaNacimiento() +"','"+ usu.getMail()+"','"+
@@ -36,7 +37,7 @@ public class BD_Usuario extends BD_Conector {
 				usu.getTelefono()+"','"+usu.getPassword()+"')";
 		
 		try{
-			//Si las ilas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
+			//Si las ilas retorna 1 el usuario ha sido aé¦»dido, si devuelve 0, el usuario no se aé¦»dio, si devuelve -1 no se aé¦»de por algun error de BD 
 			this.abrir();
 			s=c.createStatement();
 			int filas=s.executeUpdate(cadenaSQL);
@@ -131,7 +132,7 @@ public class BD_Usuario extends BD_Conector {
 		public void addHMU(String campo, String dato){
 		
 		    if (HMU.containsKey(campo)) {
-		        System.out.println("No se puede introducir el producto. El c�digo esta repetido.");
+		        System.out.println("No se puede introducir el producto. El código esta repetido.");
 		        
 		    } else {
 		        HMU.put(campo, dato);       
@@ -209,3 +210,4 @@ public class BD_Usuario extends BD_Conector {
 		}
 	
 }
+
