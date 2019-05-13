@@ -1,3 +1,4 @@
+
 package bd;
 
 /**
@@ -20,19 +21,15 @@ import modelo.Usuario;
 
 public class BD_Usuario extends BD_Conector {
 	
-
-	 
-
 	private static Statement s;	
 	private static ResultSet reg;
 	private HashMap<String,String> HMU = new HashMap<String,String>();
 	private String cadenaSQL;
 	public BD_Usuario(){
-		super(); 
+		super();
 	}
-
 	
-
+	//Metodo para añadir usuarios
 	public int add_usuario(Usuario usu){	
 		String cadenaSQL="INSERT INTO clientes VALUES('" + usu.getNombre() + "','" +
 		usu.getDni()+"','"+ usu.getFechaNacimiento() +"','"+ usu.getMail()+"','"+
@@ -54,7 +51,7 @@ public class BD_Usuario extends BD_Conector {
 	
 	}
 	
-	//Update de campo a elegir por el usuario, el usuario solo puede cambiar, Mail,Direccion,Cod_postal,password y localidad
+	//Update de campo a elegir por el usuario, el usuario solo puede cambiar, 
 	public int updateUser(String dni,String campo,String cambio) {
 
 	    String cadena = "UPDATE clientes SET "+campo+" = '"+cambio+"' WHERE dni_usuario = '" + dni + "'";
@@ -213,3 +210,4 @@ public class BD_Usuario extends BD_Conector {
 		}
 	
 }
+
