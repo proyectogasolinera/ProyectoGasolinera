@@ -1,6 +1,6 @@
-package ejercicios;
+package modelo;
 
-public class Metodo {
+public class MetodosValidacion {
 
 	public static void main(String[] args) {
 
