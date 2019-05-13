@@ -89,6 +89,34 @@ public  Vector<Administrador> selectAdmin(String dni){
 		return null;			
 	}
 }
+
+public  Vector<Administrador> selectAdminId(String id){
+	String cadenaSQL="SELECT * from administrador WHERE id_admin='"+id+"'";
+	Vector<Administrador> listadoAdmin=new Vector<Administrador>();
+	try{
+		this.abrir();
+		s=c.createStatement();
+		reg=s.executeQuery(cadenaSQL);
+		while ( reg.next()){
+			java.sql.Date f=reg.getDate("Fecha_alta");
+			LocalDate f_alta=f.toLocalDate();
+			listadoAdmin.add(new Administrador(reg.getString("id_admin")
+					,reg.getString("Nombre_admin"),reg.getString("Password")
+					,reg.getString("dni"),reg.getString("Correo_admin")
+					,reg.getString("Tlfono_admin"),reg.getString("Direccion_admin"),reg.getString("cod_post"),f_alta));
+		}
+		s.close();
+		this.cerrar();
+		return listadoAdmin;
+	}
+	catch ( SQLException e){		
+		return null;			
+	}
+}
+
+
+
+
 //update
 /*
 public int updateAdmin(String direccion,String id) {
@@ -227,6 +255,24 @@ public int borrarAdmin(String id){
 		}
 		catch ( SQLException e){		
 			return null;			
+		}
+	}
+	
+	public boolean isAdmin(String id, String pass) {
+		boolean existe=false;
+		String cadenaSQL="SELECT id_admin from administrador WHERE id_admin='"+id+"' AND Password='"+pass+"'";
+		this.abrir();
+		try {
+		s=c.createStatement();
+		reg=s.executeQuery(cadenaSQL);
+		if (reg.next())
+			existe=true;
+		s.close();		
+		this.cerrar();
+		return existe;
+		}
+		catch ( SQLException e){		
+			return false;			
 		}
 	}
 	

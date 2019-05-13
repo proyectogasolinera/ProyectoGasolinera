@@ -64,8 +64,55 @@ public class BD_Visita extends BD_Conector {
     }
 	
 	//Select para buscar las visitas de un usuario
-	public  Vector<Visita> visitList(String dni){
+	
+	public  Vector<Visita> visitList(){
+		String cadenaSQL="SELECT * from visitas ";
+		Vector<Visita> listaVisitas=new Vector<Visita>();
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			while ( reg.next()){
+				// La fecha que se extrae de la bbdd es sql.Date, hay que transformarla a LocalDate
+				java.sql.Date f=reg.getDate("fecha_visita");
+				LocalDate fBuena=f.toLocalDate();
+				listaVisitas.add(new Visita(reg.getString("dni_usuario"),fBuena,reg.getString("tipo_pago"),reg.getInt("id_gasolinera"),reg.getDouble("total")));
+				
+			}
+			s.close();
+			this.cerrar();
+			return listaVisitas;
+		}
+		catch ( SQLException e){		
+			return null;			
+		}
+	}
+	
+	public  Vector<Visita> visitUserList(String dni){
 		String cadenaSQL="SELECT * from visitas WHERE dni_usuario='"+dni+"'";
+		Vector<Visita> listaVisitas=new Vector<Visita>();
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			while ( reg.next()){
+				// La fecha que se extrae de la bbdd es sql.Date, hay que transformarla a LocalDate
+				java.sql.Date f=reg.getDate("fecha_visita");
+				LocalDate fBuena=f.toLocalDate();
+				listaVisitas.add(new Visita(reg.getString("dni_usuario"),fBuena,reg.getString("tipo_pago"),reg.getInt("id_gasolinera"),reg.getDouble("total")));
+				
+			}
+			s.close();
+			this.cerrar();
+			return listaVisitas;
+		}
+		catch ( SQLException e){		
+			return null;			
+		}
+	}
+	
+	public  Vector<Visita> visitGasList(int id){
+		String cadenaSQL="SELECT * from visitas WHERE id_gasolinera='"+id+"'";
 		Vector<Visita> listaVisitas=new Vector<Visita>();
 		try{
 			this.abrir();

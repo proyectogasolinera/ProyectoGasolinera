@@ -125,6 +125,43 @@ public class BD_Incidencia extends BD_Conector {
         }
     }
 	
+	//METODO PARA MOSTRAR TODAS LAS INCS
+	public  Vector<Incidencia> incAllList(){
+		String cadenaSQL="SELECT * from incidencias ";
+		Vector<Incidencia> listaIncidencias=new Vector<Incidencia>();
+		
+		
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			while ( reg.next()){
+				// La fecha que se extrae de la bbdd es sql.Date, hay que transformarla a LocalDate
+				java.sql.Date f=reg.getDate("fecha_incidencia");
+				LocalDate fFalla=f.toLocalDate();
+				
+				java.sql.Date f1=reg.getDate("fecha_arreglo");
+				if(f1!=null) {
+					LocalDate fArreglo=f1.toLocalDate();
+					listaIncidencias.add(new Incidencia(reg.getString("cod_incidencia"),reg.getString("dni_usuario"),reg.getString("id_admin"),fFalla,fArreglo,reg.getString("Descripcion"),reg.getInt("id_gasolinera")));
+				}
+				else
+					listaIncidencias.add(new Incidencia(reg.getString("cod_incidencia"),reg.getString("dni_usuario"),reg.getString("id_admin"),fFalla,reg.getString("Descripcion"),reg.getInt("id_gasolinera")));
+				
+			}
+			s.close();
+			this.cerrar();
+			return listaIncidencias;
+		}
+		catch ( SQLException e){		
+			return null;			
+		}
+	}
+	
+	
+	
+	
+	
 	//Metodo para ver todas las incs de un usuario
 	public  Vector<Incidencia> incUserList(String dni){
 		String cadenaSQL="SELECT * from incidencias WHERE dni_usuario='"+dni+"'";

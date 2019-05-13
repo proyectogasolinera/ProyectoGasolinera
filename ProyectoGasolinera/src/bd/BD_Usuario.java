@@ -87,6 +87,32 @@ public class BD_Usuario extends BD_Conector {
         }
     }
 	
+	//Select de todos los usuarios
+	public  Vector<Usuario> userAllList(){
+		String cadenaSQL="SELECT nombre,dni_usuario,fecha_naci,mail,localidad,direccion,cod_post,tlf,password from clientes";
+		Vector<Usuario> listaUsuarios=new Vector<Usuario>();
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			while ( reg.next()){
+				// La fecha que se extrae de la bbdd es sql.Date, hay que transformarla a LocalDate
+				java.sql.Date f=reg.getDate("fecha_naci");
+				LocalDate fBuena=f.toLocalDate();
+				listaUsuarios.add(new Usuario(reg.getString("nombre"),reg.getString("dni_usuario"),fBuena,reg.getString("mail"),reg.getString("localidad"),reg.getString("direccion"),reg.getString("cod_post"),reg.getString("tlf")));
+				
+			}
+			s.close();
+		
+			this.cerrar();
+			return listaUsuarios;
+		}
+		catch ( SQLException e){		
+			return null;			
+		}
+	}
+	
+	
 	//Select de todos los campos de cliente menos password
 	public  Vector<Usuario> userList(String dni){
 		String cadenaSQL="SELECT nombre,dni_usuario,fecha_naci,mail,localidad,direccion,cod_post,tlf,password from clientes WHERE dni_usuario='"+dni+"'";
@@ -111,6 +137,7 @@ public class BD_Usuario extends BD_Conector {
 			return null;			
 		}
 	}
+	
 	public boolean isUser(String dni, String pass) {
 		boolean existe=false;
 		String cadenaSQL="SELECT dni_usuario from clientes WHERE dni_usuario='"+dni+"' AND password='"+pass+"'";

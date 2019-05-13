@@ -123,7 +123,7 @@ public class MainPrueba {
 					sc.nextLine();
 					System.out.println("Introduce dni usuario para buscar");
 					dni_usu=sc.nextLine();
-					Vector<Visita> listadoVisita=bdv.visitList(dni_usu);
+					Vector<Visita> listadoVisita=bdv.visitUserList(dni_usu);
 					System.out.println("\n\nLISTADO VISITAS DE "+ dni_usu.toUpperCase()+"\n");
 					for (int i=0;i<listadoVisita.size();i++)									
 						System.out.println(listadoVisita.get(i).toString());
