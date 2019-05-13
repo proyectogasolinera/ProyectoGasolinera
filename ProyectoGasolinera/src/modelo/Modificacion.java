@@ -17,6 +17,17 @@ public class Modificacion {
 	 *
 	 */
 	
+	public Modificacion(String tipo, String id_admin, int id_gasolinera) {
+		super();
+		this.tipo = tipo;
+		this.fecha = LocalDate.now();
+		this.id_admin = id_admin;
+		this.id_gasolinera = id_gasolinera;
+	}
+	
+	
+	
+	
 	public Modificacion(int cod_mod, String tipo, LocalDate fecha, String id_admin, int id_gasolinera) {
 		super();
 		this.cod_mod = cod_mod;

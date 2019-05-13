@@ -5,16 +5,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import bd.BD_Administrador;
+import bd.BD_Carburante;
 import bd.BD_Conector;
 import bd.BD_Cuenta;
 import bd.BD_Gasolinera;
 import bd.BD_Incidencia;
+import bd.BD_Modificacion;
 import bd.BD_Usuario;
 import bd.BD_Visita;
 import modelo.Administrador;
+import modelo.Carburante;
 import modelo.Cuenta;
 import modelo.Gasolinera;
 import modelo.Incidencia;
+import modelo.Modificacion;
 import modelo.Usuario;
 import modelo.Visita;
 
@@ -31,9 +35,15 @@ public class MainAdmin {
 		BD_Cuenta bdc=new BD_Cuenta();
 		BD_Administrador bda=new BD_Administrador();
 		BD_Gasolinera bdG=new BD_Gasolinera();
+		BD_Modificacion bdm=new BD_Modificacion();
+		BD_Carburante bdcar=new BD_Carburante();
 		
-		String tipo,idAdmin,password,nombre,fecha,correo,dni_usu,localidad,direccion,codPostal,telefono,campo = null,cambio,codInc,tipoCuenta,numTarjeta,dato;
-		int opc,opc1,opc2,idGasolinera,filas,puntos,h;
+		String tipo,idAdmin,password,nombre,fecha,correo,
+		dni_usu,localidad,direccion,codPostal,telefono,campo = null,
+		cambio,codInc,tipoCuenta,numTarjeta,dato,empresa,provincia,municipio,horario;
+		char margen;
+		float longitud,latitud,precio;
+		int opc,opc1,opc2,idGasolinera,filas,puntos,h,id;
 		boolean login=false;
 		double saldo;
 		
@@ -561,13 +571,49 @@ public class MainAdmin {
 					System.out.println("MENU GASOLINERA\n");
 					System.out.println("1.Añadir gasolinera\n2.Modificar gasolinera\n3.Mostrar gasolinera\n4.Eliminar gasolinera\n5.Salir");
 					opc1=sc.nextInt();
-					
+					System.out.println("--------------------------------------------");
 						switch(opc1) {
+						
+							//METODO PARA AÑADIR GASOLINERA
 							case 1:
+								sc.nextLine();
+								System.out.println("Marca: ");
+								empresa=sc.nextLine();
+								System.out.println("provincia:");
+								provincia=sc.nextLine();
+								System.out.println("Municipio:");
+								municipio=sc.nextLine();
+								System.out.println("Localidad:");
+								localidad=sc.nextLine();
+								System.out.println("Codigo postal:");
+								codPostal=sc.nextLine();
+								System.out.println("Direccion:");
+								direccion=sc.nextLine();
+								System.out.println("Margen");
+								margen=sc.nextLine().charAt(0);
+								System.out.println("longitud");
+								longitud=sc.nextFloat();
+								System.out.println("latitud");
+								latitud=sc.nextFloat();
+								sc.nextLine();
+								System.out.println("Horario");
+								horario=sc.nextLine();
+								Gasolinera gas=new Gasolinera(0,empresa,provincia,municipio,
+										localidad,codPostal,direccion,margen,longitud,latitud,horario);
+								filas=bdG.add_Gasolinera(gas);
+								 if(filas==1){
+										System.out.println("Gasolinera añadida con exito");
+								 		System.out.println(gas.toString());
+								 }
+									else
+										System.out.println("Error - "+filas);
+								 
+								System.out.println("--------------------------------------------");
 								break;
 							
 							//MODIFICAR GASOLINERA
 							case 2:
+								
 								
 								break;
 								
@@ -620,7 +666,17 @@ public class MainAdmin {
 								}
 								System.out.println("--------------------------------------------\n");
 								break;
+								
+							//METODO PARA BORRAR GASOLINERAS
 							case 4:
+								System.out.println("Introduce id gasolinera a eliminar");
+								id=sc.nextInt();
+								filas=bdG.borrarGas(id);
+								if(filas==1)
+									System.out.println("La gasolinera "+id+" se ha eliminado correctamente");
+								else
+									System.out.println("Error - La gasolinera no se ha podido borrar, intentelo en otro momento");
+								System.out.println("--------------------------------------------\n");
 								break;
 							case 5:
 								break;
@@ -630,8 +686,85 @@ public class MainAdmin {
 					}while(opc1!=5);
 					break;
 				case 7:
+					do {
+					System.out.println("MENU CARBURANTE\n");
+					System.out.println("1.Mostrar carburantes de una gasolinera");
+					System.out.println("2.Modificar precio carburante de una gasolinera");
+					System.out.println("3.Salir");
+					opc1=sc.nextInt();
+					switch(opc1) {
+					
+						//METODO PARA MOSTRAR TIPOS DE GASOLINA DE UNA GASOLINERA CONCRETA
+						case 1:
+							System.out.println("Introduzca id de gasolinera que desea filtrar");
+							id=sc.nextInt();
+							System.out.println("--------------------------------------------");
+							System.out.println("TIPOS DE GASOLINA ESTACION NUMERO "+id+"\n");
+							Vector<Carburante> listaCarburanteTotal=bdcar.selectAllCarburante(id);
+							for (int i=0;i<listaCarburanteTotal.size();i++)	
+								System.out.println(listaCarburanteTotal.get(i).toString());
+							
+							System.out.println("--------------------------------------------\n");
+							break;
+							
+						//METODO PARA CAMBIAR PRECIO DE CARBURANTE
+						case 2:
+							System.out.println("Identificador de gasolinera en la que quieres modificar");
+							id=sc.nextInt();
+							sc.nextLine();
+							System.out.println("Carburante que quieres modificar:");
+							tipo=sc.nextLine();
+							System.out.println("Introduzca nuevo precio");
+							precio=sc.nextFloat();
+							LocalDate fechaMod=LocalDate.now();
+							filas=bdcar.updatePrecio(tipo, id, precio, fechaMod);
+							if(filas==1){
+								Modificacion mod=new Modificacion("MOD",idAdmin,id);
+								filas=bdm.add_modificacion(mod);
+								System.out.println("Datos cambiados correctamente");
+								
+							}
+							else
+								System.out.println("Error - no se ha podido modificar el carbutante");
+							
+							System.out.println("--------------------------------------------\n");
+							break;
+						case 3:
+						default:
+							System.out.println("Opcion incorrecta");
+					
+					
+					}
+					}while(opc1!=3);
 					break;
 				case 8:
+					do {
+					System.out.println("MENU MODIFICACIONES\n");
+					System.out.println("1.Mostrar todas las modificaciones");
+					System.out.println("2.Mostrar modificaciones de una gasolinera");
+					System.out.println("3.Salir");
+					opc1=sc.nextInt();
+					switch(opc1) {
+					
+						//MOSTRAR TODAS LAS MODIFICACIONES
+						case 1:
+							System.out.println("--------------------------------------------");
+							System.out.println("ESTAS SON TODAS LAS MODIFICACIONES REALIZADAS\n ");
+							Vector<Modificacion> listaModCompleta=bdm.selectModificacionAll();
+							for (int i=0;i<listaModCompleta.size();i++)	
+								System.out.println(listaModCompleta.get(i).toString());
+							System.out.println("--------------------------------------------");
+							break;
+						case 2:
+							break;
+						case 3:
+							break;
+						default:
+							System.out.println("Opcion incorrecta");
+						
+					}
+					}while(opc1!=3);
+					
 					break;
 				case 9:
 					System.out.println("Adios!");
