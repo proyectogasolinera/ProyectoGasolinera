@@ -16,10 +16,10 @@ public class Cuenta {
 	
 	public Cuenta(String dniTitular, double saldo, int punto, String tipoCuenta) {
 		super();
-		int cod1= (int) (Math.random() * 9999) + 1;
-		int cod2= (int) (Math.random() * 9999) + 1;
-		int cod3= (int) (Math.random() * 9999) + 1;
-		int cod4= (int) (Math.random() * 9999) + 1;
+		int cod1= (int) (Math.random()*10000 + 1);
+		int cod2= (int) (Math.random()*10000 + 1);
+		int cod3= (int) (Math.random()*10000 + 1);
+		int cod4= (int) (Math.random()*10000 + 1);
 		
 		this.numTarjeta=cod1+" "+cod2+" "+cod3+" "+cod4;
 		DniTitular = dniTitular;

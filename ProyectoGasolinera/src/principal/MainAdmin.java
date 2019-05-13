@@ -7,10 +7,13 @@ import java.util.*;
 import bd.BD_Administrador;
 import bd.BD_Conector;
 import bd.BD_Cuenta;
+import bd.BD_Gasolinera;
 import bd.BD_Incidencia;
 import bd.BD_Usuario;
 import bd.BD_Visita;
 import modelo.Administrador;
+import modelo.Cuenta;
+import modelo.Gasolinera;
 import modelo.Incidencia;
 import modelo.Usuario;
 import modelo.Visita;
@@ -27,10 +30,12 @@ public class MainAdmin {
 		BD_Incidencia bdi=new BD_Incidencia();
 		BD_Cuenta bdc=new BD_Cuenta();
 		BD_Administrador bda=new BD_Administrador();
+		BD_Gasolinera bdG=new BD_Gasolinera();
 		
-		String tipo,idAdmin,password,nombre,fecha,correo,dni_usu,localidad,direccion,codPostal,telefono,campo = null,cambio,codInc;
-		int opc,opc1,opc2,idGasolinera,filas;
+		String tipo,idAdmin,password,nombre,fecha,correo,dni_usu,localidad,direccion,codPostal,telefono,campo = null,cambio,codInc,tipoCuenta,numTarjeta,dato;
+		int opc,opc1,opc2,idGasolinera,filas,puntos,h;
 		boolean login=false;
+		double saldo;
 		
 		System.out.println("-----Hola! Bienvenido-----");
 		do {
@@ -60,7 +65,7 @@ public class MainAdmin {
 			do {
 				System.out.println("---Elige un campo---");
 				System.out.println("1.Gestionar Administrardor\n2.Gestionar Cliente\n3.Mostrar Visitas\n4.Gestionar Incidencias");
-				System.out.println("5.Gestionar Cuentas\n6.Modificar dato Gasolinera\n7.Gestionar Carburante\n8.Mostrar Modificacion");
+				System.out.println("5.Gestionar Cuentas\n6.Gestionar Gasolinera\n7.Gestionar Carburante\n8.Mostrar Modificacion");
 				System.out.println("9.Salir");
 				opc=sc.nextInt();
 				System.out.println("--------------------------------------------");
@@ -453,17 +458,95 @@ public class MainAdmin {
 					break;
 				case 5:
 					do {
-						System.out.println("Seleccione opcion deseada:\n 1.Inserta una cuenta\n 2.Cancelar una cuenta\n 3.Asociar una cuenta a un cliente");
+						System.out.println("MENU CUENTAS\n");
+						System.out.println("Seleccione opcion deseada:\n 1.Inserta una cuenta\n 2.Cancelar una cuenta\n 3.Buscar cuenta por usuario");
 						System.out.println(" 4.Mostrar todas las cuentas\n 5.Salir");
 					    opc=sc.nextInt();
+					    System.out.println("--------------------------------------------");
 						switch(opc) {
+						
+						//METODO PARA AÑADIR CUENTA
 						case 1:
+							sc.nextLine();
+							System.out.println("INSERTAR NUEVA CUENTA\n");
+							System.out.println("Introduzca DNI de usuario");
+							dni_usu=sc.nextLine();
+							System.out.println("Introduzca saldo para la cuenta");
+							saldo=sc.nextDouble();
+							System.out.println("Introduzca puntos de la cuenta");
+							puntos=sc.nextInt();
+							sc.nextLine();
+							System.out.println("Introduzca tipo de cuenta - (A/B/C)");
+							tipo=sc.nextLine();
+							
+							System.out.println("--------------------------------------------");
+							
+							Cuenta cuenta=new Cuenta(dni_usu,saldo,puntos,tipo);
+							
+
+							filas=bdc.add_cuenta(cuenta);
+							if(filas==1) {
+								System.out.println("Cuenta añadida con exito\n");
+								System.out.println(cuenta.toString());
+							}
+							else
+								System.out.println("Error - la cuenta no se ha podido añadir");
+							
+							System.out.println("--------------------------------------------");
 							break;
+							
+						//METODO PARA ELIMINAR CUENTA
 						case 2:
+							sc.nextLine();
+							System.out.println("Introduce DNI del usuario");
+							dni_usu=sc.nextLine();
+							System.out.println("--------------------------------------------");
+							System.out.println("ESTAS SON LAS CUENTAS DEL USUARIO "+dni_usu+"\n");
+							Vector<Cuenta> listaCuentas=bdc.cuentaList(dni_usu);
+							for (int i=0;i<listaCuentas.size();i++)									
+								System.out.println(listaCuentas.get(i).toString());
+							System.out.println("--------------------------------------------");
+							System.out.println("Quiere borrar alguna ?\n1.Si\n2.No");
+							opc1=sc.nextInt();
+							if(opc1==1) {
+								sc.nextLine();
+								System.out.println("Introduce numero tarjeta de la cuenta que desea eliminar");
+								numTarjeta=sc.nextLine();
+								filas=bdc.borrarCuentaTarjeta(numTarjeta);
+								if(filas==1)
+									System.out.println("La cuenta con tarjeta "+numTarjeta+" perteneciente al usuario "+dni_usu+" se ha eliminado con exito");
+								else
+									System.out.println("Error - La cuenta se ha podido eliminar, intentelo de nuevo mas tarde");
+							}
+							else {
+								System.out.println("--------------------------------------------");
+								break;
+							}
+						
+							System.out.println("--------------------------------------------");
 							break;
+							
+						//METODO PARA MOSTRAR CUENTAS DE CADA USUARIO
 						case 3:
+							sc.nextLine();
+							System.out.println("Introduce DNI del usuario");
+							dni_usu=sc.nextLine();
+							System.out.println("--------------------------------------------");
+							System.out.println("ESTAS SON LAS CUENTAS DEL USUARIO "+dni_usu+"\n");
+							Vector<Cuenta> listaCuentasUser=bdc.cuentaList(dni_usu);
+							for (int i=0;i<listaCuentasUser.size();i++)									
+								System.out.println(listaCuentasUser.get(i).toString());
+							
+							System.out.println("--------------------------------------------");
 							break;
+							
+						//MOSTRAR TODAS LAS CUENTAS
 						case 4:
+							System.out.println("ESTAS SON TODAS LAS CUENTAS\n ");
+							Vector<Cuenta> listaCuentasCompleta=bdc.cuentaAllList();
+							for (int i=0;i<listaCuentasCompleta.size();i++)	
+								System.out.println(listaCuentasCompleta.get(i).toString());
+							System.out.println("--------------------------------------------");
 							break;
 						case 5:
 							break;
@@ -473,6 +556,78 @@ public class MainAdmin {
 					}while(opc!=5);
 					break;
 				case 6:
+					sc.nextLine();
+					do {
+					System.out.println("MENU GASOLINERA\n");
+					System.out.println("1.Añadir gasolinera\n2.Modificar gasolinera\n3.Mostrar gasolinera\n4.Eliminar gasolinera\n5.Salir");
+					opc1=sc.nextInt();
+					
+						switch(opc1) {
+							case 1:
+								break;
+							
+							//MODIFICAR GASOLINERA
+							case 2:
+								
+								break;
+								
+							//MOSTRAR DATOS DE GASOLINERAS
+							case 3:
+								sc.nextLine();
+								do {
+								System.out.println("--------------------------------------------");
+								System.out.println("Campos por los que desea filtrar:");
+								System.out.println("1.empresa");
+								System.out.println("2.Municipio");
+								System.out.println("3.codigo postal");
+								System.out.println("Campos por los que desea filtrar:");
+								opc2=sc.nextInt();
+								switch (opc2) {
+								case 1:
+									sc.nextLine();
+									campo="empresa";
+									System.out.println("empresa:");
+									dato=sc.nextLine();
+									bdG.addHMG(campo, dato);
+									break;
+								case 2:
+									sc.nextLine();
+									campo="municipio";
+									System.out.println("municipio:");
+									dato=sc.nextLine();
+									bdG.addHMG(campo, dato);
+									break;
+								
+								
+								case 3:
+									sc.nextLine();
+									campo="codpostal";
+									System.out.println("codigo postal:");
+									dato=sc.nextLine();
+									bdG.addHMG(campo, dato);
+									break;
+								
+								}
+								System.out.println("--------------------------------------------");
+								System.out.println("desea introduccir otro filtro 1/si 2/no");
+								h=sc.nextInt();
+								}while(h!=2);
+								System.out.println("--------------------------------------------");
+								bdG.mostrarHMG();
+								Vector<Gasolinera> listaGasHM=bdG.selectGasolineraHM();
+								for(int i=0; i<listaGasHM.size();i++){
+									System.out.println(listaGasHM.get(i).toString());
+								}
+								System.out.println("--------------------------------------------\n");
+								break;
+							case 4:
+								break;
+							case 5:
+								break;
+							default:
+								System.out.println("Opcion incorrecta");
+							}
+					}while(opc1!=5);
 					break;
 				case 7:
 					break;

@@ -82,8 +82,48 @@ public class BD_Cuenta extends BD_Conector {
         }
     }
 	
+	//borra una cuenta con la tarjeta introducida
+	public int borrarCuentaTarjeta(String tarjeta){
+        String cadenaSQL="DELETE FROM cuentas WHERE num_tarj=('" +tarjeta+"')";
+
+        try{
+        this.abrir();
+        s=c.createStatement();
+        int filas=s.executeUpdate(cadenaSQL);
+        s.close();
+        this.cerrar();
+        return filas;
+        }
+        catch ( SQLException e){
+            return -1;
+        }
+    }
+	
 	public  Vector<Cuenta> cuentaList(String dni){
 		String cadenaSQL="SELECT * from cuentas WHERE dni_usuario='"+dni+"'";
+		Vector<Cuenta> listaCuentas=new Vector<Cuenta>();
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			while ( reg.next()){
+				// La fecha que se extrae de la bbdd es sql.Date, hay que transformarla a LocalDate
+				java.sql.Date f=reg.getDate("fecha_alta");
+				LocalDate fBuena=f.toLocalDate();
+				listaCuentas.add(new Cuenta(reg.getString("num_tarj"),reg.getString("dni_usuario"),reg.getDouble("Saldo"),reg.getInt("Puntos"),reg.getString("Tipo_cuenta"),fBuena));
+				
+			}
+			s.close();
+			this.cerrar();
+			return listaCuentas;
+		}
+		catch ( SQLException e){		
+			return null;			
+		}
+	}
+	
+	public  Vector<Cuenta> cuentaAllList(){
+		String cadenaSQL="SELECT * from cuentas";
 		Vector<Cuenta> listaCuentas=new Vector<Cuenta>();
 		try{
 			this.abrir();
