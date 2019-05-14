@@ -214,7 +214,7 @@ public class MainAdmin {
 						default:
 							System.out.println("Opcion incorrecta");
 						}
-					}while(opc!=5);
+					}while(opc!=4);
 					break;
 				//MENU CLIENTES
 				case 2:
@@ -548,8 +548,8 @@ public class MainAdmin {
 						System.out.println("MENU CUENTAS\n");
 						System.out.println("Seleccione opcion deseada:\n 1.Inserta una cuenta\n 2.Cancelar una cuenta\n 3.Buscar cuenta por usuario");
 						System.out.println(" 4.Mostrar todas las cuentas\n 5.Salir");
+						System.out.println("--------------------------------------------");
 					    opc=sc.nextInt();
-					    System.out.println("--------------------------------------------");
 						switch(opc) {
 						
 						//METODO PARA AÑADIR CUENTA
@@ -651,6 +651,7 @@ public class MainAdmin {
 							System.out.println("Opcion incorrecta");
 						}
 					}while(opc!=5);
+					System.out.println("--------------------------------------------");
 					break;
 				//MENU GASOLINERA
 				case 6:
@@ -658,8 +659,8 @@ public class MainAdmin {
 					do {
 					System.out.println("MENU GASOLINERA\n");
 					System.out.println("1.Añadir gasolinera\n2.Mostrar gasolinera\n3.Eliminar gasolinera\n4.Salir");
-					opc1=sc.nextInt();
 					System.out.println("--------------------------------------------");
+					opc1=sc.nextInt();
 						switch(opc1) {
 						
 							//METODO PARA AÑADIR GASOLINERA
@@ -815,7 +816,8 @@ public class MainAdmin {
 					System.out.println("1.Mostrar carburantes de una gasolinera");
 					System.out.println("2.Modificar precio carburante de una gasolinera");
 					System.out.println("3.Insertar precio carburante");
-					System.out.println("3.Salir");
+					System.out.println("4.Salir");
+					System.out.println("--------------------------------------------");
 					opc1=sc.nextInt();
 					switch(opc1) {
 					
@@ -901,7 +903,7 @@ public class MainAdmin {
 					
 					
 					}
-					}while(opc1!=3);
+					}while(opc1!=4);
 					break;
 				case 8:
 					do {
@@ -909,6 +911,7 @@ public class MainAdmin {
 					System.out.println("1.Mostrar todas las modificaciones");
 					System.out.println("2.Mostrar modificaciones de una gasolinera");
 					System.out.println("3.Salir");
+					System.out.println("--------------------------------------------");
 					opc1=sc.nextInt();
 					switch(opc1) {
 					
