@@ -125,6 +125,23 @@ public class BD_Incidencia extends BD_Conector {
         }
     }
 	
+	//METODO PARA BORRAR INCIDENCIA POR COD GASOLINERA
+	public int borrarIncGas(int id){
+        String cadenaSQL="DELETE FROM incidencias WHERE id_gasolinera=('" +id+"')";
+
+        try{
+        this.abrir();
+        s=c.createStatement();
+        int filas=s.executeUpdate(cadenaSQL);
+        s.close();
+        this.cerrar();
+        return filas;
+        }
+        catch ( SQLException e){
+            return -1;
+        }
+    }
+	
 	//METODO PARA MOSTRAR TODAS LAS INCS
 	public  Vector<Incidencia> incAllList(){
 		String cadenaSQL="SELECT * from incidencias ";

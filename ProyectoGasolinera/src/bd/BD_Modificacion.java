@@ -41,6 +41,29 @@ public class BD_Modificacion extends BD_Conector{
 	}
 	
 	
+	//Select que recibe id gasolinera y devuelve sus modificaciones
+	public  Vector<Modificacion> selectModificacionGas(int id){
+		cadenaSQL="SELECT * from modificaciones WHERE id_gasolinera=('" +id+"')";
+		Vector<Modificacion> listadoModificaciones=new Vector<Modificacion>();
+		try{
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery(cadenaSQL);
+			
+			while ( reg.next()){
+				java.sql.Date f=reg.getDate("fecha");
+				LocalDate fBuena=f.toLocalDate();
+				listadoModificaciones.add(new Modificacion (reg.getInt(1),reg.getString(2),fBuena,reg.getString(4),reg.getInt(5)));
+			}
+			s.close();
+			this.cerrar();
+			return listadoModificaciones;
+		}
+		catch ( SQLException e){		
+			return null;			
+		}
+	}
+	
 	
 	
 //selects
@@ -155,4 +178,20 @@ public class BD_Modificacion extends BD_Conector{
 			}
 	
 	}
+	
+	public int borrarModGas(int id){
+        String cadenaSQL="DELETE FROM modificaciones WHERE id_gasolinera=('" +id+"')";
+
+        try{
+        this.abrir();
+        s=c.createStatement();
+        int filas=s.executeUpdate(cadenaSQL);
+        s.close();
+        this.cerrar();
+        return filas;
+        }
+        catch ( SQLException e){
+            return -1;
+        }
+    }
 }

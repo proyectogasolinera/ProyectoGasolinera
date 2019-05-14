@@ -63,6 +63,22 @@ public class BD_Visita extends BD_Conector {
         }
     }
 	
+	public int borrarVisitaGas(int id){
+        String cadenaSQL="DELETE FROM visitas WHERE id_gasolinera=('" +id+"')";
+
+        try{
+        this.abrir();
+        s=c.createStatement();
+        int filas=s.executeUpdate(cadenaSQL);
+        s.close();
+        this.cerrar();
+        return filas;
+        }
+        catch ( SQLException e){
+            return -1;
+        }
+    }
+	
 	//Select para buscar las visitas de un usuario
 	
 	public  Vector<Visita> visitList(){

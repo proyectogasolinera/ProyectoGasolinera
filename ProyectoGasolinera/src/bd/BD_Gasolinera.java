@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 
 import modelo.Administrador;
 import modelo.Gasolinera;
-
+import modelo.Modificacion;
 
 import java.time.LocalDate;
 
@@ -178,7 +178,7 @@ public int borrarGas(int id){
 	public void addHMG(String campo, String dato){
 	
 	    if (HMG.containsKey(campo)) {
-	        System.out.println("No se puede introducir el producto. El c�digo esta repetido.");
+	        System.out.println("No se puede introducir el producto. El c󤩧o esta repetido.");
 	        
 	    } else {
 	        HMG.put(campo, dato);       
@@ -253,4 +253,25 @@ public int borrarGas(int id){
 	}
 	
 	
+public int maxGasolinera(){	
+		
+		int gasMax=0;
+		try{
+			//Si las filas retorna 1 el usuario ha sido a馻dido, si devuelve 0, el usuario no se a馻dio, si devuelve -1 no se a馻de por algun error de BD 
+			this.abrir();
+			s=c.createStatement();
+			reg=s.executeQuery("SELECT max(id_gasolinera) as total from gasolineras"); 
+			while(reg.next()) {
+				gasMax=Integer.parseInt(reg.getString("total"));
+						
+			}
+			return gasMax;
+		
+
+		}
+		catch ( SQLException e){			
+			return -1;
+		}
+
+}
 }
