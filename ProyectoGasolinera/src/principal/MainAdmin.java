@@ -48,7 +48,7 @@ public class MainAdmin {
 		dni_usu,localidad,direccion,codPostal,telefono,campo = null,
 		cambio = null,codInc,tipoCuenta,numTarjeta,dato,empresa,provincia,municipio,horario;
 		char margen;
-		float longitud,latitud,precio;
+		float longitud,latitud,precio = 0;
 		int opc,opc1,opc2,idGasolinera,filas,puntos,h,id;
 		boolean login=false;
 		double saldo;
@@ -135,10 +135,10 @@ public class MainAdmin {
 								case 3:
 									sc.nextLine();
 									campo="Tlfono_admin";
-									do {
+
 									System.out.println("Introduce nuevo telefono");
 									cambio=sc.nextLine();
-									}while(validarTelefono(cambio)==false);
+							
 									break;
 								case 4:
 									sc.nextLine();
@@ -187,10 +187,10 @@ public class MainAdmin {
 							correo=sc.nextLine();
 							}while(validarEmail(correo)==false);
 								
-							do {
+						
 							System.out.println("Introduce telefono");
 							telefono=sc.nextLine();
-							}while(validarTelefono(telefono)==false);
+						
 							
 							System.out.println("Introduce direccion");
 							direccion=sc.nextLine();
@@ -268,10 +268,10 @@ public class MainAdmin {
 							codPostal=sc.nextLine();
 							}while(validarCodpostal(codPostal)==false);
 							
-							do {
+						
 							System.out.println("Introduzca el telefono del usuario");
 							telefono=sc.nextLine();
-							}while(validarTelefono(telefono)==false);
+						
 							
 							do {
 							System.out.println("Introduzca contraseña para el usuario");
@@ -841,8 +841,22 @@ public class MainAdmin {
 							sc.nextLine();
 							System.out.println("Carburante que quieres modificar:");
 							tipo=sc.nextLine();
-							System.out.println("Introduzca nuevo precio");
-							precio=sc.nextFloat();
+							
+							boolean ok;
+							do {
+								ok=true;
+							try{
+								System.out.println("Introduzca precio del carburante");
+								precio=sc.nextFloat();
+							}    
+							catch (InputMismatchException e)
+							{
+							    System.out.println("Has introducido un formato no valido");
+							    ok=false;
+							    sc.nextLine();
+							}
+							}while(ok==false);
+							
 							LocalDate fechaMod=LocalDate.now();
 							filas=bdcar.updatePrecio(tipo, id, precio, fechaMod);
 							if(filas==1){
@@ -882,8 +896,23 @@ public class MainAdmin {
 									System.out.println("Opcion incorrecta");
 							
 							}
-							System.out.println("Introduzca precio del carburante");
-							precio=sc.nextFloat();
+							
+
+							do {
+								ok=true;
+							try{
+								System.out.println("Introduzca precio del carburante");
+								precio=sc.nextFloat();
+							}    
+							catch (InputMismatchException e)
+							{
+							    System.out.println("Has introducido un formato no valido");
+							    ok=false;
+							    sc.nextLine();
+							}
+							
+							
+							}while(ok==false);
 							Carburante carbu=new Carburante(campo,precio,id,fechaMod);
 							filas=bdcar.add_carburante(carbu);
 							 if(filas==1) {
