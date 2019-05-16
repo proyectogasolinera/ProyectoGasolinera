@@ -148,7 +148,7 @@ public class MainAdmin {
 									break;
 								case 5:
 									sc.nextLine();
-									campo="cod_post";
+									campo="codpostal";
 									do {
 									System.out.println("Introduce nuevo codigo postal");
 									cambio=sc.nextLine();
