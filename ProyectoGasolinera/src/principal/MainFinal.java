@@ -31,17 +31,10 @@ public class MainFinal {
 		switch (tipo) {
 		case "ADMIN":
 		case "admin":
-			do {
 				System.out.println("Introduce el ID del adninistrador:");
 				id=sc.nextLine();
 				System.out.println("Introduce el password:");
 				password = sc.nextLine();
-				nombreAdmin = bda.VerificaClave(id, password);
-				if (nombreAdmin == null)
-					System.out.println("Id o password invalido,intentalo de nuevo");
-			} while (nombreAdmin == null);
-			
-			System.out.println("Bienvenido querido administrador "+nombreAdmin+" :");
 			
 			do { 
 				System.out.println("---Elige un campo---");
@@ -192,16 +185,10 @@ public class MainFinal {
 			
 		case "CLIENTE":
 		case "cliente":
-			do {
 				System.out.println("Introduce el DNI del usuario:");
 				dni=sc.nextLine();
 				System.out.println("Introduce el password:");
 				password = sc.nextLine();
-				nombreUsu = bdu.VerificaUsuario(dni, password);
-				if (nombreUsu == null)
-					System.out.println("DNI o password del usuario incorrecto,intentalo de nuevo");
-			} while (nombreUsu == null);
-			System.out.println("Bienvenido estimado cliente "+nombreUsu+", elige un campo que deseas operar:");
 			do {
 				System.out.println("1.Búsqueda Gasolinera\n2.Opcion Incidencia\n3.Consulta Cuentas\n4.Perfil Usuario");
 				System.out.println("5.Salir");
