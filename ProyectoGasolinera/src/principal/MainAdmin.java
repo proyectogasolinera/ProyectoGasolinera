@@ -8,6 +8,7 @@ package principal;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 import bd.BD_Administrador;
@@ -45,13 +46,13 @@ public class MainAdmin {
 		BD_Carburante bdcar=new BD_Carburante();
 		
 		String tipo,idAdmin,password,nombre,fecha,correo,
-		dni_usu,localidad,direccion,codPostal,telefono,campo = null,
+		dni_usu = null,localidad,direccion,codPostal,telefono,campo = null,
 		cambio = null,codInc,tipoCuenta,numTarjeta,dato,empresa,provincia,municipio,horario;
 		char margen;
 		float longitud,latitud,precio = 0;
-		int opc,opc1,opc2,idGasolinera,filas,puntos,h,id;
-		boolean login=false;
-		double saldo;
+		int opc = 0,opc1 = 0,opc2 = 0,idGasolinera,filas,puntos = 0,h,id = 0;
+		boolean login=false,ok;
+		double saldo = 0;
 		
 		System.out.println("-----Hola! Bienvenido-----");
 		do {
@@ -79,21 +80,48 @@ public class MainAdmin {
 				}while(login==false);
 			
 			do {
+				do {
+					ok=true;
+				try {
 				System.out.println("---Elige un campo---");
 				System.out.println("1.Gestionar Administrardor\n2.Gestionar Cliente\n3.Mostrar Visitas\n4.Gestionar Incidencias");
 				System.out.println("5.Gestionar Cuentas\n6.Gestionar Gasolinera\n7.Gestionar Carburante\n8.Menu Modificaciones");
 				System.out.println("9.Salir");
 				opc=sc.nextInt();
+				}    
+				catch (InputMismatchException e)
+				{
+				    System.out.println("Has introducido un formato no valido");
+				    ok=false;
+				    sc.nextLine();
+				}
+				}while(ok==false);
+				
+				
+				
 				System.out.println("--------------------------------------------");
 				switch(opc) {
 				//MENU ADMINISTRADOR
 				case 1:
 					do {
+						do {
+							ok=true;
+						try {
 						System.out.println("MENU ADMINISTRADOR\n");
 						System.out.println("Seleccione opcion deseada:\n 1.Mostrar sus datos de administrador.\n 2.Modificar sus datos persolanes");
 						System.out.println(" 3.Insertar nuevo administrador\n 4.Salir");
 						System.out.println("--------------------------------------------");
 						opc=sc.nextInt();
+						}    
+						catch (InputMismatchException e)
+						{
+						    System.out.println("Has introducido un formato no valido");
+						    ok=false;
+						    sc.nextLine();
+						}
+						}while(ok==false);
+						
+						
 						switch(opc) {
 						
 						//MOSTRAR DATOS DEL ADMINISTRADOR LOGUEADO
@@ -109,11 +137,28 @@ public class MainAdmin {
 						//MODIFICAR DATOS DEL ADMINISTRADOR LOGUEADO
 						case 2:
 							sc.nextLine();
+							
+							do {
+								ok=true;
+	
+							try {
+								
 							System.out.println("--------------------------------------------");
 							System.out.println("Que campo desea modificar ?");
 							System.out.println("1.Cambiar password\n2.Cambiar correo\n3.Cambiar telefono\n4.Cambiar direccion\n5.Cambiar codigo postal");
 							System.out.println("--------------------------------------------");
 							opc1=sc.nextInt();
+							}    
+							catch (InputMismatchException e)
+							{
+							    System.out.println("Has introducido un formato no valido");
+							    ok=false;
+							    sc.nextLine();
+							}
+							}while(ok==false);
+							
+							
+							
 							
 							switch(opc1) {
 								case 1:
@@ -219,11 +264,28 @@ public class MainAdmin {
 				//MENU CLIENTES
 				case 2:
 					do {
+						
+						
+						do {
+							ok=true;
+						try {
 						System.out.println("MENU CLIENTES\n");
 						System.out.println("Seleccione opcion deseada:\n 1.Mostrar todos los clientes\n 2.Insertar nuevo Cliente");
 						System.out.println(" 3.Elimina Cliente\n 4.Modificar datos Cliente\n 5.Salir");
 						System.out.println("--------------------------------------------");
 						opc=sc.nextInt();
+						}    
+						catch (InputMismatchException e)
+						{
+						    System.out.println("Has introducido un formato no valido");
+						    ok=false;
+						    sc.nextLine();
+						}
+						}while(ok==false);
+						
+						
+						
+						
 						switch(opc) {
 						
 						//Mostrar usuario
@@ -248,9 +310,22 @@ public class MainAdmin {
 							dni_usu=sc.nextLine();
 							}while(validarDni(dni_usu)==false);
 							
+							
+							LocalDate fechaNacimiento = null;
+							do {
+								ok=true;
+							try {
 							System.out.println("Introduzca fecha de nacimiento del usuario en formato (YYYY-MM-DD)");
 							fecha=sc.nextLine();
-							LocalDate fechaNacimiento=LocalDate.parse(fecha,fechaFormateada);
+							fechaNacimiento=LocalDate.parse(fecha,fechaFormateada);
+							
+							} catch (DateTimeParseException ex) {
+								System.out.println("Has introducido un formato no valido");
+							    ok=false;
+							    sc.nextLine();
+							}
+							}while(ok==false);
+							
 							
 							do {
 							System.out.println("Introduzca correo electronico del usuario");
@@ -325,6 +400,11 @@ public class MainAdmin {
 						//Modificar datos de usuario, Mail,Direccion,Cod_postal,password y localidad
 						case 4:
 							sc.nextLine();
+							
+							
+							do {
+								ok=true;
+							try {
 							System.out.println("Introduce dni del user a modificar");
 							dni_usu=sc.nextLine();
 							System.out.println("Que campo desea modificar ?");
@@ -334,6 +414,16 @@ public class MainAdmin {
 							System.out.println("4.Direccion");
 							System.out.println("5.Cod_Postal");
 							opc1=sc.nextInt();
+							}    
+							catch (InputMismatchException e)
+							{
+							    System.out.println("Has introducido un formato no valido");
+							    ok=false;
+							    sc.nextLine();
+							}
+							}while(ok==false);
+							
+							
 							
 							switch(opc1) {
 								case 1:
@@ -394,6 +484,10 @@ public class MainAdmin {
 				//MENU VISITAS
 				case 3:
 					do {
+						
+						do {
+							ok=true;
+						try {
 						System.out.println("MENU VISITAS\n");
 						System.out.println("1.Ver todas las visitas");
 						System.out.println("2.Ver las visitas de una gasolinera determinada");
@@ -402,6 +496,15 @@ public class MainAdmin {
 						System.out.println("5.Salir");
 						System.out.println("--------------------------------------------");
 						opc1=sc.nextInt();
+						}    
+						catch (InputMismatchException e)
+						{
+						    System.out.println("Has introducido un formato no valido");
+						    ok=false;
+						    sc.nextLine();
+						}
+						}while(ok==false);
+						
 						
 						switch(opc1) {
 						
@@ -472,10 +575,24 @@ public class MainAdmin {
 				//MENU INCIDENCIAS
 				case 4:
 					do {
+						do {
+							ok=true;
+						try {
 						System.out.println("MENU INCIDENCIAS\n");
 						System.out.println("Seleccione opcion deseada:\n 1.Mostrar todas las incidencias\n 2.Mostrar todas sus incidencias, resueltas o no\n 3.Arregla una incidencia\n 4.Salir");
 						System.out.println("--------------------------------------------");
 						opc=sc.nextInt();
+						}    
+						catch (InputMismatchException e)
+						{
+						    System.out.println("Has introducido un formato no valido");
+						    ok=false;
+						    sc.nextLine();
+						}
+						}while(ok==false);
+						
+						
+						
 						switch(opc) {
 						
 							//METODO PARA MOSTRAR TODAS LAS INCIDENCIAS
@@ -494,10 +611,25 @@ public class MainAdmin {
 							case 2:
 								sc.nextLine();
 								campo="id_admin";
+								
+								
+								do {
+									ok=true;
+								try {
 								System.out.println("Esta resuelta la incidencia?");
 								System.out.println("1.Si");
 								System.out.println("2.No");
 								opc2=sc.nextInt();
+								}    
+								catch (InputMismatchException e)
+								{
+								    System.out.println("Has introducido un formato no valido");
+								    ok=false;
+								    sc.nextLine();
+								}
+								}while(ok==false);
+								
+								
 								String entrada;
 									if(opc2==1)
 										entrada="not null";
@@ -545,11 +677,24 @@ public class MainAdmin {
 				//MENU CUENTAS
 				case 5:
 					do {
+						do {
+							ok=true;
+						try {
 						System.out.println("MENU CUENTAS\n");
 						System.out.println("Seleccione opcion deseada:\n 1.Inserta una cuenta\n 2.Cancelar una cuenta\n 3.Buscar cuenta por usuario");
 						System.out.println(" 4.Mostrar todas las cuentas\n 5.Salir");
 						System.out.println("--------------------------------------------");
 					    opc=sc.nextInt();
+						}    
+						catch (InputMismatchException e)
+						{
+						    System.out.println("Has introducido un formato no valido");
+						    ok=false;
+						    sc.nextLine();
+						}
+						}while(ok==false);
+					    
+					    
 						switch(opc) {
 						
 						//METODO PARA AÑADIR CUENTA
@@ -562,15 +707,36 @@ public class MainAdmin {
 							dni_usu=sc.nextLine();
 							}while(validarDni(dni_usu)==false);
 							
-							do {
-							System.out.println("Introduzca saldo para la cuenta");
-							saldo=sc.nextDouble();
-							}while(validarSaldo(saldo)==false);
 							
 							do {
+								ok=true;
+								try {
+							System.out.println("Introduzca saldo para la cuenta");
+							saldo=sc.nextDouble();
+							}    
+							catch (InputMismatchException e)
+							{
+							    System.out.println("Has introducido un formato no valido");
+							    ok=false;
+							    sc.nextLine();
+							}
+							}while(validarSaldo(saldo)==false || ok==false);
+							
+							
+							do {
+								ok=true;
+							try {
 							System.out.println("Introduzca puntos de la cuenta");
 							puntos=sc.nextInt();
-							}while(validarPuntos(puntos)==false);
+							}    
+							catch (InputMismatchException e)
+							{
+							    System.out.println("Has introducido un formato no valido");
+							    ok=false;
+							    sc.nextLine();
+							}
+							
+							}while(validarPuntos(puntos)==false || ok==false);
 							
 							sc.nextLine();
 							System.out.println("Introduzca tipo de cuenta - (A/B/C)");
@@ -657,10 +823,24 @@ public class MainAdmin {
 				case 6:
 					sc.nextLine();
 					do {
+					do {
+						ok=true;
+					try {
 					System.out.println("MENU GASOLINERA\n");
 					System.out.println("1.Añadir gasolinera\n2.Mostrar gasolinera\n3.Eliminar gasolinera\n4.Salir");
 					System.out.println("--------------------------------------------");
 					opc1=sc.nextInt();
+					}    
+					catch (InputMismatchException e)
+					{
+					    System.out.println("Has introducido un formato no valido");
+					    ok=false;
+					    sc.nextLine();
+					}
+					
+					}while(ok==false);
+					
+					
 						switch(opc1) {
 						
 							//METODO PARA AÑADIR GASOLINERA
@@ -721,13 +901,27 @@ public class MainAdmin {
 							case 2:
 								sc.nextLine();
 								do {
-								System.out.println("--------------------------------------------");
-								System.out.println("Campos por los que desea filtrar:");
-								System.out.println("1.empresa");
-								System.out.println("2.Municipio");
-								System.out.println("3.codigo postal");
-								System.out.println("Campos por los que desea filtrar:");
-								opc2=sc.nextInt();
+									do {
+										ok=true;
+									try {
+										System.out.println("--------------------------------------------");
+										System.out.println("Campos por los que desea filtrar:");
+										System.out.println("1.empresa");
+										System.out.println("2.Municipio");
+										System.out.println("3.codigo postal");
+										System.out.println("Campos por los que desea filtrar:");
+										opc2=sc.nextInt();
+									}    
+									catch (InputMismatchException e)
+									{
+									    System.out.println("Has introducido un formato no valido");
+									    ok=false;
+									    sc.nextLine();
+									}
+									
+									}while(ok==false);
+								
+								
 								switch (opc2) {
 								case 1:
 									sc.nextLine();
@@ -812,13 +1006,28 @@ public class MainAdmin {
 				//CARBURANTES
 				case 7:
 					do {
-					System.out.println("MENU CARBURANTE\n");
-					System.out.println("1.Mostrar carburantes de una gasolinera");
-					System.out.println("2.Modificar precio carburante de una gasolinera");
-					System.out.println("3.Insertar precio carburante");
-					System.out.println("4.Salir");
-					System.out.println("--------------------------------------------");
-					opc1=sc.nextInt();
+						do {
+							ok=true;
+						try {
+							System.out.println("MENU CARBURANTE\n");
+							System.out.println("1.Mostrar carburantes de una gasolinera");
+							System.out.println("2.Modificar precio carburante de una gasolinera");
+							System.out.println("3.Insertar precio carburante");
+							System.out.println("4.Salir");
+							System.out.println("--------------------------------------------");
+							opc1=sc.nextInt();
+						}    
+						catch (InputMismatchException e)
+						{
+						    System.out.println("Has introducido un formato no valido");
+						    ok=false;
+						    sc.nextLine();
+						}
+						
+						}while(ok==false);
+							
+							
+							
 					switch(opc1) {
 					
 						//METODO PARA MOSTRAR TIPOS DE GASOLINA DE UNA GASOLINERA CONCRETA
@@ -836,13 +1045,27 @@ public class MainAdmin {
 							
 						//METODO PARA CAMBIAR PRECIO DE CARBURANTE
 						case 2:
+							do {
+								ok=true;
+							try {
 							System.out.println("Identificador de gasolinera en la que quieres modificar");
 							id=sc.nextInt();
+							}    
+							catch (InputMismatchException e)
+							{
+							    System.out.println("Has introducido un formato no valido");
+							    ok=false;
+							    sc.nextLine();
+							}
+							
+							}while(ok==false);
+							
+							
 							sc.nextLine();
 							System.out.println("Carburante que quieres modificar:");
 							tipo=sc.nextLine();
 							
-							boolean ok;
+		
 							do {
 								ok=true;
 							try{
@@ -872,11 +1095,27 @@ public class MainAdmin {
 							break;
 							
 						case 3:
+							do {
+								ok=true;
+							try{
 							System.out.println("Introduzca id de gasolinera");
 							id=sc.nextInt();
 							System.out.println("Que tipo de gasolina desea insertar ?\n1.Gasoleo A\n2.Gasoleo B\n3.Gasolina 95\n4.Gasolina 98");
-							fechaMod=LocalDate.now();
+							
 							opc1=sc.nextInt();
+							}    
+							catch (InputMismatchException e)
+							{
+							    System.out.println("Has introducido un formato no valido");
+							    ok=false;
+							    sc.nextLine();
+							}
+							
+							}while(ok==false);
+							
+							fechaMod=LocalDate.now();
+							
+							
 							switch(opc1) {
 								case 1:
 									campo="Gasoleo A";
@@ -954,8 +1193,21 @@ public class MainAdmin {
 							System.out.println("--------------------------------------------");
 							break;
 						case 2:
+							do {
+								ok=true;
+							try {
 							System.out.println("Introduzca el id de la gasolinera por la que quiere filtrar");
 							id=sc.nextInt();
+							}    
+							catch (InputMismatchException e)
+							{
+							    System.out.println("Has introducido un formato no valido");
+							    ok=false;
+							    sc.nextLine();
+							}
+							}while(ok==false);
+							
+							
 							System.out.println("--------------------------------------------");
 							System.out.println("ESTAS SON TODAS LAS MODIFICACIONES REALIZADAS EN LA GASOLINERA "+id+"\n ");
 							Vector<Modificacion> listaModGas=bdm.selectModificacionGas(id);
